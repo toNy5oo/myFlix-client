@@ -979,7 +979,7 @@ _client.createRoot(container).render(/*#__PURE__*/ _reactDefault.default.createE
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react-dom/client":"jdzvJ","./components/main-view/main-view":"2zHas","./components/movie-view/movie-view":"ikZdr","./index.scss":"jUTZ8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","react":"6TuXu","react-dom":"gkWJK"}],"8xIwr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-dom":"gkWJK","react-dom/client":"jdzvJ","./components/main-view/main-view":"2zHas","./components/movie-view/movie-view":"ikZdr","./index.scss":"jUTZ8","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"8xIwr":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-runtime.development.js');
 
@@ -3724,28 +3724,7 @@ module.exports = require('./cjs/react.development.js');
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop === 'function') __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
 })();
 
-},{}],"jdzvJ":[function(require,module,exports) {
-'use strict';
-var m = require('react-dom');
-var i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-exports.createRoot = function(c, o) {
-    i.usingClientEntryPoint = true;
-    try {
-        return m.createRoot(c, o);
-    } finally{
-        i.usingClientEntryPoint = false;
-    }
-};
-exports.hydrateRoot = function(c, h, o) {
-    i.usingClientEntryPoint = true;
-    try {
-        return m.hydrateRoot(c, h, o);
-    } finally{
-        i.usingClientEntryPoint = false;
-    }
-};
-
-},{"react-dom":"gkWJK"}],"gkWJK":[function(require,module,exports) {
+},{}],"gkWJK":[function(require,module,exports) {
 'use strict';
 function checkDCE() {
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' || typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function') return;
@@ -25081,7 +25060,28 @@ module.exports = require('./cjs/scheduler.development.js');
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop === 'function') __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
 })();
 
-},{}],"2zHas":[function(require,module,exports) {
+},{}],"jdzvJ":[function(require,module,exports) {
+'use strict';
+var m = require('react-dom');
+var i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+exports.createRoot = function(c, o) {
+    i.usingClientEntryPoint = true;
+    try {
+        return m.createRoot(c, o);
+    } finally{
+        i.usingClientEntryPoint = false;
+    }
+};
+exports.hydrateRoot = function(c, h, o) {
+    i.usingClientEntryPoint = true;
+    try {
+        return m.hydrateRoot(c, h, o);
+    } finally{
+        i.usingClientEntryPoint = false;
+    }
+};
+
+},{"react-dom":"gkWJK"}],"2zHas":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$35bf = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -27872,20 +27872,20 @@ function LoginView(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs("form", {
         __source: {
             fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 23
+            lineNumber: 24
         },
         __self: this,
         children: [
             /*#__PURE__*/ _jsxRuntime.jsx("p", {
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 24
+                    lineNumber: 25
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsxs("label", {
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 25
+                        lineNumber: 26
                     },
                     __self: this,
                     children: [
@@ -27897,7 +27897,7 @@ function LoginView(props) {
                             ,
                             __source: {
                                 fileName: "src/components/login-view/login-view.jsx",
-                                lineNumber: 27
+                                lineNumber: 28
                             },
                             __self: this
                         })
@@ -27907,7 +27907,7 @@ function LoginView(props) {
             /*#__PURE__*/ _jsxRuntime.jsxs("label", {
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 30
+                    lineNumber: 31
                 },
                 __self: this,
                 children: [
@@ -27919,7 +27919,7 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 32
+                            lineNumber: 33
                         },
                         __self: this
                     })
@@ -27928,7 +27928,7 @@ function LoginView(props) {
             /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 34
+                    lineNumber: 35
                 },
                 __self: this,
                 children: [
@@ -27937,7 +27937,7 @@ function LoginView(props) {
                         onClick: handleSubmit,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 35
+                            lineNumber: 36
                         },
                         __self: this,
                         children: "Submit"
@@ -27948,7 +27948,7 @@ function LoginView(props) {
             /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 37
+                    lineNumber: 38
                 },
                 __self: this,
                 children: [
@@ -27958,7 +27958,7 @@ function LoginView(props) {
                         onClick: handleNewUser,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 38
+                            lineNumber: 39
                         },
                         __self: this,
                         children: "click here"
@@ -27985,7 +27985,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","prop-types":"1tgq3","../register-view/register-view":"F9ahz"}],"F9ahz":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","../register-view/register-view":"F9ahz","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"F9ahz":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$31a6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -28007,9 +28007,9 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _registerView = require("../register-view/register-view");
-var _registerViewDefault = parcelHelpers.interopDefault(_registerView);
-function RegisterView() {
+function RegisterView(props) {
+    // const [ username, setUsername ] = useState('');
+    // const [ password, setPassword ] = useState('');
     const handleRegistration = ()=>{
         alert('test');
     };
@@ -28017,13 +28017,13 @@ function RegisterView() {
         className: "registerForm",
         __source: {
             fileName: "src/components/register-view/register-view.jsx",
-            lineNumber: 12
+            lineNumber: 13
         },
         __self: this,
         children: "Registration"
     }));
 }
-_c = _registerViewDefault.default;
+_c = RegisterView;
 var _c;
 $RefreshReg$(_c, "RegisterView");
 
@@ -28032,6 +28032,6 @@ $RefreshReg$(_c, "RegisterView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","../register-view/register-view":"F9ahz"}],"jUTZ8":[function() {},{}]},["lpjO7","fHeZ2","dLPEP"], "dLPEP", "parcelRequireaec4")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"jUTZ8":[function() {},{}]},["lpjO7","fHeZ2","dLPEP"], "dLPEP", "parcelRequireaec4")
 
-//# sourceMappingURL=index.6701a6e1.js.map
+//# sourceMappingURL=index.js.map
