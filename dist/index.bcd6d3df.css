@@ -1,0 +1,27 @@
+.row {
+    justify-content: space-evenly;
+}
+
+.left_side {
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.right_side {
+    padding: 1rem;
+    margin: 1rem;
+}
+.my-flix {
+  color: steelblue;
+}
+
+.navbar {
+  background-color: rgba(161, 0, 0, 0.9);
+  color: white !important;
+  padding: 1rem;
+}
+
+.logo_navbar {
+  font-family: "Bebas Neue", cursive !important;
+}
+/*# sourceMappingURL=index.bcd6d3df.css.map */

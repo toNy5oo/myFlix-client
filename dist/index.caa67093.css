@@ -1,4 +1,10 @@
 .my-flix {
   color: steelblue;
 }
+
+.navbar {
+  background-color: rgba(161, 0, 0, 0.9);
+  color: white !important;
+  padding: 1rem;
+}
 /*# sourceMappingURL=index.caa67093.css.map */
