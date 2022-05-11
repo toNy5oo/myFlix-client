@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import {Card, ListGroup, ListGroupItem, Button} from 'react-bootstrap';
 import CardGroup from 'react-bootstrap/CardGroup';
+import { Link } from "react-router-dom";
+
 import './movie-card.css'
-import axios from 'axios';
+
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onMovieClick } = this.props;
+    const { movie } = this.props;
 
     const defineGenre = () =>{
       // axios.get('https://my-flix-cf.herokuapp.com//movies/'+movie.Title+'/details')
@@ -27,7 +30,9 @@ export class MovieCard extends React.Component {
     return (
       <Card>
         {/* crossorigin="anonymous" is important to bypass CORP security protection */}
-        <Card.Img variant="top" src={movie.ImagePath} crossOrigin="anonymous" onClick={() => onMovieClick(movie)}/>
+        <Link to={`/movies/${movie._id}`}>
+        <Card.Img variant="top" src={movie.ImagePath} crossOrigin="anonymous"/>
+        </Link>
         {/* <Card.ImgOverlay>
         <Button className='movie_details' onClick={() => onMovieClick(movie)} variant="primary">Details</Button>
         </Card.ImgOverlay> */}

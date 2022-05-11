@@ -8,23 +8,58 @@ export function RegisterView(props) {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('')
+  // Validation
+  const [ usernameErr, setUsernameErr ] = useState('');
+  const [ passwordErr, setPasswordErr ] = useState('');
+  const [ emailErr, setEmailErr ] = useState('');
+
+  const validate = () => {
+    let isReq = true;
+    if(!username){
+     setUsernameErr('Username is required');
+     isReq = false;
+    }else if(username.length < 5){
+     setUsernameErr('Username must be minimum 5 characters long');
+     isReq = false;
+    }
+    if(!password){
+     setPasswordErr('Password is required');
+     isReq = false;
+    }else if(password.length < 6){
+     setPassword('Password must be minimum 6 characters long');
+     isReq = false;
+    }
+    if (!email){
+      setEmailErr('Email address is required');
+      isReq = false;
+    }else if (email.indexOf('@') === -1){
+      setEmailErr('Email format is invalid');
+      isReq = false;
+    }
+    return isReq;
+   }
 
   
   const handleRegistration = () => {
     e.preventDefault();
-    axios.post('https://my-flix-cf.herokuapp.com/users', {
-      Username: username,
-      Password: password,
-      Email: email
-    })
-    .then(response => {
-      console.log(response.data);
-      window.open('/', '_self');
-    })
-    .catch(e => {
-      console.log('Error during registration');
-      alert('Registration not completed');
-    });
+    const isReq = validate();
+    if (isReq){
+          axios.post('https://my-flix-cf.herokuapp.com/users', {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday
+          })
+          .then(response => {
+            console.log(response.data);
+            window.open('/', '_self');
+          })
+          .catch(e => {
+            console.log('Error during registration');
+            alert('Registration not completed');
+          });
+    }
+        
   };
 
   return (
@@ -40,7 +75,7 @@ export function RegisterView(props) {
           value={username}
           onChange={e => setUsername(e.target.value)}
           required
-        />
+        />{usernameErr && <p>{usernameErr}</p>}
       </Form.Group>
       <Form.Group>
         <Form.Label>Password</Form.Label>
@@ -51,7 +86,7 @@ export function RegisterView(props) {
           onChange={e => setPassword(e.target.value)}
           required
           minLength="8"
-        />
+        />{passwordErr && <p>{passwordErr}</p>}
       </Form.Group>
       <Form.Group>
         <Form.Label>Email</Form.Label>
@@ -61,13 +96,13 @@ export function RegisterView(props) {
           value={email}
           onChange={e => setEmail(e.target.value)}
           required
-        />
+        />{emailErr && <p>{emailErr}</p>}
       </Form.Group>
       <Form.Group>
         <Form.Label>Birthday</Form.Label>
         <Form.Control 
           type="text" 
-          placeholder="Username" 
+          placeholder="Birthday" 
         />
       </Form.Group>
       <Button type="submit" onClick={handleRegistration}>
@@ -77,18 +112,14 @@ export function RegisterView(props) {
         </Col>
       </Row>
     </Container>
-
-
-
-    
+  
   );
 }
 
-// RegisterView.propTypes = {
-//     user: PropTypes.exact({
-//       username: PropTypes.string.isRequired,
-//       password: PropTypes.string.isRequired,
-//       email: PropTypes.string.isRequired,
-//       birthday: PropTypes.string.isRequired
-//     }).isRequired,
-//   };
+RegisterView.propTypes = {
+    user: PropTypes.shape({
+      Username: PropTypes.string.isRequired,
+      Password: PropTypes.string.isRequired,
+      Email: PropTypes.string.isRequired
+    })
+  };

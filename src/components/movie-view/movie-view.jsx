@@ -44,7 +44,15 @@ export class MovieView extends React.Component {
 				
 			</ListGroup>  
 			<div className="p-5 h4 text-muted">
-			{movie.Description}
+			<p>{movie.Description}</p>
+      <p><Link to={`/directors/${movie.Director.Name}`}>
+          <Button variant="link">Director</Button>
+        </Link>
+
+        <Link to={`/genres/${movie.Genre.Name}`}>
+          <Button variant="link">Genre</Button>
+        </Link>
+        </p>
 			</div>  
         </Col>
 
