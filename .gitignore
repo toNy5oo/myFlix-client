@@ -1,3 +1,4 @@
 node_modules
 .cache_modules
 .parcel-cache
+dist

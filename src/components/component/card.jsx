@@ -1,17 +1,20 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {Card, ListGroup, ListGroupItem, Button} from 'react-bootstrap';
 import CardGroup from 'react-bootstrap/CardGroup';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-import './movie-card.css'
+import '../styles/movie-card.css'
 
-export class MovieCard extends React.Component {
-  render() {
-    const { movie } = this.props;
+export function MovieCard(props) {
 
-    const defineGenre = () =>{
+  const {idMovie} = useParams();
+
+  const [movie, setMovie ] = useState(props.movie);
+ 
+  
+  const defineGenre = () =>{
       // axios.get('https://my-flix-cf.herokuapp.com//movies/'+movie.Title+'/details')
       //     .then(response => {}
       //     )
@@ -26,12 +29,13 @@ export class MovieCard extends React.Component {
        else
        return 'N/A in Theathers';
     }
-
+    
     return (
-      <Card>
+      
+        <Card>
         {/* crossorigin="anonymous" is important to bypass CORP security protection */}
         <Link to={`/movies/${movie._id}`}>
-        <Card.Img variant="top" src={movie.ImagePath} crossOrigin="anonymous"/>
+            <Card.Img variant="top" src={movie.ImagePath} crossOrigin="anonymous"/>
         </Link>
         {/* <Card.ImgOverlay>
         <Button className='movie_details' onClick={() => onMovieClick(movie)} variant="primary">Details</Button>
@@ -50,16 +54,16 @@ export class MovieCard extends React.Component {
             <Card.Link href="#">Remove from Favourites</Card.Link>
           </Card.Body>
         </Card>
-      
-    )
-  }
-}
+  
+     )
+    }
 
-MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired
-  }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
-};
+
+// MovieCard.propTypes = {
+//   movie: PropTypes.shape({
+//     Title: PropTypes.string.isRequired,
+//     Description: PropTypes.string.isRequired,
+//     ImagePath: PropTypes.string.isRequired
+//   }).isRequired,
+//   onMovieClick: PropTypes.func.isRequired
+// };

@@ -1,23 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
+  Link,
+  useNavigate
 } from "react-router-dom";
 import PropTypes from 'prop-types';
-import RegisterView from '../register-view/register-view';
 import {Form, FormGroup, Button, Row, Col, Container } from 'react-bootstrap';
 import axios from 'axios';
 
-import './login-view.css';
+import '../styles/login-view.css';
 
-export function LoginView(props) {
+export function Login(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
+  const [ user, setUser ] = useState('');
  // Declare hook for each input
  const [ usernameErr, setUsernameErr ] = useState('');
  const [ passwordErr, setPasswordErr ] = useState('');
+ const navigate = useNavigate();
 
 // validate user inputs
 const validate = () => {
@@ -39,39 +38,35 @@ const validate = () => {
    return isReq;
   }
 
-
-  const handleSubmit = (e) => {
-    const isReq = validate();
+  const handleSubmit = e => {
     e.preventDefault();
+    const isReq = validate();
     axios.post('https://my-flix-cf.herokuapp.com/login', {
       Username: username,
       Password: password,
     })
     .then(response => {
-      const data = response.data;
-      console.log(data)
-      props.onLoggedIn(data);
+          const data = response.data;
+          console.table(data)
+          console.log("LoggedIn...");
+          setUser(data.user.Username)
+          console.table({user})
+          //Set data into LocalStorage
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', data.user.Username);
+          //Redirect Homepage
+          navigate.push('/', user={user});
+             
     })
-    .catch(e => {
-      console.log(e)
+    .catch(err => {
+      console.log(err)
       console.log('no such user')
     });
   };
 
-  function handleNewUser(e) {
-    console.log('Registration...');
-    <Router>
-      <Link to="/register"></Link>
-      <Route path="/register">
-          <RegisterView />
-          </Route>
-    </Router>
-  };
-  
-
-  return (
+   return (
+       
         
-
       <Row className="d-flex justify-content-evenly">
       <Col></Col>
       <Col xs={4} className="left_side">
@@ -94,13 +89,18 @@ const validate = () => {
       
       <Col xs={6} className="right_side d-flex flex-column justify-content-center align-items-center p-2 mt-4">
         <p>Please enter your details to login into the application.</p>
-        <p>If you don't have an account, please <a href="#" onClick={handleNewUser()}>click here</a> to register.</p>
+        <p>If you don't have an account, please <Link to="/register">register</Link></p>
+         
+      {/* <Route path="/register">
+          <RegisterView />
+      </Route>
+         */}
+          {/* <a href="#" onClick={handleNewUser()}>click here</a> to register.</p> */}
       </Col>
       <Col></Col>
      </Row>
-
-    
-  );
+       
+   );
 }
 
 // LoginView.propTypes = {

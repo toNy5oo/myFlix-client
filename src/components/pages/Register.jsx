@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios'; 
 import {Form, Button, Card, CardGroup, Container, Row, Col} from 'react-bootstrap';
 
-export function RegisterView(props) {
+export function Register(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -59,10 +59,10 @@ export function RegisterView(props) {
             alert('Registration not completed');
           });
     }
-        
   };
 
   return (
+
     <Container>
       <Row>
         <Col>
@@ -112,14 +112,14 @@ export function RegisterView(props) {
         </Col>
       </Row>
     </Container>
-  
-  );
+
+  )
 }
 
-RegisterView.propTypes = {
-    user: PropTypes.shape({
-      Username: PropTypes.string.isRequired,
-      Password: PropTypes.string.isRequired,
-      Email: PropTypes.string.isRequired
-    })
-  };
+// RegisterView.propTypes = {
+//     user: PropTypes.shape({
+//       Username: PropTypes.string.isRequired,
+//       Password: PropTypes.string.isRequired,
+//       Email: PropTypes.string.isRequired
+//     })
+//   };
