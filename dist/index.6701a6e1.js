@@ -41749,35 +41749,7 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "SingleMovie", ()=>SingleMovie
-) // OLD CODE  ___________________________________
- //   <Card>
- //   <Card.Img variant="top" src={movie.ImagePath} crossOrigin="anonymous" onClick={() => onMovieClick(movie)}/>
- //     <Card.Body>
- //     <Card.Title as="h5" className="description mh-200">{movie.Title}</Card.Title>
- //       <Card.Text>{movie.Description}</Card.Text>
- //     </Card.Body>
- //     <ListGroup className="list-group-flush">
- //       <ListGroupItem key={movie._id}>Genre: {defineGenre()}</ListGroupItem>
- //       <ListGroupItem key={movie._Actors}>Actors:{}</ListGroupItem>
- //       <ListGroupItem key="theater" className="text-center">{isFeatured(movie.Featured)}</ListGroupItem>
- //     </ListGroup>
- //     <Card.Body className="d-flex justify-content-between">
- //     <Card.Link href="#">Add to favourites</Card.Link>
- //     <Card.Link href="#">Remove from Favourites</Card.Link>
- //     </Card.Body>
- //     <Button variant="primary" onClick={() => { onBackClick(null); }}>Back</Button>
- //   </Card>
- //   <Card>
- //   <Card.Img variant="top" src={movie.ImagePath} crossorigin="anonymous"/>
- //   <Card.Body>
- //   <Card.Header as="h5">{movie.Title}</Card.Header>
- //     <Card.Text>
- //     {movie.Description}
- //     </Card.Text>
- //     <Button variant="primary" onClick={() => { onBackClick(null); }}>Back</Button>
- //   </Card.Body>
- // </Card>
- // MovieView.propTypes = {
+) // MovieView.propTypes = {
  //   movie: PropTypes.shape({
  //     Title: PropTypes.string.isRequired,
  //     Description: PropTypes.string.isRequired,
@@ -41801,174 +41773,384 @@ var _movieViewCss = require("../styles/movie-view.css");
 var _s = $RefreshSig$();
 function SingleMovie() {
     _s();
-    const [movie, setMovie] = _react.useState('');
+    const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    //Destructuring the params Object
     const { movie_id  } = _reactRouterDom.useParams();
     const navigate = _reactRouterDom.useNavigate();
+    const [movie, setMovie] = _react.useState('');
+    const [director, setDirector] = _react.useState('');
+    const [genres, setGenres] = _react.useState('');
+    //Setting loading and error variables 
+    const [loading, setLoading] = _react.useState(true);
+    const [error, setError] = _react.useState();
+    // let { directorName, directorBio } = {};
     _react.useEffect(()=>{
+        console.log('useEffect_MOVIE.......................................................');
         let accessToken = localStorage.getItem('token');
-        console.log({
-            movie_id
-        });
-        getMovie(accessToken);
-    }, []);
-    const defineGenre = ()=>{
-    // axios.get('https://my-flix-cf.herokuapp.com//movies/'+movie.Title+'/details')
-    //     .then(response => {}
-    //     )
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
-    };
-    function getMovie(token) {
-        _axiosDefault.default.get(`https://my-flix-cf.herokuapp.com/movies/${movie_id}`, {
+        //Fetching Movie through ID
+        console.log('getMovie');
+        _axiosDefault.default.get(baseURL + 'movies/' + movie_id, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${accessToken}`
             }
         }).then((response)=>{
             // Assign the result to the state
             setMovie(response.data);
             console.log(response.data);
-        }).catch(function(error) {
-            console.log(error);
+        }).catch(function(error1) {
+            console.log(error1);
+            setError(error1);
+        }).finally(()=>{
+            setLoading(false);
         });
-    }
-    function isFeatured(val) {
-        if (val) return(/*#__PURE__*/ _jsxRuntime.jsx("strong", {
+    }, []);
+    //Fetch Movie Data on page Loaded
+    _react.useEffect(()=>{
+        console.log('useEffect_REST.......................................................');
+        //Fetching Director through ID
+        console.log('getDirector');
+        let directorURL = baseURL + 'directors/' + movie.Director;
+        _axiosDefault.default.get(directorURL).then((response)=>{
+            console.log(response.data);
+            setDirector(response.data);
+        }).catch((error1)=>{
+            console.log(error1);
+            setError(error1);
+        }).finally(()=>{
+            setLoading(false);
+        });
+    }, [
+        movie
+    ]);
+    // function getGenres() {
+    // 	if (movie != '') { 
+    // 		console.log('getGenre');
+    // 		console.log(movie.Genre);
+    // 		movie.Genre.forEach((genre) => {
+    // 				let genreURL = baseURL + 'genres/' + genre;
+    // 				axios.get(genreURL)
+    // 								.then(response => {
+    // 									//console.log(response.data.Name)
+    // 									setGenres(...genres, response.data.Name)
+    // 								})
+    // 								.catch(error => {
+    // 									console.log(error);
+    // 								})
+    // 				})
+    // 			}
+    // 			console.table(genres);
+    // 		}
+    // 	for (let genre in movie.Genre) {
+    // 				let genreURL = baseURL + 'genres/' + genre;
+    // 					axios.get(genreURL)
+    // 							.then(response => {
+    // 								setGenres(response.data.Name)
+    // 							})
+    // 							.catch(error => {
+    // 								console.log(error);
+    // 							})
+    // 			}
+    // 			console.log(Object.entries(genres))
+    // }
+    // console.log('GenreObj '+genres)
+    // parseGenres();
+    // function getDirector () {
+    // 	if (movie != '') {      
+    // 							console.log('getDirector')
+    // 							let directorURL = baseURL + 'directors/' + movie.Director;
+    // 							axios.get(directorURL)
+    // 									.then(response => {
+    // 										console.log(response.data);
+    // 										setDirector(response.data);
+    // 										})
+    // 									.catch(error => {
+    // 										console.log(error);
+    // 									});
+    // 						 }
+    // }
+    // const parseGenres = () => {
+    //   if (movie != '') { 
+    //         console.log('parseGenre '+genres)
+    //           let genreList = '';
+    //           for (var i in genres) {
+    //               if (i!=0) genreList += ',  ';
+    //               genreList += genres[i];
+    //           }
+    //           console.log(genreList)
+    //           return genreList;
+    //         }
+    // }
+    // const parseActors = () => {
+    //   if (movie != '') { 
+    //         console.log('parseActors')
+    //           let actorsList = '';
+    //           for (var i in movie.Actors) {
+    //               if (i!=0) actorsList += ',  ';
+    //               actorsList += movie.Actors[i];
+    //           }
+    //           return actorsList;
+    //         }
+    // }
+    const isFeatured = (val)=>{
+        if (movie != '') {
+            console.log('isFeatured');
+            if (val) return(/*#__PURE__*/ _jsxRuntime.jsx("strong", {
+                __source: {
+                    fileName: "src/components/pages/SingleMovie.jsx",
+                    lineNumber: 162
+                },
+                __self: this,
+                children: "Available"
+            }));
+            else return 'Not Available';
+        }
+    };
+    //If data is not fetched, show spinner
+    if (loading) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+        className: "justify-content-center my-5",
+        __source: {
+            fileName: "src/components/pages/SingleMovie.jsx",
+            lineNumber: 172
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+            className: "h3 text-muted text-center",
             __source: {
                 fileName: "src/components/pages/SingleMovie.jsx",
-                lineNumber: 49
+                lineNumber: 173
             },
             __self: this,
-            children: "Available in Theathers"
-        }));
-        else return 'N/A in Theathers';
-    }
+            children: [
+                "Data is loading \xa0",
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Spinner, {
+                    animation: "border",
+                    variant: "secondary",
+                    role: "status",
+                    __source: {
+                        fileName: "src/components/pages/SingleMovie.jsx",
+                        lineNumber: 174
+                    },
+                    __self: this
+                })
+            ]
+        })
+    }));
+    if (error || !Array.isArray(movie.Actors)) return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Row, {
+        className: "justify-content-center my-5",
+        __source: {
+            fileName: "src/components/pages/SingleMovie.jsx",
+            lineNumber: 180
+        },
+        __self: this,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                __source: {
+                    fileName: "src/components/pages/SingleMovie.jsx",
+                    lineNumber: 181
+                },
+                __self: this,
+                children: "There was an error loading your data!"
+            }),
+            ";"
+        ]
+    }));
     return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
         children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Row, {
-            className: "w-100 justify-content-around mx-auto",
+            className: "justify-content-center my-5",
             __source: {
                 fileName: "src/components/pages/SingleMovie.jsx",
-                lineNumber: 59
+                lineNumber: 188
             },
             __self: this,
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Col, {
-                    md: 8,
+                    md: 6,
                     __source: {
                         fileName: "src/components/pages/SingleMovie.jsx",
-                        lineNumber: 60
+                        lineNumber: 189
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                            className: "p-5 h4 text-muted",
+                            className: "h3 text-muted text-center",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 61
+                                lineNumber: 190
                             },
                             __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
-                                __source: {
-                                    fileName: "src/components/pages/SingleMovie.jsx",
-                                    lineNumber: 62
-                                },
-                                __self: this,
-                                children: movie.Description
-                            })
+                            children: movie.Title
                         }),
-                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup, {
+                        /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                            className: "p-4 m-3 h5 text-muted text-center",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 72
+                                lineNumber: 192
                             },
                             __self: this,
                             children: [
-                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup.Item, {
+                                /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 73
-                                    },
-                                    __self: this,
-                                    children: /*#__PURE__*/ _jsxRuntime.jsx("h3", {
-                                        __source: {
-                                            fileName: "src/components/pages/SingleMovie.jsx",
-                                            lineNumber: 73
-                                        },
-                                        __self: this,
-                                        children: movie.Title
-                                    })
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup.Item, {
-                                    __source: {
-                                        fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 74
+                                        lineNumber: 193
                                     },
                                     __self: this,
                                     children: [
-                                        "Genre: ",
-                                        defineGenre()
+                                        "Directed by ",
+                                        director.Name
                                     ]
                                 }),
-                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup.Item, {
+                                "\xa0",
+                                /*#__PURE__*/ _jsxRuntime.jsx("p", {
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 75
+                                        lineNumber: 195
                                     },
                                     __self: this,
-                                    children: "Actors:"
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup.Item, {
-                                    __source: {
-                                        fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 76
-                                    },
-                                    __self: this,
-                                    children: isFeatured(movie.Featured)
-                                }),
+                                    children: movie.Description
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Stack, {
+                            gap: 2,
+                            className: "d-flex justify-content-center align-items-center",
+                            __source: {
+                                fileName: "src/components/pages/SingleMovie.jsx",
+                                lineNumber: 198
+                            },
+                            __self: this,
+                            children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 77
+                                        lineNumber: 199
                                     },
                                     __self: this,
-                                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup.Item, {
-                                        className: "w-100 d-flex justify-content-between",
-                                        __source: {
-                                            fileName: "src/components/pages/SingleMovie.jsx",
-                                            lineNumber: 78
-                                        },
-                                        __self: this,
-                                        children: [
-                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                                                variant: "link text-muted",
-                                                __source: {
-                                                    fileName: "src/components/pages/SingleMovie.jsx",
-                                                    lineNumber: 79
-                                                },
-                                                __self: this,
-                                                children: "Add to favourites"
-                                            }),
-                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                                                variant: "link text-muted",
-                                                __source: {
-                                                    fileName: "src/components/pages/SingleMovie.jsx",
-                                                    lineNumber: 80
-                                                },
-                                                __self: this,
-                                                children: "Remove from Favourites"
-                                            })
-                                        ]
-                                    })
+                                    children: "Actors"
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                    className: "bg-light border p-2 m-3 px-3",
+                                    __source: {
+                                        fileName: "src/components/pages/SingleMovie.jsx",
+                                        lineNumber: 199
+                                    },
+                                    __self: this,
+                                    children: movie.Actors.map((actor, i)=>i != 0 ? ', ' + actor : actor
+                                    )
                                 })
                             ]
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Stack, {
+                            gap: 2,
+                            className: "d-flex justify-content-center align-items-center",
+                            __source: {
+                                fileName: "src/components/pages/SingleMovie.jsx",
+                                lineNumber: 205
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                    __source: {
+                                        fileName: "src/components/pages/SingleMovie.jsx",
+                                        lineNumber: 206
+                                    },
+                                    __self: this,
+                                    children: "Genre"
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                    className: "bg-light border p-2 m-3 px-3",
+                                    __source: {
+                                        fileName: "src/components/pages/SingleMovie.jsx",
+                                        lineNumber: 206
+                                    },
+                                    __self: this
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Stack, {
+                            gap: 2,
+                            className: "d-flex justify-content-center align-items-center",
+                            __source: {
+                                fileName: "src/components/pages/SingleMovie.jsx",
+                                lineNumber: 208
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                    __source: {
+                                        fileName: "src/components/pages/SingleMovie.jsx",
+                                        lineNumber: 209
+                                    },
+                                    __self: this,
+                                    children: "Available in Theathers"
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                    className: "bg-light border p-2 m-3 px-3",
+                                    __source: {
+                                        fileName: "src/components/pages/SingleMovie.jsx",
+                                        lineNumber: 209
+                                    },
+                                    __self: this,
+                                    children: isFeatured(movie.Featured)
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Stack, {
+                            gap: 3,
+                            className: "col-md-5 mx-auto",
+                            __source: {
+                                fileName: "src/components/pages/SingleMovie.jsx",
+                                lineNumber: 211
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                    variant: "link text-muted",
+                                    __source: {
+                                        fileName: "src/components/pages/SingleMovie.jsx",
+                                        lineNumber: 212
+                                    },
+                                    __self: this,
+                                    children: "Add to favourites"
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                    variant: "link text-muted",
+                                    __source: {
+                                        fileName: "src/components/pages/SingleMovie.jsx",
+                                        lineNumber: 213
+                                    },
+                                    __self: this,
+                                    children: "Remove from Favourites"
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Stack, {
+                            gap: 2,
+                            className: "col-md-5 mx-auto text-center m-4 p-2",
+                            __source: {
+                                fileName: "src/components/pages/SingleMovie.jsx",
+                                lineNumber: 215
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                variant: "secondary",
+                                onClick: ()=>{
+                                    navigate('/');
+                                },
+                                __source: {
+                                    fileName: "src/components/pages/SingleMovie.jsx",
+                                    lineNumber: 216
+                                },
+                                __self: this,
+                                children: "Back to all movies"
+                            })
                         })
                     ]
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
-                    md: 4,
+                    md: 2,
                     __source: {
                         fileName: "src/components/pages/SingleMovie.jsx",
-                        lineNumber: 86
+                        lineNumber: 220
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Image, {
@@ -41977,28 +42159,16 @@ function SingleMovie() {
                         crossOrigin: "anonymous",
                         __source: {
                             fileName: "src/components/pages/SingleMovie.jsx",
-                            lineNumber: 87
+                            lineNumber: 221
                         },
                         __self: this
                     })
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                    variant: "primary",
-                    onClick: ()=>{
-                        navigate('/');
-                    },
-                    __source: {
-                        fileName: "src/components/pages/SingleMovie.jsx",
-                        lineNumber: 89
-                    },
-                    __self: this,
-                    children: "Back"
                 })
             ]
         })
     }));
 }
-_s(SingleMovie, "BeyG28AAHV/8r9CC5lWgleq+ikI=", false, function() {
+_s(SingleMovie, "SzRnd+HRxNk1tYO4AjJ1B3rwND4=", false, function() {
     return [_reactRouterDom.useParams, _reactRouterDom.useNavigate];
 });
 _c = SingleMovie;
@@ -42010,7 +42180,7 @@ $RefreshReg$(_c, "SingleMovie");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap":"h2YVd","react-router-dom":"kjA5T","react-bootstrap/CardGroup":"lNZc4","../styles/movie-view.css":"ldfrl","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","axios":"iYoWk"}],"ldfrl":[function() {},{}],"3nr8j":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","prop-types":"1tgq3","react-bootstrap":"h2YVd","react-router-dom":"kjA5T","react-bootstrap/CardGroup":"lNZc4","../styles/movie-view.css":"ldfrl","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"ldfrl":[function() {},{}],"3nr8j":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$4381 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
