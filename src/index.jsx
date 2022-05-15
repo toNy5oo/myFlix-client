@@ -3,22 +3,17 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router} from "react-router-dom";
 import { Home } from './components/pages/home';
 import { SingleMovie } from './components/pages/SingleMovie';
-import { MovieList } from './components/pages/MovieList';
-import { Featured } from './components/pages/Featured';
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
+import { Favourites } from './components/pages/Favourites';
+import { Director } from './components/pages/Director';
+import { Genre } from './components/pages/Genre';
+import { Profile } from './components/pages/Profile';
 import { Login } from './components/pages/Login';
-import { Navbar } from './components/layout/navbar';
 import { SharedLayout } from './components/component/SharedLayout';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
-  Outlet,
-  useParams,
-  Redirect,
-  useNavigate
+
 } from "react-router-dom";
 
 // Import statement to indicate that you need to bundle `./index.scss`
@@ -56,7 +51,10 @@ export default function MyFlixApplication() {
                     <Route path="/" element={<SharedLayout />}> 
                         <Route index element={(user) ? <Home /> : <Login />} />  
                         <Route path="movies/:movie_id" element={<SingleMovie />} />  
-                        <Route path="featured" element={<Featured />} />
+                        <Route path="favourites" element={<Favourites />} />
+                        <Route path="profile" element={<Profile />} />
+                        <Route path="directors/:director_id" element={<Director />} />
+                        <Route path="genres/:genre_id" element={<Genre />} />
                     </Route>
 
               </Routes>

@@ -22,7 +22,6 @@ import {
 
 export function Home()  {
  
-
       return (
         <> 
             <MovieList />

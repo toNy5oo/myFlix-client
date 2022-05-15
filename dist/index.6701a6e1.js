@@ -948,14 +948,11 @@ var _client = require("react-dom/client");
 var _reactRouterDom = require("react-router-dom");
 var _home = require("./components/pages/home");
 var _singleMovie = require("./components/pages/SingleMovie");
-var _movieList = require("./components/pages/MovieList");
-var _featured = require("./components/pages/Featured");
-var _container = require("react-bootstrap/Container");
-var _containerDefault = parcelHelpers.interopDefault(_container);
-var _navbar = require("react-bootstrap/Navbar");
-var _navbarDefault = parcelHelpers.interopDefault(_navbar);
+var _favourites = require("./components/pages/Favourites");
+var _director = require("./components/pages/Director");
+var _genre = require("./components/pages/Genre");
+var _profile = require("./components/pages/Profile");
 var _login = require("./components/pages/Login");
-var _navbar1 = require("./components/layout/navbar");
 var _sharedLayout = require("./components/component/SharedLayout");
 // Import statement to indicate that you need to bundle `./index.scss`
 var _indexCss = require("./index.css");
@@ -980,19 +977,19 @@ function MyFlixApplication() {
     /*#__PURE__*/ _jsxRuntime.jsx("div", {
         __source: {
             fileName: "src/index.jsx",
-            lineNumber: 52
+            lineNumber: 47
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/index.jsx",
-                lineNumber: 53
+                lineNumber: 48
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Routes, {
                 __source: {
                     fileName: "src/index.jsx",
-                    lineNumber: 54
+                    lineNumber: 49
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.Route, {
@@ -1001,7 +998,7 @@ function MyFlixApplication() {
                     }),
                     __source: {
                         fileName: "src/index.jsx",
-                        lineNumber: 56
+                        lineNumber: 51
                     },
                     __self: this,
                     children: [
@@ -1012,7 +1009,7 @@ function MyFlixApplication() {
                             }),
                             __source: {
                                 fileName: "src/index.jsx",
-                                lineNumber: 57
+                                lineNumber: 52
                             },
                             __self: this
                         }),
@@ -1022,17 +1019,47 @@ function MyFlixApplication() {
                             }),
                             __source: {
                                 fileName: "src/index.jsx",
-                                lineNumber: 58
+                                lineNumber: 53
                             },
                             __self: this
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
-                            path: "featured",
-                            element: /*#__PURE__*/ _jsxRuntime.jsx(_featured.Featured, {
+                            path: "favourites",
+                            element: /*#__PURE__*/ _jsxRuntime.jsx(_favourites.Favourites, {
                             }),
                             __source: {
                                 fileName: "src/index.jsx",
-                                lineNumber: 59
+                                lineNumber: 54
+                            },
+                            __self: this
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
+                            path: "profile",
+                            element: /*#__PURE__*/ _jsxRuntime.jsx(_profile.Profile, {
+                            }),
+                            __source: {
+                                fileName: "src/index.jsx",
+                                lineNumber: 55
+                            },
+                            __self: this
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
+                            path: "directors/:director_id",
+                            element: /*#__PURE__*/ _jsxRuntime.jsx(_director.Director, {
+                            }),
+                            __source: {
+                                fileName: "src/index.jsx",
+                                lineNumber: 56
+                            },
+                            __self: this
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
+                            path: "genres/:genre_id",
+                            element: /*#__PURE__*/ _jsxRuntime.jsx(_genre.Genre, {
+                            }),
+                            __source: {
+                                fileName: "src/index.jsx",
+                                lineNumber: 57
                             },
                             __self: this
                         })
@@ -1058,7 +1085,7 @@ $RefreshReg$(_c, "MyFlixApplication");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-dom/client":"jdzvJ","react-router-dom":"kjA5T","./components/pages/home":"ke6jO","./components/pages/SingleMovie":"7JX0s","./components/pages/MovieList":"bwqA5","./components/pages/Featured":"hHAZI","react-bootstrap/Container":"2PRIq","react-bootstrap/Navbar":"eYZQl","./components/pages/Login":"3nr8j","./components/layout/navbar":"clKBo","./components/component/SharedLayout":"2XLwF","./index.css":"1dfYM","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"8xIwr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-dom/client":"jdzvJ","react-router-dom":"kjA5T","./components/pages/home":"ke6jO","./components/pages/SingleMovie":"7JX0s","./components/pages/Login":"3nr8j","./components/component/SharedLayout":"2XLwF","./index.css":"1dfYM","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","./components/pages/Favourites":"2C1jY","./components/pages/Profile":"gEUOp","./components/pages/Director":"jVsus","./components/pages/Genre":"7wyHG"}],"8xIwr":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-runtime.development.js');
 
@@ -28764,13 +28791,13 @@ var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _ = require("react-bootstrap/");
 var _card = require("../component/card");
-var _singleMovie = require("./SingleMovie");
-var _reactRouterDom = require("react-router-dom");
 var _s = $RefreshSig$();
 function MovieList() {
     _s();
     const [movies, setMovies] = _react.useState([]);
     const [user, setUser] = _react.useState();
+    const [loading, setLoading] = _react.useState(true);
+    const [error, setError] = _react.useState();
     _react.useEffect(()=>{
         let accessToken = localStorage.getItem('token');
         //   if (accessToken !== null) {
@@ -28787,37 +28814,85 @@ function MovieList() {
         }).then((response)=>{
             // Assign the result to the state
             setMovies(response.data);
-        }).catch(function(error) {
-            console.log(error);
+        }).catch(function(error1) {
+            console.log(error1);
+        }).finally(()=>{
+            setLoading(false);
         });
     }
+    //If data is not fetched, show spinner
+    if (loading) return(/*#__PURE__*/ _jsxRuntime.jsx(_.Row, {
+        className: "justify-content-center my-5",
+        __source: {
+            fileName: "src/components/pages/MovieList.jsx",
+            lineNumber: 42
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+            className: "h3 text-muted text-center",
+            __source: {
+                fileName: "src/components/pages/MovieList.jsx",
+                lineNumber: 43
+            },
+            __self: this,
+            children: [
+                "Loading Movies... \xa0",
+                /*#__PURE__*/ _jsxRuntime.jsx(_.Spinner, {
+                    animation: "border",
+                    variant: "secondary",
+                    role: "status",
+                    __source: {
+                        fileName: "src/components/pages/MovieList.jsx",
+                        lineNumber: 44
+                    },
+                    __self: this
+                })
+            ]
+        })
+    }));
+    if (error) return(/*#__PURE__*/ _jsxRuntime.jsx(_.Row, {
+        className: "justify-content-center my-5",
+        __source: {
+            fileName: "src/components/pages/MovieList.jsx",
+            lineNumber: 50
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
+            __source: {
+                fileName: "src/components/pages/MovieList.jsx",
+                lineNumber: 51
+            },
+            __self: this,
+            children: "There was an error loading your data!"
+        })
+    }));
     return(/*#__PURE__*/ _jsxRuntime.jsx(_.Row, {
         className: "main-view justify-content-md-evenly m-0 p-5 align-items-start",
         __source: {
             fileName: "src/components/pages/MovieList.jsx",
-            lineNumber: 49
+            lineNumber: 58
         },
         __self: this,
         children: movies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_.Col, {
                 md: 3,
                 __source: {
                     fileName: "src/components/pages/MovieList.jsx",
-                    lineNumber: 52
+                    lineNumber: 60
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_card.MovieCard, {
-                    movie: m,
+                    movieData: m,
                     __source: {
                         fileName: "src/components/pages/MovieList.jsx",
-                        lineNumber: 52
+                        lineNumber: 60
                     },
                     __self: this
-                })
-            }, m._id)
+                }, m._id)
+            })
         )
     }));
 }
-_s(MovieList, "0VyVDKQcI0j1sKBthxJUj6fCxmo=");
+_s(MovieList, "nHww7qDKc/RPEP6qzqpXGLVsJGM=");
 _c = MovieList;
 var _c;
 $RefreshReg$(_c, "MovieList");
@@ -28827,7 +28902,7 @@ $RefreshReg$(_c, "MovieList");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","react-bootstrap/":"h2YVd","../component/card":"i86jX","./SingleMovie":"7JX0s","react-router-dom":"kjA5T","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"h2YVd":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","react-bootstrap/":"h2YVd","../component/card":"i86jX","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"h2YVd":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Accordion", ()=>_accordionDefault.default
@@ -41441,55 +41516,23 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
-) // MovieCard.propTypes = {
- //   movie: PropTypes.shape({
- //     Title: PropTypes.string.isRequired,
- //     Description: PropTypes.string.isRequired,
- //     ImagePath: PropTypes.string.isRequired
- //   }).isRequired,
- //   onMovieClick: PropTypes.func.isRequired
- // };
-;
+);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _axios = require("axios");
-var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _reactBootstrap = require("react-bootstrap");
-var _cardGroup = require("react-bootstrap/CardGroup");
-var _cardGroupDefault = parcelHelpers.interopDefault(_cardGroup);
 var _reactRouterDom = require("react-router-dom");
 var _movieCardCss = require("../styles/movie-card.css");
 var _s = $RefreshSig$();
 function MovieCard(props) {
     _s();
-    const { idMovie  } = _reactRouterDom.useParams();
-    const [movie, setMovie] = _react.useState(props.movie);
-    const defineGenre = ()=>{
-    // axios.get('https://my-flix-cf.herokuapp.com//movies/'+movie.Title+'/details')
-    //     .then(response => {}
-    //     )
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
-    };
-    function isFeatured(val) {
-        if (val) return(/*#__PURE__*/ _jsxRuntime.jsx("strong", {
-            __source: {
-                fileName: "src/components/component/card.jsx",
-                lineNumber: 28
-            },
-            __self: this,
-            children: "Available in Theathers"
-        }));
-        else return 'N/A in Theathers';
-    }
+    const [movie, setMovie] = _react.useState(props.movieData);
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card, {
         __source: {
             fileName: "src/components/component/card.jsx",
-            lineNumber: 35
+            lineNumber: 14
         },
         __self: this,
         children: [
@@ -41497,7 +41540,7 @@ function MovieCard(props) {
                 to: `/movies/${movie._id}`,
                 __source: {
                     fileName: "src/components/component/card.jsx",
-                    lineNumber: 37
+                    lineNumber: 16
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Img, {
@@ -41506,7 +41549,7 @@ function MovieCard(props) {
                     crossOrigin: "anonymous",
                     __source: {
                         fileName: "src/components/component/card.jsx",
-                        lineNumber: 38
+                        lineNumber: 17
                     },
                     __self: this
                 })
@@ -41514,7 +41557,7 @@ function MovieCard(props) {
             /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                 __source: {
                     fileName: "src/components/component/card.jsx",
-                    lineNumber: 43
+                    lineNumber: 19
                 },
                 __self: this,
                 children: [
@@ -41523,7 +41566,7 @@ function MovieCard(props) {
                         className: "description",
                         __source: {
                             fileName: "src/components/component/card.jsx",
-                            lineNumber: 44
+                            lineNumber: 20
                         },
                         __self: this,
                         children: movie.Title
@@ -41531,85 +41574,17 @@ function MovieCard(props) {
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Text, {
                         __source: {
                             fileName: "src/components/component/card.jsx",
-                            lineNumber: 45
+                            lineNumber: 21
                         },
                         __self: this,
                         children: movie.Description
-                    })
-                ]
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup, {
-                className: "list-group-flush",
-                __source: {
-                    fileName: "src/components/component/card.jsx",
-                    lineNumber: 47
-                },
-                __self: this,
-                children: [
-                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroupItem, {
-                        __source: {
-                            fileName: "src/components/component/card.jsx",
-                            lineNumber: 48
-                        },
-                        __self: this,
-                        children: [
-                            "Genre: ",
-                            defineGenre()
-                        ]
-                    }, movie._id),
-                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroupItem, {
-                        __source: {
-                            fileName: "src/components/component/card.jsx",
-                            lineNumber: 49
-                        },
-                        __self: this,
-                        children: "Actors:"
-                    }, movie._Actors),
-                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroupItem, {
-                        className: "text-center",
-                        __source: {
-                            fileName: "src/components/component/card.jsx",
-                            lineNumber: 50
-                        },
-                        __self: this,
-                        children: isFeatured(movie.Featured)
-                    }, "theater")
-                ]
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
-                className: "d-flex justify-content-between",
-                __source: {
-                    fileName: "src/components/component/card.jsx",
-                    lineNumber: 52
-                },
-                __self: this,
-                children: [
-                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Link, {
-                        href: "#",
-                        __source: {
-                            fileName: "src/components/component/card.jsx",
-                            lineNumber: 53
-                        },
-                        __self: this,
-                        children: "Add to favourites"
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Link, {
-                        href: "#",
-                        __source: {
-                            fileName: "src/components/component/card.jsx",
-                            lineNumber: 54
-                        },
-                        __self: this,
-                        children: "Remove from Favourites"
                     })
                 ]
             })
         ]
     }));
 }
-_s(MovieCard, "bxJmA1fFrrmACdHM1RqvwvHXIL8=", false, function() {
-    return [_reactRouterDom.useParams];
-});
+_s(MovieCard, "/fdjOLQw2w9ula9UZwBfzCtLZ/s=");
 _c = MovieCard;
 var _c;
 $RefreshReg$(_c, "MovieCard");
@@ -41619,7 +41594,7 @@ $RefreshReg$(_c, "MovieCard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","axios":"iYoWk","react-bootstrap":"h2YVd","react-bootstrap/CardGroup":"lNZc4","react-router-dom":"kjA5T","../styles/movie-card.css":"hEGfn","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"hEGfn":[function() {},{}],"bVmk7":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap":"h2YVd","react-router-dom":"kjA5T","../styles/movie-card.css":"hEGfn","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"hEGfn":[function() {},{}],"bVmk7":[function(require,module,exports) {
 "use strict";
 var Refresh = require('react-refresh/runtime');
 function debounce(func, delay) {
@@ -41749,15 +41724,7 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "SingleMovie", ()=>SingleMovie
-) // MovieView.propTypes = {
- //   movie: PropTypes.shape({
- //     Title: PropTypes.string.isRequired,
- //     Description: PropTypes.string.isRequired,
- //     ImagePath: PropTypes.string.isRequired
- //   }).isRequired,
- //   onBackClick: PropTypes.func.isRequired
- // };
-;
+);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
@@ -41774,6 +41741,7 @@ var _s = $RefreshSig$();
 function SingleMovie() {
     _s();
     const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    const [user, setUser] = _react.useState(localStorage.getItem('user'));
     //Destructuring the params Object
     const { movie_id  } = _reactRouterDom.useParams();
     const navigate = _reactRouterDom.useNavigate();
@@ -41783,7 +41751,7 @@ function SingleMovie() {
     //Setting loading and error variables 
     const [loading, setLoading] = _react.useState(true);
     const [error, setError] = _react.useState();
-    // let { directorName, directorBio } = {};
+    const [isFavourite, setIsFavourite] = _react.useState('');
     _react.useEffect(()=>{
         console.log('useEffect_MOVIE.......................................................');
         let accessToken = localStorage.getItem('token');
@@ -41822,82 +41790,13 @@ function SingleMovie() {
     }, [
         movie
     ]);
-    // function getGenres() {
-    // 	if (movie != '') { 
-    // 		console.log('getGenre');
-    // 		console.log(movie.Genre);
-    // 		movie.Genre.forEach((genre) => {
-    // 				let genreURL = baseURL + 'genres/' + genre;
-    // 				axios.get(genreURL)
-    // 								.then(response => {
-    // 									//console.log(response.data.Name)
-    // 									setGenres(...genres, response.data.Name)
-    // 								})
-    // 								.catch(error => {
-    // 									console.log(error);
-    // 								})
-    // 				})
-    // 			}
-    // 			console.table(genres);
-    // 		}
-    // 	for (let genre in movie.Genre) {
-    // 				let genreURL = baseURL + 'genres/' + genre;
-    // 					axios.get(genreURL)
-    // 							.then(response => {
-    // 								setGenres(response.data.Name)
-    // 							})
-    // 							.catch(error => {
-    // 								console.log(error);
-    // 							})
-    // 			}
-    // 			console.log(Object.entries(genres))
-    // }
-    // console.log('GenreObj '+genres)
-    // parseGenres();
-    // function getDirector () {
-    // 	if (movie != '') {      
-    // 							console.log('getDirector')
-    // 							let directorURL = baseURL + 'directors/' + movie.Director;
-    // 							axios.get(directorURL)
-    // 									.then(response => {
-    // 										console.log(response.data);
-    // 										setDirector(response.data);
-    // 										})
-    // 									.catch(error => {
-    // 										console.log(error);
-    // 									});
-    // 						 }
-    // }
-    // const parseGenres = () => {
-    //   if (movie != '') { 
-    //         console.log('parseGenre '+genres)
-    //           let genreList = '';
-    //           for (var i in genres) {
-    //               if (i!=0) genreList += ',  ';
-    //               genreList += genres[i];
-    //           }
-    //           console.log(genreList)
-    //           return genreList;
-    //         }
-    // }
-    // const parseActors = () => {
-    //   if (movie != '') { 
-    //         console.log('parseActors')
-    //           let actorsList = '';
-    //           for (var i in movie.Actors) {
-    //               if (i!=0) actorsList += ',  ';
-    //               actorsList += movie.Actors[i];
-    //           }
-    //           return actorsList;
-    //         }
-    // }
     const isFeatured = (val)=>{
         if (movie != '') {
             console.log('isFeatured');
             if (val) return(/*#__PURE__*/ _jsxRuntime.jsx("strong", {
                 __source: {
                     fileName: "src/components/pages/SingleMovie.jsx",
-                    lineNumber: 162
+                    lineNumber: 80
                 },
                 __self: this,
                 children: "Available"
@@ -41905,19 +41804,35 @@ function SingleMovie() {
             else return 'Not Available';
         }
     };
+    const addFavouriteMovie = ()=>{
+        let accessToken = localStorage.getItem('token');
+        let compositeURL = baseURL + 'users/' + user + '/favourites/' + movie._id;
+        _axiosDefault.default.put(compositeURL, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        }).then((response)=>{
+            console.log(response.data);
+            setIsFavourite(true);
+        }).catch((error1)=>{
+            console.log(compositeURL);
+            console.log(error1);
+            setError(error1);
+        });
+    };
     //If data is not fetched, show spinner
     if (loading) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/pages/SingleMovie.jsx",
-            lineNumber: 172
+            lineNumber: 103
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "h3 text-muted text-center",
             __source: {
                 fileName: "src/components/pages/SingleMovie.jsx",
-                lineNumber: 173
+                lineNumber: 104
             },
             __self: this,
             children: [
@@ -41928,38 +41843,35 @@ function SingleMovie() {
                     role: "status",
                     __source: {
                         fileName: "src/components/pages/SingleMovie.jsx",
-                        lineNumber: 174
+                        lineNumber: 105
                     },
                     __self: this
                 })
             ]
         })
     }));
-    if (error || !Array.isArray(movie.Actors)) return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Row, {
+    if (error || !Array.isArray(movie.Actors)) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/pages/SingleMovie.jsx",
-            lineNumber: 180
+            lineNumber: 111
         },
         __self: this,
-        children: [
-            /*#__PURE__*/ _jsxRuntime.jsx("p", {
-                __source: {
-                    fileName: "src/components/pages/SingleMovie.jsx",
-                    lineNumber: 181
-                },
-                __self: this,
-                children: "There was an error loading your data!"
-            }),
-            ";"
-        ]
+        children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
+            __source: {
+                fileName: "src/components/pages/SingleMovie.jsx",
+                lineNumber: 112
+            },
+            __self: this,
+            children: "There was an error loading your data!"
+        })
     }));
     return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
         children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Row, {
             className: "justify-content-center my-5",
             __source: {
                 fileName: "src/components/pages/SingleMovie.jsx",
-                lineNumber: 188
+                lineNumber: 119
             },
             __self: this,
             children: [
@@ -41967,7 +41879,7 @@ function SingleMovie() {
                     md: 6,
                     __source: {
                         fileName: "src/components/pages/SingleMovie.jsx",
-                        lineNumber: 189
+                        lineNumber: 120
                     },
                     __self: this,
                     children: [
@@ -41975,7 +41887,7 @@ function SingleMovie() {
                             className: "h3 text-muted text-center",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 190
+                                lineNumber: 121
                             },
                             __self: this,
                             children: movie.Title
@@ -41984,14 +41896,14 @@ function SingleMovie() {
                             className: "p-4 m-3 h5 text-muted text-center",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 192
+                                lineNumber: 123
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 193
+                                        lineNumber: 124
                                     },
                                     __self: this,
                                     children: [
@@ -42003,7 +41915,7 @@ function SingleMovie() {
                                 /*#__PURE__*/ _jsxRuntime.jsx("p", {
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 195
+                                        lineNumber: 126
                                     },
                                     __self: this,
                                     children: movie.Description
@@ -42015,14 +41927,14 @@ function SingleMovie() {
                             className: "d-flex justify-content-center align-items-center",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 198
+                                lineNumber: 129
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 199
+                                        lineNumber: 130
                                     },
                                     __self: this,
                                     children: "Actors"
@@ -42031,7 +41943,7 @@ function SingleMovie() {
                                     className: "bg-light border p-2 m-3 px-3",
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 199
+                                        lineNumber: 130
                                     },
                                     __self: this,
                                     children: movie.Actors.map((actor, i)=>i != 0 ? ', ' + actor : actor
@@ -42044,14 +41956,14 @@ function SingleMovie() {
                             className: "d-flex justify-content-center align-items-center",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 205
+                                lineNumber: 136
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 206
+                                        lineNumber: 137
                                     },
                                     __self: this,
                                     children: "Genre"
@@ -42060,7 +41972,7 @@ function SingleMovie() {
                                     className: "bg-light border p-2 m-3 px-3",
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 206
+                                        lineNumber: 137
                                     },
                                     __self: this
                                 })
@@ -42071,14 +41983,14 @@ function SingleMovie() {
                             className: "d-flex justify-content-center align-items-center",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 208
+                                lineNumber: 139
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 209
+                                        lineNumber: 140
                                     },
                                     __self: this,
                                     children: "Available in Theathers"
@@ -42087,7 +41999,7 @@ function SingleMovie() {
                                     className: "bg-light border p-2 m-3 px-3",
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 209
+                                        lineNumber: 140
                                     },
                                     __self: this,
                                     children: isFeatured(movie.Featured)
@@ -42096,31 +42008,32 @@ function SingleMovie() {
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Stack, {
                             gap: 3,
-                            className: "col-md-5 mx-auto",
+                            className: "col-md-5 text-center mx-auto",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 211
+                                lineNumber: 142
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                                     variant: "link text-muted",
+                                    onClick: addFavouriteMovie,
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 212
+                                        lineNumber: 143
                                     },
                                     __self: this,
                                     children: "Add to favourites"
                                 }),
-                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                isFavourite ? /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                                     variant: "link text-muted",
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 213
+                                        lineNumber: 144
                                     },
                                     __self: this,
                                     children: "Remove from Favourites"
-                                })
+                                }) : ''
                             ]
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Stack, {
@@ -42128,7 +42041,7 @@ function SingleMovie() {
                             className: "col-md-5 mx-auto text-center m-4 p-2",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 215
+                                lineNumber: 146
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
@@ -42138,7 +42051,7 @@ function SingleMovie() {
                                 },
                                 __source: {
                                     fileName: "src/components/pages/SingleMovie.jsx",
-                                    lineNumber: 216
+                                    lineNumber: 147
                                 },
                                 __self: this,
                                 children: "Back to all movies"
@@ -42150,7 +42063,7 @@ function SingleMovie() {
                     md: 2,
                     __source: {
                         fileName: "src/components/pages/SingleMovie.jsx",
-                        lineNumber: 220
+                        lineNumber: 151
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Image, {
@@ -42159,7 +42072,7 @@ function SingleMovie() {
                         crossOrigin: "anonymous",
                         __source: {
                             fileName: "src/components/pages/SingleMovie.jsx",
-                            lineNumber: 221
+                            lineNumber: 152
                         },
                         __self: this
                     })
@@ -42168,7 +42081,7 @@ function SingleMovie() {
         })
     }));
 }
-_s(SingleMovie, "SzRnd+HRxNk1tYO4AjJ1B3rwND4=", false, function() {
+_s(SingleMovie, "CZnlNxOy5ZoNx47CWP5LHC8uq/U=", false, function() {
     return [_reactRouterDom.useParams, _reactRouterDom.useNavigate];
 });
 _c = SingleMovie;
@@ -42726,9 +42639,9 @@ var _reactBootstrap = require("react-bootstrap");
 var _navbarCss = require("../styles/navbar.css");
 var _reactRouterDom = require("react-router-dom");
 var _s = $RefreshSig$();
-function Navbar({ user  }) {
+function Navbar() {
     _s();
-    let localUser = null;
+    const [user, setUser] = _react.useState(localStorage.getItem('user'));
     const onLoggedOut = ()=>{
         localStorage.clear();
         window.open('/', '_self');
@@ -42738,29 +42651,20 @@ function Navbar({ user  }) {
         if (localStorage.getItem('token')) return localStorage.getItem('token');
         else return false;
     };
-    _react.useEffect(()=>{
-        localUser = localStorage.getItem('user');
-    });
-    return(// <div className="test">
-    // 	<Link to="/">Home</Link>
-    // 	<Link to="/movies">Movies</Link>
-    // 	<Link to="/movie/:movieId"></Link>
-    // 	<Link to="/featured">Featured</Link>
-    // </div>
-    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar, {
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar, {
         collapseOnSelect: true,
         expand: "lg",
         bg: "alert",
         variant: "dark",
         __source: {
             fileName: "src/components/layout/navbar.jsx",
-            lineNumber: 51
+            lineNumber: 38
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
             __source: {
                 fileName: "src/components/layout/navbar.jsx",
-                lineNumber: 52
+                lineNumber: 39
             },
             __self: this,
             children: [
@@ -42768,7 +42672,7 @@ function Navbar({ user  }) {
                     href: "#home",
                     __source: {
                         fileName: "src/components/layout/navbar.jsx",
-                        lineNumber: 53
+                        lineNumber: 40
                     },
                     __self: this,
                     children: "MyFlix"
@@ -42777,7 +42681,7 @@ function Navbar({ user  }) {
                     "aria-controls": "responsive-navbar-nav",
                     __source: {
                         fileName: "src/components/layout/navbar.jsx",
-                        lineNumber: 54
+                        lineNumber: 41
                     },
                     __self: this
                 }),
@@ -42785,15 +42689,15 @@ function Navbar({ user  }) {
                     id: "responsive-navbar-nav",
                     __source: {
                         fileName: "src/components/layout/navbar.jsx",
-                        lineNumber: 55
+                        lineNumber: 42
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Nav, {
-                            className: "d-flex mx-auto",
+                            className: "mx-auto",
                             __source: {
                                 fileName: "src/components/layout/navbar.jsx",
-                                lineNumber: 56
+                                lineNumber: 44
                             },
                             __self: this,
                             children: [
@@ -42801,14 +42705,14 @@ function Navbar({ user  }) {
                                     to: "/",
                                     __source: {
                                         fileName: "src/components/layout/navbar.jsx",
-                                        lineNumber: 57
+                                        lineNumber: 45
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
                                         href: "#api",
                                         __source: {
                                             fileName: "src/components/layout/navbar.jsx",
-                                            lineNumber: 58
+                                            lineNumber: 46
                                         },
                                         __self: this,
                                         children: "Movies"
@@ -42818,42 +42722,43 @@ function Navbar({ user  }) {
                                     to: "/profile",
                                     __source: {
                                         fileName: "src/components/layout/navbar.jsx",
-                                        lineNumber: 60
+                                        lineNumber: 48
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
                                         href: "#portfolio",
                                         __source: {
                                             fileName: "src/components/layout/navbar.jsx",
-                                            lineNumber: 61
+                                            lineNumber: 49
                                         },
                                         __self: this,
                                         children: "Profile"
                                     })
                                 }),
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                    to: "/featured",
+                                    to: "/favourites",
                                     __source: {
                                         fileName: "src/components/layout/navbar.jsx",
-                                        lineNumber: 63
+                                        lineNumber: 51
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
-                                        href: "#featured",
+                                        href: "#favourites",
                                         __source: {
                                             fileName: "src/components/layout/navbar.jsx",
-                                            lineNumber: 64
+                                            lineNumber: 52
                                         },
                                         __self: this,
-                                        children: "Featured"
+                                        children: "Favourites"
                                     })
                                 })
                             ]
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Nav, {
+                            className: "mx-auto",
                             __source: {
                                 fileName: "src/components/layout/navbar.jsx",
-                                lineNumber: 68
+                                lineNumber: 56
                             },
                             __self: this,
                             children: [
@@ -42863,19 +42768,21 @@ function Navbar({ user  }) {
                                     ,
                                     __source: {
                                         fileName: "src/components/layout/navbar.jsx",
-                                        lineNumber: 73
+                                        lineNumber: 59
                                     },
                                     __self: this,
                                     children: "Logout"
                                 }),
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
                                     href: "#test",
+                                    disabled: true,
+                                    variant: "secondary",
                                     __source: {
                                         fileName: "src/components/layout/navbar.jsx",
-                                        lineNumber: 75
+                                        lineNumber: 63
                                     },
                                     __self: this,
-                                    children: localUser
+                                    children: user
                                 })
                             ]
                         })
@@ -42885,7 +42792,7 @@ function Navbar({ user  }) {
         })
     }));
 }
-_s(_reactBootstrap.Navbar, "OD7bBpZva5O2jO+Puf00hKivP7c=");
+_s(_reactBootstrap.Navbar, "H5b8CZIeX3I7/+HCGXpjGTz7S+k=");
 _c = _reactBootstrap.Navbar;
 var _c;
 $RefreshReg$(_c, "Navbar");
@@ -42895,40 +42802,7 @@ $RefreshReg$(_c, "Navbar");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","../styles/navbar.css":"2Kj78","react-router-dom":"kjA5T","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"2Kj78":[function() {},{}],"hHAZI":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$687d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$687d.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Featured", ()=>Featured
-);
-var _jsxRuntime = require("react/jsx-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-function Featured() {
-    return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
-        __source: {
-            fileName: "src/components/pages/Featured.jsx",
-            lineNumber: 5
-        },
-        __self: this,
-        children: "Featured"
-    }));
-}
-_c = Featured;
-var _c;
-$RefreshReg$(_c, "Featured");
-
-  $parcel$ReactRefreshHelpers$687d.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"2XLwF":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","../styles/navbar.css":"2Kj78","react-router-dom":"kjA5T","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"2Kj78":[function() {},{}],"2XLwF":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$40ea = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -43061,6 +42935,914 @@ $RefreshReg$(_c, "SharedLayout");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","../layout/navbar":"clKBo","react-bootstrap/":"h2YVd","react-router-dom":"kjA5T","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"1dfYM":[function() {},{}]},["lpjO7","fHeZ2","dLPEP"], "dLPEP", "parcelRequireaec4")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","../layout/navbar":"clKBo","react-bootstrap/":"h2YVd","react-router-dom":"kjA5T","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"1dfYM":[function() {},{}],"2C1jY":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$330b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$330b.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Favourites", ()=>Favourites
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactBootstrap = require("react-bootstrap");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _s = $RefreshSig$();
+function Favourites() {
+    _s();
+    const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    const [user, setUser] = _react.useState(localStorage.getItem('user'));
+    const [userDocument, setUserDocument] = _react.useState('');
+    //Setting loading and error variables 
+    const [loading, setLoading] = _react.useState(true);
+    const [error, setError] = _react.useState();
+    _react.useEffect(()=>{
+        let accessToken = localStorage.getItem('token');
+        _axiosDefault.default.get(baseURL + 'users/' + user, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        }).then((response)=>{
+            console.log(response.data);
+            setUserDocument(response.data);
+        }).catch((error1)=>{
+            console.log(error1);
+            setError(error1);
+        }).finally(()=>{
+            setLoading(false);
+        });
+    }, []);
+    if (error) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+        className: "justify-content-center my-5",
+        __source: {
+            fileName: "src/components/pages/Favourites.jsx",
+            lineNumber: 34
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
+            __source: {
+                fileName: "src/components/pages/Favourites.jsx",
+                lineNumber: 35
+            },
+            __self: this,
+            children: "There was an error loading your data!"
+        })
+    }));
+    //If data is not fetched, show spinner
+    if (loading) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+        className: "justify-content-center my-5",
+        __source: {
+            fileName: "src/components/pages/Favourites.jsx",
+            lineNumber: 41
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+            className: "h3 text-muted text-center",
+            __source: {
+                fileName: "src/components/pages/Favourites.jsx",
+                lineNumber: 42
+            },
+            __self: this,
+            children: [
+                "Data is loading \xa0",
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Spinner, {
+                    animation: "border",
+                    variant: "secondary",
+                    role: "status",
+                    __source: {
+                        fileName: "src/components/pages/Favourites.jsx",
+                        lineNumber: 43
+                    },
+                    __self: this
+                })
+            ]
+        })
+    }));
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                className: "justify-content-center my-5",
+                __source: {
+                    fileName: "src/components/pages/Favourites.jsx",
+                    lineNumber: 50
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                    md: 6,
+                    __source: {
+                        fileName: "src/components/pages/Favourites.jsx",
+                        lineNumber: 51
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                        className: "h3 text-muted text-center",
+                        __source: {
+                            fileName: "src/components/pages/Favourites.jsx",
+                            lineNumber: 52
+                        },
+                        __self: this,
+                        children: "List of my favourite movies"
+                    })
+                })
+            })
+        ]
+    }));
+}
+_s(Favourites, "iixt2WmmaRRz2H/Tgv72ATst6+c=");
+_c = Favourites;
+var _c;
+$RefreshReg$(_c, "Favourites");
+
+  $parcel$ReactRefreshHelpers$330b.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","react-bootstrap":"h2YVd","axios":"iYoWk"}],"gEUOp":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$a799 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$a799.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Profile", ()=>Profile
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactBootstrap = require("react-bootstrap");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _password = require("../component/password");
+var _resetButton = require("../component/resetButton");
+var _s = $RefreshSig$();
+function Profile() {
+    _s();
+    const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    const accessToken = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
+    const [user, setUser] = _react.useState('');
+    const [updateUser, setUpdateUser] = _react.useState('');
+    //const [userDocument, setUserDocument] = useState('');
+    //Setting loading and error variables 
+    const [loading, setLoading] = _react.useState(true);
+    const [error, setError] = _react.useState();
+    _react.useEffect(()=>{
+        _axiosDefault.default.get(baseURL + 'users/' + username, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        }).then((response)=>{
+            console.log(response.data);
+            setUser(response.data);
+        }).catch((error1)=>{
+            console.log(error1);
+            setError(error1);
+        }).finally(()=>{
+            setLoading(false);
+        });
+    }, []);
+    function handleChange(e) {
+        //console.log('changing '+e.target.value)
+        setUpdateUser((prevUser)=>{
+            return {
+                ...prevUser,
+                [e.target.name]: e.target.value
+            };
+        });
+        console.log(e.target.name);
+        console.log(e.target.value);
+    }
+    function handleUpdate() {
+        _axiosDefault.default.put(baseURL, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        }).then((response)=>{
+            console.log(response.data);
+        }).catch((error1)=>{
+            console.log(error1);
+            setError(error1);
+        });
+    }
+    function handleDelete() {
+        console.log(baseURL + 'users/' + user.Username);
+        _axiosDefault.default.delete(baseURL + 'users/' + user.Username, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        }).then((response)=>{
+            console.log(response.data);
+            return(/*#__PURE__*/ _jsxRuntime.jsx("p", {
+                __source: {
+                    fileName: "src/components/pages/Profile.jsx",
+                    lineNumber: 69
+                },
+                __self: this,
+                children: "Your account has been deleted"
+            }));
+        }).catch((error1)=>{
+            console.log(error1);
+            setError(error1);
+        });
+    }
+    const parseDate = (date)=>{
+        console.log(date);
+        let newDate = date.split('T');
+        return newDate[0];
+    };
+    if (error) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+        className: "justify-content-center my-5",
+        __source: {
+            fileName: "src/components/pages/Profile.jsx",
+            lineNumber: 84
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
+            __source: {
+                fileName: "src/components/pages/Profile.jsx",
+                lineNumber: 85
+            },
+            __self: this,
+            children: "There was an error loading your data!"
+        })
+    }));
+    //If data is not fetched, show spinner
+    if (loading) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+        className: "justify-content-center my-5",
+        __source: {
+            fileName: "src/components/pages/Profile.jsx",
+            lineNumber: 91
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+            className: "h3 text-muted text-center",
+            __source: {
+                fileName: "src/components/pages/Profile.jsx",
+                lineNumber: 92
+            },
+            __self: this,
+            children: [
+                "Data is loading \xa0",
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Spinner, {
+                    animation: "border",
+                    variant: "secondary",
+                    role: "status",
+                    __source: {
+                        fileName: "src/components/pages/Profile.jsx",
+                        lineNumber: 93
+                    },
+                    __self: this
+                })
+            ]
+        })
+    }));
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                className: "justify-content-center my-5",
+                __source: {
+                    fileName: "src/components/pages/Profile.jsx",
+                    lineNumber: 100
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Col, {
+                    md: 4,
+                    __source: {
+                        fileName: "src/components/pages/Profile.jsx",
+                        lineNumber: 101
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                            className: "h3 text-muted text-center m-1 p-3",
+                            __source: {
+                                fileName: "src/components/pages/Profile.jsx",
+                                lineNumber: 103
+                            },
+                            __self: this,
+                            children: "My Profile"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
+                            __source: {
+                                fileName: "src/components/pages/Profile.jsx",
+                                lineNumber: 106
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Group, {
+                                    className: "mb-3",
+                                    controlId: "formPassword",
+                                    __source: {
+                                        fileName: "src/components/pages/Profile.jsx",
+                                        lineNumber: 109
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                        className: "d-flex justify-content-between align-items-center my-5",
+                                        __source: {
+                                            fileName: "src/components/pages/Profile.jsx",
+                                            lineNumber: 110
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                                className: "h5 text-muted text-center",
+                                                __source: {
+                                                    fileName: "src/components/pages/Profile.jsx",
+                                                    lineNumber: 111
+                                                },
+                                                __self: this,
+                                                children: "Username"
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                                className: "h5 text-muted text-center",
+                                                __source: {
+                                                    fileName: "src/components/pages/Profile.jsx",
+                                                    lineNumber: 112
+                                                },
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                                                    type: "email",
+                                                    name: "Username",
+                                                    placeholder: user.Username,
+                                                    onChange: handleChange,
+                                                    __source: {
+                                                        fileName: "src/components/pages/Profile.jsx",
+                                                        lineNumber: 112
+                                                    },
+                                                    __self: this
+                                                })
+                                            })
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Group, {
+                                    className: "mb-3",
+                                    controlId: "formPassword",
+                                    __source: {
+                                        fileName: "src/components/pages/Profile.jsx",
+                                        lineNumber: 121
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                        className: "d-flex justify-content-between align-items-center my-5",
+                                        __source: {
+                                            fileName: "src/components/pages/Profile.jsx",
+                                            lineNumber: 122
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                                className: "h5 text-muted text-center",
+                                                __source: {
+                                                    fileName: "src/components/pages/Profile.jsx",
+                                                    lineNumber: 123
+                                                },
+                                                __self: this,
+                                                children: "Password"
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                                className: "h5 text-muted text-center d-flex",
+                                                __source: {
+                                                    fileName: "src/components/pages/Profile.jsx",
+                                                    lineNumber: 124
+                                                },
+                                                __self: this,
+                                                children: updateUser.Password != '' ? /*#__PURE__*/ _jsxRuntime.jsx(_resetButton.ResetButton, {
+                                                    updateUser: updateUser,
+                                                    __source: {
+                                                        fileName: "src/components/pages/Profile.jsx",
+                                                        lineNumber: 125
+                                                    },
+                                                    __self: this
+                                                }) : /*#__PURE__*/ _jsxRuntime.jsx(_password.PasswordInput, {
+                                                    __source: {
+                                                        fileName: "src/components/pages/Profile.jsx",
+                                                        lineNumber: 125
+                                                    },
+                                                    __self: this
+                                                })
+                                            })
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Group, {
+                                    className: "mb-3",
+                                    controlId: "formEmail",
+                                    __source: {
+                                        fileName: "src/components/pages/Profile.jsx",
+                                        lineNumber: 132
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                        className: "d-flex justify-content-between align-items-center my-5",
+                                        __source: {
+                                            fileName: "src/components/pages/Profile.jsx",
+                                            lineNumber: 133
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                                className: "h5 text-muted text-center",
+                                                __source: {
+                                                    fileName: "src/components/pages/Profile.jsx",
+                                                    lineNumber: 134
+                                                },
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                                    __source: {
+                                                        fileName: "src/components/pages/Profile.jsx",
+                                                        lineNumber: 134
+                                                    },
+                                                    __self: this,
+                                                    children: "Email address"
+                                                })
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                                className: "h5 text-muted text-center",
+                                                __source: {
+                                                    fileName: "src/components/pages/Profile.jsx",
+                                                    lineNumber: 135
+                                                },
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                                                    type: "email",
+                                                    name: "Email",
+                                                    placeholder: user.Email,
+                                                    onChange: handleChange,
+                                                    __source: {
+                                                        fileName: "src/components/pages/Profile.jsx",
+                                                        lineNumber: 135
+                                                    },
+                                                    __self: this
+                                                })
+                                            })
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Group, {
+                                    className: "mb-3",
+                                    controlId: "formBirthday",
+                                    __source: {
+                                        fileName: "src/components/pages/Profile.jsx",
+                                        lineNumber: 144
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                        className: "d-flex justify-content-between align-items-center my-5",
+                                        __source: {
+                                            fileName: "src/components/pages/Profile.jsx",
+                                            lineNumber: 145
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                                className: "h5 text-muted text-center",
+                                                __source: {
+                                                    fileName: "src/components/pages/Profile.jsx",
+                                                    lineNumber: 146
+                                                },
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                                    __source: {
+                                                        fileName: "src/components/pages/Profile.jsx",
+                                                        lineNumber: 146
+                                                    },
+                                                    __self: this,
+                                                    children: "Birthday"
+                                                })
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                                className: "h5 text-muted text-center",
+                                                __source: {
+                                                    fileName: "src/components/pages/Profile.jsx",
+                                                    lineNumber: 147
+                                                },
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                                                    type: "email",
+                                                    name: "Birthday",
+                                                    placeholder: parseDate(user.Birthday),
+                                                    __source: {
+                                                        fileName: "src/components/pages/Profile.jsx",
+                                                        lineNumber: 147
+                                                    },
+                                                    __self: this
+                                                })
+                                            })
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Group, {
+                                    className: "mb-3",
+                                    controlId: "formFavourites",
+                                    __source: {
+                                        fileName: "src/components/pages/Profile.jsx",
+                                        lineNumber: 155
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                        className: "d-flex justify-content-between align-items-center my-5",
+                                        __source: {
+                                            fileName: "src/components/pages/Profile.jsx",
+                                            lineNumber: 156
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                                className: "h5 text-muted text-center",
+                                                __source: {
+                                                    fileName: "src/components/pages/Profile.jsx",
+                                                    lineNumber: 157
+                                                },
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                                    __source: {
+                                                        fileName: "src/components/pages/Profile.jsx",
+                                                        lineNumber: 157
+                                                    },
+                                                    __self: this,
+                                                    children: "Favourite Movies"
+                                                })
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                                className: "h5 text-muted text-center",
+                                                __source: {
+                                                    fileName: "src/components/pages/Profile.jsx",
+                                                    lineNumber: 158
+                                                },
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                                                    type: "email",
+                                                    placeholder: "Test",
+                                                    __source: {
+                                                        fileName: "src/components/pages/Profile.jsx",
+                                                        lineNumber: 158
+                                                    },
+                                                    __self: this
+                                                })
+                                            })
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                    className: "d-flex justify-content-around align-items-center my-5",
+                                    __source: {
+                                        fileName: "src/components/pages/Profile.jsx",
+                                        lineNumber: 166
+                                    },
+                                    __self: this,
+                                    children: [
+                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                            className: "h2 text-center",
+                                            variant: "secondary",
+                                            onClick: handleUpdate,
+                                            __source: {
+                                                fileName: "src/components/pages/Profile.jsx",
+                                                lineNumber: 167
+                                            },
+                                            __self: this,
+                                            children: "Update my account"
+                                        }),
+                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                            className: "h2 text-center",
+                                            variant: "secondary",
+                                            onClick: handleDelete,
+                                            __source: {
+                                                fileName: "src/components/pages/Profile.jsx",
+                                                lineNumber: 168
+                                            },
+                                            __self: this,
+                                            children: "Delete my account"
+                                        })
+                                    ]
+                                })
+                            ]
+                        })
+                    ]
+                })
+            })
+        ]
+    }));
+}
+_s(Profile, "ESWepMlY3aChhi25e3C2Iz1LK1s=");
+_c = Profile;
+var _c;
+$RefreshReg$(_c, "Profile");
+
+  $parcel$ReactRefreshHelpers$a799.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","../component/password":"aWpvz","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","../component/resetButton":"6JvxV"}],"aWpvz":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$c76d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$c76d.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _form = require("react-bootstrap/Form");
+var _formDefault = parcelHelpers.interopDefault(_form);
+const PasswordInput = ()=>{
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
+        className: "passwordInput",
+        type: "password",
+        name: "Password",
+        placeholder: "Type your new password",
+        onChange: handleChange,
+        __source: {
+            fileName: "src/components/component/password.jsx",
+            lineNumber: 8
+        },
+        __self: undefined
+    }));
+};
+_c = PasswordInput;
+exports.default = PasswordInput;
+var _c;
+$RefreshReg$(_c, "PasswordInput");
+
+  $parcel$ReactRefreshHelpers$c76d.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Form":"5ykgY","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"6JvxV":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$d083 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$d083.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ResetButton", ()=>ResetButton
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _reactBootstrap = require("react-bootstrap");
+var _s = $RefreshSig$();
+function ResetButton(props) {
+    _s();
+    const [updateUser, setUpdateUser] = _react.useState(props.updateUser);
+    const showPasswordInput = (e)=>{
+        console.log('click');
+        setUpdateUser((prevUser)=>{
+            return {
+                ...prevUser,
+                [updateUser.Password]: 'A'
+            };
+        });
+    };
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+        className: "h2 text-center buttonReset",
+        variant: "secondary",
+        onClick: showPasswordInput,
+        __source: {
+            fileName: "src/components/component/resetButton.jsx",
+            lineNumber: 22
+        },
+        __self: this,
+        children: "Reset password"
+    }));
+}
+_s(ResetButton, "GbRqL1VXpLA70rfeJb8NLADQ5dU=");
+_c = ResetButton;
+var _c;
+$RefreshReg$(_c, "ResetButton");
+
+  $parcel$ReactRefreshHelpers$d083.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap":"h2YVd","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"jVsus":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$ec70 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$ec70.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Director", ()=>Director
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactBootstrap = require("react-bootstrap");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _reactRouterDom = require("react-router-dom");
+var _s = $RefreshSig$();
+function Director() {
+    _s();
+    const { director_id  } = _reactRouterDom.useParams();
+    //   const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    //   const [user, setUser] = useState(localStorage.getItem('user'));
+    //   const [userDocument, setUserDocument] = useState('');
+    //   const [updateUsername, setUpdateUsername] = useState(false);
+    //   //Setting loading and error variables 
+    //   const [loading, setLoading] = useState(true);
+    //   const [error, setError] = useState();
+    //   useEffect(() => {
+    //     let accessToken = localStorage.getItem('token');
+    //         axios.get(baseURL+'users/'+user, { headers: { Authorization: `Bearer ${accessToken}`} })
+    //             .then(response => {
+    //                 console.log(response.data);
+    //                 setUserDocument(response.data);
+    //                 })
+    //             .catch(error => {
+    //                 console.log(error);
+    //                 setError(error);
+    //             })
+    //             .finally(() => {
+    //                 setLoading(false);
+    //             })
+    //   },[])
+    //     if (error) {
+    //     return <Row className="justify-content-center my-5">
+    //         <p>There was an error loading your data!</p>
+    //         </Row>
+    //     }
+    //     //If data is not fetched, show spinner
+    //     if (loading) {
+    //         return <Row className="justify-content-center my-5">
+    //                     <div className="h3 text-muted text-center">Data is loading
+    //                         &nbsp;<Spinner animation="border" variant="secondary" role="status" />
+    //                     </div>
+    //                 </Row>		
+    //     }
+    //     const updateUsernameField = () => {
+    //         setUpdateUsername(true);
+    //     }
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                className: "justify-content-center my-5",
+                __source: {
+                    fileName: "src/components/pages/Director.jsx",
+                    lineNumber: 60
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                    md: 4,
+                    __source: {
+                        fileName: "src/components/pages/Director.jsx",
+                        lineNumber: 61
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        className: "h3 text-muted text-center m-1 p-3",
+                        __source: {
+                            fileName: "src/components/pages/Director.jsx",
+                            lineNumber: 62
+                        },
+                        __self: this,
+                        children: [
+                            "Director View: ",
+                            director_id
+                        ]
+                    })
+                })
+            })
+        ]
+    }));
+}
+_s(Director, "J8ByiOpey2WnOoKQ1O8ViRZ35VE=", false, function() {
+    return [_reactRouterDom.useParams];
+});
+_c = Director;
+var _c;
+$RefreshReg$(_c, "Director");
+
+  $parcel$ReactRefreshHelpers$ec70.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","react-router-dom":"kjA5T"}],"7wyHG":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$6991 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$6991.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Genre", ()=>Genre
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactBootstrap = require("react-bootstrap");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _reactRouterDom = require("react-router-dom");
+var _s = $RefreshSig$();
+function Genre() {
+    _s();
+    const { genre_id  } = _reactRouterDom.useParams();
+    //   const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    //   const [user, setUser] = useState(localStorage.getItem('user'));
+    //   const [userDocument, setUserDocument] = useState('');
+    //   const [updateUsername, setUpdateUsername] = useState(false);
+    //   //Setting loading and error variables 
+    //   const [loading, setLoading] = useState(true);
+    //   const [error, setError] = useState();
+    //   useEffect(() => {
+    //     let accessToken = localStorage.getItem('token');
+    //         axios.get(baseURL+'users/'+user, { headers: { Authorization: `Bearer ${accessToken}`} })
+    //             .then(response => {
+    //                 console.log(response.data);
+    //                 setUserDocument(response.data);
+    //                 })
+    //             .catch(error => {
+    //                 console.log(error);
+    //                 setError(error);
+    //             })
+    //             .finally(() => {
+    //                 setLoading(false);
+    //             })
+    //   },[])
+    //     if (error) {
+    //     return <Row className="justify-content-center my-5">
+    //         <p>There was an error loading your data!</p>
+    //         </Row>
+    //     }
+    //     //If data is not fetched, show spinner
+    //     if (loading) {
+    //         return <Row className="justify-content-center my-5">
+    //                     <div className="h3 text-muted text-center">Data is loading
+    //                         &nbsp;<Spinner animation="border" variant="secondary" role="status" />
+    //                     </div>
+    //                 </Row>		
+    //     }
+    //     const updateUsernameField = () => {
+    //         setUpdateUsername(true);
+    //     }
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                className: "justify-content-center my-5",
+                __source: {
+                    fileName: "src/components/pages/Genre.jsx",
+                    lineNumber: 60
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                    md: 4,
+                    __source: {
+                        fileName: "src/components/pages/Genre.jsx",
+                        lineNumber: 61
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        className: "h3 text-muted text-center m-1 p-3",
+                        __source: {
+                            fileName: "src/components/pages/Genre.jsx",
+                            lineNumber: 63
+                        },
+                        __self: this,
+                        children: [
+                            "Genre view: ",
+                            genre_id
+                        ]
+                    })
+                })
+            })
+        ]
+    }));
+}
+_s(Genre, "7VxZ4qb8bwGOw6iio8qAgFjMNPQ=", false, function() {
+    return [_reactRouterDom.useParams];
+});
+_c = Genre;
+var _c;
+$RefreshReg$(_c, "Genre");
+
+  $parcel$ReactRefreshHelpers$6991.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","react-router-dom":"kjA5T"}]},["lpjO7","fHeZ2","dLPEP"], "dLPEP", "parcelRequireaec4")
 
 //# sourceMappingURL=index.6701a6e1.js.map
