@@ -5,74 +5,75 @@ import {Card, ListGroup, ListGroupItem, Button, Row, Col, Image, Stack, Spinner}
 import {
 	Link,
 	useParams,
-	useNavigate
+	useNavigate,
+	useLocation
 } from "react-router-dom";
 import CardGroup from 'react-bootstrap/CardGroup';
 import '../styles/movie-view.css'
 
-export function SingleMovie() {
+export function SingleMovie(props) {
 		
 		const baseURL = 'https://my-flix-cf.herokuapp.com/';
-		const [user, setUser] = useState(localStorage.getItem('user'));
-		
+				
 		//Destructuring the params Object
 		const {movie_id} = useParams();
 		const navigate = useNavigate();
+		const location = useLocation();
+		const userData = location.state;
 
+		const [user, setUser] = useState(userData);
 		const [movie, setMovie ] = useState('');
 		const [director, setDirector ] = useState('');
-		const [genres, setGenres] = useState('');
+		const [genres, setGenres] = useState([]);
+		const [isFavourite, setIsFavourite] = useState(false);
 
 		//Setting loading and error variables 
 		const [loading, setLoading] = useState(true);
 		const [error, setError] = useState();
-		const [isFavourite, setIsFavourite] = useState('');
-
-
+		
 		useEffect(() => {
-			console.log('useEffect_MOVIE.......................................................');
 			let accessToken = localStorage.getItem('token');
-			//Fetching Movie through ID
-			console.log('getMovie');
-				axios.get(baseURL + 'movies/' + movie_id,
-				{ headers: { Authorization: `Bearer ${accessToken}`} }
-				).then(response => {
-					// Assign the result to the state
-					setMovie(response.data)
-					console.log(response.data);
-				})
-				.catch(function (error) {
-					console.log(error);
-					setError(error);
-				})
-				.finally(() => {
-					setLoading(false);
-				})
-			}, [])
+			getMovieData(accessToken);
+		},[])
 
-
-		//Fetch Movie Data on page Loaded
-		useEffect(() => {
+		async function getMovieData(accessToken) {
+			const movieURL = baseURL + 'movies/' + movie_id;
+			const response = await axios.get(movieURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
 			
-			console.log('useEffect_REST.......................................................');
-				//Fetching Director through ID
-				console.log('getDirector')
-				let directorURL = baseURL + 'directors/' + movie.Director;
-				axios.get(directorURL)
-						.then(response => {
-							console.log(response.data);
-							setDirector(response.data);
-						})
-						.catch(error => {
-							console.log(error);
-							setError(error);
-						})
-						.finally(() => {
-							setLoading(false);
-						})
-		},[movie])
+			setMovie(response.data);
+			
+			//Fetching Director from ID
+			getDirectorData(accessToken, response.data.Director);
+			
+			//Fetching Genres from ID
+			response.data.Genre.forEach(g => {
+				getGenresData(accessToken, g)
+			})
+			
+			//If movie exists in user favourite list
+			if (user.FavoriteMovies.includes(movie_id)) setIsFavourite(true)
+			
+			// //Movie can be displayed and the loading spinner set off
+			 setLoading(false)
+		}
 
-	
+		async function getDirectorData(accessToken, directorID){
+			//console.log('Movie director id: '+directorID);
+			const directorURL = baseURL + 'directors/' + directorID;
+			const response = await axios.get(directorURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
+			setDirector(response.data);
+		}
+
+		async function getGenresData(accessToken, genreID){
+			// console.log('Genre id: '+genreID);
+			const genreURL = baseURL + 'genres/' + genreID;
+			const response = await axios.get(genreURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
+			const genreData = response.data.Name;
+			setGenres(prevData => {
+			 	return [...prevData, genreData] 
+			})
+		}
+
 		const isFeatured = (val) => {
 			if (movie != '') { 
 				console.log('isFeatured')
@@ -120,12 +121,16 @@ export function SingleMovie() {
 				<Col md={6}> 
 						<div className="h3 text-muted text-center">{movie.Title}</div>
 							
+							<div className="p-1 m-1 h6 text-muted text-center">
+								<p>({genres.map((g, i) => (i !=0 ) ? ', '+{g} : <Link to={`/genres/${genres}`}>{g}</Link>)})</p>
+							</div>
+
 							<div className="p-4 m-3 h5 text-muted text-center">
-								<p>Directed by {director.Name}</p>
+								<p>Directed by <Link to={`../directors/${director._id}`}>{director.Name}</Link></p>
 								&nbsp;
 								<p>{movie.Description}</p>
-							
-						</div>    
+							</div>    
+
 						<Stack gap={2} className="d-flex justify-content-center align-items-center">
 										<div>Actors</div><div className="bg-light border p-2 m-3 px-3">
 											{ 
@@ -133,15 +138,12 @@ export function SingleMovie() {
 											}
 										</div>
 						</Stack>
-						<Stack gap={2} className="d-flex justify-content-center align-items-center">              
-										<div>Genre</div><div className="bg-light border p-2 m-3 px-3">{}</div>
-						</Stack>
 						<Stack gap={2} className="d-flex justify-content-center align-items-center">
 						<div>Available in Theathers</div><div className="bg-light border p-2 m-3 px-3">{isFeatured(movie.Featured)}</div>
 						</Stack>
 						<Stack gap={3} className="col-md-5 text-center mx-auto">
 										<Button variant="link text-muted" onClick={addFavouriteMovie}>Add to favourites</Button>
-										{(isFavourite) ? <Button variant="link text-muted">Remove from Favourites</Button> : ''}
+										{(isFavourite) && <Button variant="link text-muted">Remove from Favourites</Button>}
 						</Stack>
 						<Stack gap={2} className="col-md-5 mx-auto text-center m-4 p-2">
 										<Button variant="secondary" onClick={() => { navigate('/') }}>Back to all movies</Button>     
@@ -174,87 +176,47 @@ export function SingleMovie() {
 
 ________________________________________________________________________________________________________________________________
 
+// useEffect(() => {
+		// 	console.log('useEffect_MOVIE.......................................................');
+		// 	let accessToken = localStorage.getItem('token');
+		// 	//Fetching Movie through ID
+		// 	console.log('getMovie');
+		// 		axios.get(baseURL + 'movies/' + movie_id,
+		// 		{ headers: { Authorization: `Bearer ${accessToken}`} }
+		// 		).then(response => {
+		// 			// Assign the result to the state
+		// 			setMovie(response.data)
+		// 			console.log(response.data);
+		// 		})
+		// 		.catch(function (error) {
+		// 			console.log(error);
+		// 			setError(error);
+		// 		})
+		// 		.finally(() => {
+		// 			setLoading(false);
+		// 		})
+		// 	}, [])
 
 
-
-
-		// function getGenres() {
-		// 	if (movie != '') { 
-				
-		// 		console.log('getGenre');
-		// 		console.log(movie.Genre);
-
-		// 		movie.Genre.forEach((genre) => {
-		// 				let genreURL = baseURL + 'genres/' + genre;
-		// 				axios.get(genreURL)
-		// 								.then(response => {
-		// 									//console.log(response.data.Name)
-		// 									setGenres(...genres, response.data.Name)
-		// 								})
-		// 								.catch(error => {
-		// 									console.log(error);
-		// 								})
+		// //Fetch Movie Data on page Loaded
+		// useEffect(() => {
+			
+		// 	console.log('useEffect_REST.......................................................');
+		// 		//Fetching Director through ID
+		// 		console.log('getDirector')
+		// 		let directorURL = baseURL + 'directors/' + movie.Director;
+		// 		axios.get(directorURL)
+		// 				.then(response => {
+		// 					console.log(response.data);
+		// 					setDirector(response.data);
 		// 				})
-						
-		// 			}
-		// 			console.table(genres);
-		// 		}
-
-
-			// 	for (let genre in movie.Genre) {
-			// 				let genreURL = baseURL + 'genres/' + genre;
-			// 					axios.get(genreURL)
-			// 							.then(response => {
-			// 								setGenres(response.data.Name)
-			// 							})
-			// 							.catch(error => {
-			// 								console.log(error);
-			// 							})
-			// 			}
-
-			// 			console.log(Object.entries(genres))
-			// }
-			// console.log('GenreObj '+genres)
-			// parseGenres();
-	   
+		// 				.catch(error => {
+		// 					console.log(error);
+		// 					setError(error);
+		// 				})
+		// 				.finally(() => {
+		// 					setLoading(false);
+		// 				})
+		// },[movie])
+  
 		
-
-		// function getDirector () {
-		// 	if (movie != '') {      
-		// 							console.log('getDirector')
-		// 							let directorURL = baseURL + 'directors/' + movie.Director;
-		// 							axios.get(directorURL)
-		// 									.then(response => {
-		// 										console.log(response.data);
-		// 										setDirector(response.data);
-		// 										})
-		// 									.catch(error => {
-		// 										console.log(error);
-		// 									});
-		// 						 }
-		// }
-
-		// const parseGenres = () => {
-		//   if (movie != '') { 
-		//         console.log('parseGenre '+genres)
-		//           let genreList = '';
-		//           for (var i in genres) {
-		//               if (i!=0) genreList += ',  ';
-		//               genreList += genres[i];
-		//           }
-		//           console.log(genreList)
-		//           return genreList;
-		//         }
-		// }
-
-		// const parseActors = () => {
-		//   if (movie != '') { 
-		//         console.log('parseActors')
-		//           let actorsList = '';
-		//           for (var i in movie.Actors) {
-		//               if (i!=0) actorsList += ',  ';
-		//               actorsList += movie.Actors[i];
-		//           }
-		//           return actorsList;
-		//         }
-		// }

@@ -28795,30 +28795,35 @@ var _s = $RefreshSig$();
 function MovieList() {
     _s();
     const [movies, setMovies] = _react.useState([]);
-    const [user, setUser] = _react.useState();
+    const [user, setUser] = _react.useState('');
     const [loading, setLoading] = _react.useState(true);
     const [error, setError] = _react.useState();
     _react.useEffect(()=>{
         let accessToken = localStorage.getItem('token');
-        //   if (accessToken !== null) {
-        //     setUser(localStorage.getItem('user'));
-        //   }
-        getMovies(accessToken);
+        let activeUser = localStorage.getItem('user');
+        getMovies(accessToken, activeUser);
     }, []);
     //fetch movies from API
-    function getMovies(token) {
-        _axiosDefault.default.get('https://my-flix-cf.herokuapp.com/movies', {
+    async function getMovies(token, activeUser) {
+        const response = await _axiosDefault.default.get('https://my-flix-cf.herokuapp.com/movies', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then((response)=>{
-            // Assign the result to the state
-            setMovies(response.data);
-        }).catch(function(error1) {
-            console.log(error1);
-        }).finally(()=>{
-            setLoading(false);
         });
+        setMovies(response.data);
+        getUserInfo(token, activeUser);
+    }
+    //fetch movies from API
+    async function getUserInfo(token, activeUser) {
+        const response = await _axiosDefault.default.get('https://my-flix-cf.herokuapp.com/users/' + activeUser, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        setUser(response.data);
+        console.log('User in MovieList');
+        console.log(user);
+        setLoading(false);
     }
     //If data is not fetched, show spinner
     if (loading) return(/*#__PURE__*/ _jsxRuntime.jsx(_.Row, {
@@ -28881,18 +28886,19 @@ function MovieList() {
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_card.MovieCard, {
+                    userData: user,
                     movieData: m,
                     __source: {
                         fileName: "src/components/pages/MovieList.jsx",
                         lineNumber: 60
                     },
                     __self: this
-                }, m._id)
-            })
+                })
+            }, m._id)
         )
     }));
 }
-_s(MovieList, "nHww7qDKc/RPEP6qzqpXGLVsJGM=");
+_s(MovieList, "EZ1UxLapkyP2EHcGY2y6PoXF6Rk=");
 _c = MovieList;
 var _c;
 $RefreshReg$(_c, "MovieList");
@@ -41529,18 +41535,24 @@ var _s = $RefreshSig$();
 function MovieCard(props) {
     _s();
     const [movie, setMovie] = _react.useState(props.movieData);
+    const [user, setUser] = _react.useState(props.userData);
+    _react.useEffect(()=>{
+        console.log('User');
+        console.log(user);
+    }, []);
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card, {
         __source: {
             fileName: "src/components/component/card.jsx",
-            lineNumber: 14
+            lineNumber: 20
         },
         __self: this,
         children: [
             /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
                 to: `/movies/${movie._id}`,
+                state: user,
                 __source: {
                     fileName: "src/components/component/card.jsx",
-                    lineNumber: 16
+                    lineNumber: 22
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Img, {
@@ -41549,7 +41561,7 @@ function MovieCard(props) {
                     crossOrigin: "anonymous",
                     __source: {
                         fileName: "src/components/component/card.jsx",
-                        lineNumber: 17
+                        lineNumber: 23
                     },
                     __self: this
                 })
@@ -41557,7 +41569,7 @@ function MovieCard(props) {
             /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                 __source: {
                     fileName: "src/components/component/card.jsx",
-                    lineNumber: 19
+                    lineNumber: 25
                 },
                 __self: this,
                 children: [
@@ -41566,7 +41578,7 @@ function MovieCard(props) {
                         className: "description",
                         __source: {
                             fileName: "src/components/component/card.jsx",
-                            lineNumber: 20
+                            lineNumber: 26
                         },
                         __self: this,
                         children: movie.Title
@@ -41574,7 +41586,7 @@ function MovieCard(props) {
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Text, {
                         __source: {
                             fileName: "src/components/component/card.jsx",
-                            lineNumber: 21
+                            lineNumber: 27
                         },
                         __self: this,
                         children: movie.Description
@@ -41584,7 +41596,7 @@ function MovieCard(props) {
         ]
     }));
 }
-_s(MovieCard, "/fdjOLQw2w9ula9UZwBfzCtLZ/s=");
+_s(MovieCard, "osZSK1hghOExAGbxlX8Fy+reLrk=");
 _c = MovieCard;
 var _c;
 $RefreshReg$(_c, "MovieCard");
@@ -41738,65 +41750,78 @@ var _cardGroup = require("react-bootstrap/CardGroup");
 var _cardGroupDefault = parcelHelpers.interopDefault(_cardGroup);
 var _movieViewCss = require("../styles/movie-view.css");
 var _s = $RefreshSig$();
-function SingleMovie() {
+function SingleMovie(props) {
     _s();
     const baseURL = 'https://my-flix-cf.herokuapp.com/';
-    const [user, setUser] = _react.useState(localStorage.getItem('user'));
     //Destructuring the params Object
     const { movie_id  } = _reactRouterDom.useParams();
     const navigate = _reactRouterDom.useNavigate();
+    const location = _reactRouterDom.useLocation();
+    const userData = location.state;
+    const [user, setUser] = _react.useState(userData);
     const [movie, setMovie] = _react.useState('');
     const [director, setDirector] = _react.useState('');
-    const [genres, setGenres] = _react.useState('');
+    const [genres, setGenres] = _react.useState([]);
+    const [isFavourite, setIsFavourite] = _react.useState(false);
     //Setting loading and error variables 
     const [loading, setLoading] = _react.useState(true);
     const [error, setError] = _react.useState();
-    const [isFavourite, setIsFavourite] = _react.useState('');
     _react.useEffect(()=>{
-        console.log('useEffect_MOVIE.......................................................');
         let accessToken = localStorage.getItem('token');
-        //Fetching Movie through ID
-        console.log('getMovie');
-        _axiosDefault.default.get(baseURL + 'movies/' + movie_id, {
+        getMovieData(accessToken);
+    }, []);
+    async function getMovieData(accessToken) {
+        const movieURL = baseURL + 'movies/' + movie_id;
+        const response = await _axiosDefault.default.get(movieURL, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
-        }).then((response)=>{
-            // Assign the result to the state
-            setMovie(response.data);
-            console.log(response.data);
-        }).catch(function(error1) {
-            console.log(error1);
-            setError(error1);
-        }).finally(()=>{
-            setLoading(false);
         });
-    }, []);
-    //Fetch Movie Data on page Loaded
-    _react.useEffect(()=>{
-        console.log('useEffect_REST.......................................................');
-        //Fetching Director through ID
-        console.log('getDirector');
-        let directorURL = baseURL + 'directors/' + movie.Director;
-        _axiosDefault.default.get(directorURL).then((response)=>{
-            console.log(response.data);
-            setDirector(response.data);
-        }).catch((error1)=>{
-            console.log(error1);
-            setError(error1);
-        }).finally(()=>{
-            setLoading(false);
+        setMovie(response.data);
+        //Fetching Director from ID
+        getDirectorData(accessToken, response.data.Director);
+        //Fetching Genres from ID
+        response.data.Genre.forEach((g)=>{
+            getGenresData(accessToken, g);
         });
-    }, [
-        movie
-    ]);
+        //If movie exists in user favourite list
+        if (user.FavoriteMovies.includes(movie_id)) setIsFavourite(true);
+        // //Movie can be displayed and the loading spinner set off
+        setLoading(false);
+    }
+    async function getDirectorData(accessToken, directorID) {
+        //console.log('Movie director id: '+directorID);
+        const directorURL = baseURL + 'directors/' + directorID;
+        const response = await _axiosDefault.default.get(directorURL, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        });
+        setDirector(response.data);
+    }
+    async function getGenresData(accessToken, genreID) {
+        // console.log('Genre id: '+genreID);
+        const genreURL = baseURL + 'genres/' + genreID;
+        const response = await _axiosDefault.default.get(genreURL, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        });
+        const genreData = response.data.Name;
+        setGenres((prevData)=>{
+            return [
+                ...prevData,
+                genreData
+            ];
+        });
+    }
     const isFeatured = (val)=>{
         if (movie != '') {
             console.log('isFeatured');
             if (val) return(/*#__PURE__*/ _jsxRuntime.jsx("strong", {
                 __source: {
                     fileName: "src/components/pages/SingleMovie.jsx",
-                    lineNumber: 80
+                    lineNumber: 81
                 },
                 __self: this,
                 children: "Available"
@@ -41825,14 +41850,14 @@ function SingleMovie() {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/pages/SingleMovie.jsx",
-            lineNumber: 103
+            lineNumber: 104
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "h3 text-muted text-center",
             __source: {
                 fileName: "src/components/pages/SingleMovie.jsx",
-                lineNumber: 104
+                lineNumber: 105
             },
             __self: this,
             children: [
@@ -41843,7 +41868,7 @@ function SingleMovie() {
                     role: "status",
                     __source: {
                         fileName: "src/components/pages/SingleMovie.jsx",
-                        lineNumber: 105
+                        lineNumber: 106
                     },
                     __self: this
                 })
@@ -41854,13 +41879,13 @@ function SingleMovie() {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/pages/SingleMovie.jsx",
-            lineNumber: 111
+            lineNumber: 112
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
             __source: {
                 fileName: "src/components/pages/SingleMovie.jsx",
-                lineNumber: 112
+                lineNumber: 113
             },
             __self: this,
             children: "There was an error loading your data!"
@@ -41871,7 +41896,7 @@ function SingleMovie() {
             className: "justify-content-center my-5",
             __source: {
                 fileName: "src/components/pages/SingleMovie.jsx",
-                lineNumber: 119
+                lineNumber: 120
             },
             __self: this,
             children: [
@@ -41879,7 +41904,7 @@ function SingleMovie() {
                     md: 6,
                     __source: {
                         fileName: "src/components/pages/SingleMovie.jsx",
-                        lineNumber: 120
+                        lineNumber: 121
                     },
                     __self: this,
                     children: [
@@ -41887,35 +41912,72 @@ function SingleMovie() {
                             className: "h3 text-muted text-center",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 121
+                                lineNumber: 122
                             },
                             __self: this,
                             children: movie.Title
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                            className: "p-1 m-1 h6 text-muted text-center",
+                            __source: {
+                                fileName: "src/components/pages/SingleMovie.jsx",
+                                lineNumber: 124
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsxs("p", {
+                                __source: {
+                                    fileName: "src/components/pages/SingleMovie.jsx",
+                                    lineNumber: 125
+                                },
+                                __self: this,
+                                children: [
+                                    "(",
+                                    genres.map((g, i)=>i != 0 ? ", [object Object]" : /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                            to: `/genres/${genres}`,
+                                            __source: {
+                                                fileName: "src/components/pages/SingleMovie.jsx",
+                                                lineNumber: 125
+                                            },
+                                            __self: this,
+                                            children: g
+                                        })
+                                    ),
+                                    ")"
+                                ]
+                            })
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                             className: "p-4 m-3 h5 text-muted text-center",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 123
+                                lineNumber: 128
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 124
+                                        lineNumber: 129
                                     },
                                     __self: this,
                                     children: [
                                         "Directed by ",
-                                        director.Name
+                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                            to: `../directors/${director._id}`,
+                                            __source: {
+                                                fileName: "src/components/pages/SingleMovie.jsx",
+                                                lineNumber: 129
+                                            },
+                                            __self: this,
+                                            children: director.Name
+                                        })
                                     ]
                                 }),
                                 "\xa0",
                                 /*#__PURE__*/ _jsxRuntime.jsx("p", {
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 126
+                                        lineNumber: 131
                                     },
                                     __self: this,
                                     children: movie.Description
@@ -41927,14 +41989,14 @@ function SingleMovie() {
                             className: "d-flex justify-content-center align-items-center",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 129
+                                lineNumber: 134
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 130
+                                        lineNumber: 135
                                     },
                                     __self: this,
                                     children: "Actors"
@@ -41943,7 +42005,7 @@ function SingleMovie() {
                                     className: "bg-light border p-2 m-3 px-3",
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 130
+                                        lineNumber: 135
                                     },
                                     __self: this,
                                     children: movie.Actors.map((actor, i)=>i != 0 ? ', ' + actor : actor
@@ -41956,41 +42018,14 @@ function SingleMovie() {
                             className: "d-flex justify-content-center align-items-center",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 136
+                                lineNumber: 141
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 137
-                                    },
-                                    __self: this,
-                                    children: "Genre"
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                                    className: "bg-light border p-2 m-3 px-3",
-                                    __source: {
-                                        fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 137
-                                    },
-                                    __self: this
-                                })
-                            ]
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Stack, {
-                            gap: 2,
-                            className: "d-flex justify-content-center align-items-center",
-                            __source: {
-                                fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 139
-                            },
-                            __self: this,
-                            children: [
-                                /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                                    __source: {
-                                        fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 140
+                                        lineNumber: 142
                                     },
                                     __self: this,
                                     children: "Available in Theathers"
@@ -41999,7 +42034,7 @@ function SingleMovie() {
                                     className: "bg-light border p-2 m-3 px-3",
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 140
+                                        lineNumber: 142
                                     },
                                     __self: this,
                                     children: isFeatured(movie.Featured)
@@ -42011,7 +42046,7 @@ function SingleMovie() {
                             className: "col-md-5 text-center mx-auto",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 142
+                                lineNumber: 144
                             },
                             __self: this,
                             children: [
@@ -42020,20 +42055,20 @@ function SingleMovie() {
                                     onClick: addFavouriteMovie,
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 143
+                                        lineNumber: 145
                                     },
                                     __self: this,
                                     children: "Add to favourites"
                                 }),
-                                isFavourite ? /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                isFavourite && /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                                     variant: "link text-muted",
                                     __source: {
                                         fileName: "src/components/pages/SingleMovie.jsx",
-                                        lineNumber: 144
+                                        lineNumber: 146
                                     },
                                     __self: this,
                                     children: "Remove from Favourites"
-                                }) : ''
+                                })
                             ]
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Stack, {
@@ -42041,7 +42076,7 @@ function SingleMovie() {
                             className: "col-md-5 mx-auto text-center m-4 p-2",
                             __source: {
                                 fileName: "src/components/pages/SingleMovie.jsx",
-                                lineNumber: 146
+                                lineNumber: 148
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
@@ -42051,7 +42086,7 @@ function SingleMovie() {
                                 },
                                 __source: {
                                     fileName: "src/components/pages/SingleMovie.jsx",
-                                    lineNumber: 147
+                                    lineNumber: 149
                                 },
                                 __self: this,
                                 children: "Back to all movies"
@@ -42063,7 +42098,7 @@ function SingleMovie() {
                     md: 2,
                     __source: {
                         fileName: "src/components/pages/SingleMovie.jsx",
-                        lineNumber: 151
+                        lineNumber: 153
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Image, {
@@ -42072,7 +42107,7 @@ function SingleMovie() {
                         crossOrigin: "anonymous",
                         __source: {
                             fileName: "src/components/pages/SingleMovie.jsx",
-                            lineNumber: 152
+                            lineNumber: 154
                         },
                         __self: this
                     })
@@ -42081,8 +42116,8 @@ function SingleMovie() {
         })
     }));
 }
-_s(SingleMovie, "CZnlNxOy5ZoNx47CWP5LHC8uq/U=", false, function() {
-    return [_reactRouterDom.useParams, _reactRouterDom.useNavigate];
+_s(SingleMovie, "bdumjuyjFnqlCUDrjIQ7uips4k8=", false, function() {
+    return [_reactRouterDom.useParams, _reactRouterDom.useNavigate, _reactRouterDom.useLocation];
 });
 _c = SingleMovie;
 var _c;

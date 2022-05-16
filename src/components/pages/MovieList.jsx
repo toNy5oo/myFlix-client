@@ -7,37 +7,37 @@ import { MovieCard } from '../component/card';
 export function MovieList() {
 
     const [movies, setMovies] = useState([]);
-    const [user, setUser] = useState();
-
+    const [user, setUser] = useState('');
     const [loading, setLoading] = useState(true);
 		const [error, setError] = useState();
 
     useEffect(() => {
       let accessToken = localStorage.getItem('token');
-       //   if (accessToken !== null) {
-       //     setUser(localStorage.getItem('user'));
-       //   }
-       getMovies(accessToken);
-       },[])
+      let activeUser = localStorage.getItem('user');
+      getMovies(accessToken, activeUser);
+      },[])
  
     //fetch movies from API
-    function getMovies(token) {
-        axios.get('https://my-flix-cf.herokuapp.com/movies', {
+    async function getMovies(token, activeUser) {
+        const response =  await axios.get('https://my-flix-cf.herokuapp.com/movies', {
           headers: { Authorization: `Bearer ${token}`}
         })
-        .then(response => {
-          // Assign the result to the state
-          setMovies(response.data)
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-        .finally(() => {
-					setLoading(false);
-				})
+        setMovies(response.data)
+        getUserInfo(token, activeUser);
       }
 
-      //If data is not fetched, show spinner
+      //fetch movies from API
+    async function getUserInfo(token, activeUser) {
+      const response =  await axios.get('https://my-flix-cf.herokuapp.com/users/'+activeUser, {
+        headers: { Authorization: `Bearer ${token}`}
+      })
+      setUser(response.data) 
+      console.log('User in MovieList')        
+      console.log(user)        
+      setLoading(false);
+    }
+
+    //If data is not fetched, show spinner
 		if (loading) {
 			return <Row className="justify-content-center my-5">
 						<div className="h3 text-muted text-center">Loading Movies...
@@ -57,7 +57,7 @@ export function MovieList() {
     
     <Row className="main-view justify-content-md-evenly m-0 p-5 align-items-start">
         
-        {movies.map(m => (<Col md={3}><MovieCard key={m._id} movieData={m} /></Col>))}
+        {movies.map(m => (<Col md={3} key={m._id}><MovieCard userData={user} movieData={m} /></Col>))}
         
     </Row>  
     
@@ -66,3 +66,31 @@ export function MovieList() {
 
   )
 }
+
+
+
+_______________________________________________
+
+
+// OLD <Fetch>
+
+// axios.get('https://my-flix-cf.herokuapp.com/movies', {
+        //   headers: { Authorization: `Bearer ${token}`}
+        // })
+        // .then(response => {
+        //   // Assign the result to the state
+        //   setMovies(response.data)
+        // })
+        // .catch(function (error) {
+        //   console.log(error);
+        // })
+        // .finally(() => {
+				// 	setLoading(false);
+				// })
+
+
+
+
+        //   if (accessToken !== null) {
+       //     setUser(localStorage.getItem('user'));
+       //   }
