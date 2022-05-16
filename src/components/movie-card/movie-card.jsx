@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Card } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
-import '../styles/movie-card.css'
+import '../movie-card/movie-card.css'
 
 export function MovieCard(props) {
  

@@ -7,7 +7,7 @@ import {
 	useNavigate
 } from "react-router-dom";
 
-export function Genre() {
+export function GenreView() {
 
     const {genre_id} = useParams();
 //   const baseURL = 'https://my-flix-cf.herokuapp.com/';

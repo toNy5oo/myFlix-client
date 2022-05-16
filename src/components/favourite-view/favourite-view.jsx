@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Card, ListGroup, ListGroupItem, Button, Row, Col, Image, Stack, Spinner} from 'react-bootstrap';
 import axios from 'axios';
 
-export function Favourites() {
+export function FavouritesView() {
 
   const baseURL = 'https://my-flix-cf.herokuapp.com/';
   

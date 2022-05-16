@@ -9,9 +9,9 @@ import {
 	useLocation
 } from "react-router-dom";
 import CardGroup from 'react-bootstrap/CardGroup';
-import '../styles/movie-view.css'
+import '../movie-view/movie-view.css'
 
-export function SingleMovie(props) {
+export function MovieView(props) {
 		
 		const baseURL = 'https://my-flix-cf.herokuapp.com/';
 				

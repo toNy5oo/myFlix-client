@@ -1,13 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
-
+import { MainView } from '../main-view/main-view';
+import { MovieCard } from '../movie-card/movie-card';
+import { MovieView } from '../movie-view/movie-view';
+import { LoginView } from '../login-view/login-view';
+import { RegisterForm } from '../register-view/register-view';
+import { NavbarView } from '../navbar-view/navbar-view'
 import { Row, Col, Spinner } from 'react-bootstrap/';
-import { MovieCard } from '../component/card';
 
-export function MovieList() {
+export function MainView(props) {
 
     const [movies, setMovies] = useState([]);
-    const [user, setUser] = useState('');
+    const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 		const [error, setError] = useState();
 

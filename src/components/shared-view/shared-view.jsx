@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 
-import { Navbar } from '../layout/navbar';
+import { NavbarView } from '../navbar-view/navbar-view';
 import { Row, Col, Container } from 'react-bootstrap/';
 import {
   BrowserRouter,
@@ -16,7 +16,7 @@ import {
   useNavigate
 } from "react-router-dom";
 
-export function SharedLayout()  {
+export function SharedView()  {
  
 
   // const [user, setUser] = useState(props.user);
@@ -71,7 +71,7 @@ export function SharedLayout()  {
       return (
         <> 
                   
-                  <Navbar />
+                  <NavbarView />
                   <Outlet />
          </>
             

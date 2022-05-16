@@ -7,7 +7,7 @@ import {
 	useNavigate
 } from "react-router-dom";
 
-export function Director() {
+export function DirectorView() {
 
     const {director_id} = useParams();
 //   const baseURL = 'https://my-flix-cf.herokuapp.com/';

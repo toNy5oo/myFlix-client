@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {ListGroup, ListGroupItem, Button, Row, Col, Spinner, Form, Stack} from 'react-bootstrap';
 import axios from 'axios';
-import { PasswordInput } from '../component/password'
-import { ResetButton } from '../component/resetButton'
 
-export function Profile() {
+
+export function ProfileView() {
 
   const baseURL = 'https://my-flix-cf.herokuapp.com/';
   const accessToken = localStorage.getItem('token');
@@ -35,6 +34,16 @@ export function Profile() {
                 setLoading(false);
             })
   },[])
+
+  const showPasswordInput = (e) => {
+	console.log('click');
+	setUpdateUser(prevUser => {
+	  return {
+		...prevUser,
+		[updateUser.Password]: 'A'
+	  }
+	})
+  }
 
 
   	function handleChange (e) {
@@ -122,7 +131,13 @@ export function Profile() {
 						<div className="d-flex justify-content-between align-items-center my-5">
 							<div className="h5 text-muted text-center">Password</div>
 							<div className="h5 text-muted text-center d-flex">
-								{ (updateUser.Password != '') ? <ResetButton updateUser={updateUser}/> : <Form.Control
+								{ (updateUser.Password != '') ? <Button 
+																			className="h2 text-center buttonReset" 
+																			variant="secondary"
+																			onClick={showPasswordInput}
+																			>
+																				Reset password
+																			</Button> : <Form.Control
 																			className="passwordInput" 
 																			type="password" 
 																			name="Password"

@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import { MovieList } from '../main-view/main-view';
+import { MainView } from '../main-view/main-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { RegisterForm } from '../register-view/register-view';
-import { Navbar } from '../layout/navbar';
+import { NavbarView } from '../navbar-view/navbar-view'
 import { Row, Col, Container } from 'react-bootstrap/';
 import {
   BrowserRouter,
@@ -20,11 +20,11 @@ import {
   useNavigate
 } from "react-router-dom";
 
-export function Home()  {
+export function HomeView()  {
  
       return (
         <> 
-            <MovieList />
+            <MainView />
         </>
 
       )

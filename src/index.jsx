@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router} from "react-router-dom";
-import { Home } from './components/home-view/home-view';
-import { SingleMovie } from './components/movie-view/movie-view';
-import { Favourites } from './components/favourite-view/favourite-view';
-import { Director } from './components/director-view/director-view';
-import { Genre } from './components/genre-view/genre-view';
-import { Profile } from './components/profile-view/profile-view';
-import { Login } from './components/login-view/login-view';
-import { SharedLayout } from './components/shared-view/shared-view';
+import { MainView } from './components/main-view/main-view';
+import { MovieView } from './components/movie-view/movie-view';
+import { FavouritesView } from './components/favourite-view/favourite-view';
+import { DirectorView } from './components/director-view/director-view';
+import { GenreView } from './components/genre-view/genre-view';
+import { ProfileView } from './components/profile-view/profile-view';
+import { LoginView } from './components/login-view/login-view';
+import { SharedView } from './components/shared-view/shared-view';
 import {
   BrowserRouter as Router,
   Routes,
@@ -43,24 +43,26 @@ export default function MyFlixApplication() {
     },[])
   
     return (
-        // 
-        <div>
+        <>
            <Router>
               <Routes>
                     {/*If user exists then Home, otherwise Login form*/}
-                    <Route path="/" element={<SharedLayout />}> 
-                        <Route index element={(user) ? <Home /> : <Login />} />  
-                        <Route path="movies/:movie_id" element={<SingleMovie />} />  
-                        <Route path="favourites" element={<Favourites />} />
-                        <Route path="profile" element={<Profile />} />
-                        <Route path="directors/:director_id" element={<Director />} />
-                        <Route path="genres/:genre_id" element={<Genre />} />
+                    <Route path="/" element={<SharedView />}> 
+                        <Route index element={(user) ? (<MainView user={user}/>) : (<LoginView />)}/>
+                         
+                        <Route path="profile" element={<ProfileView />} />
+                        <Route path="favourites" element={<FavouritesView />} />
+                        
+                        <Route path="movies/:movie_id" element={<MovieView />} /> 
+                        
+                        
+                        <Route path="directors/:director_id" element={<DirectorView />} />
+                        <Route path="genres/:genre_id" element={<GenreView />} />
                     </Route>
 
               </Routes>
             </Router>  
-        </div>
-        // </Router>
+        </>
     )
 }
 
