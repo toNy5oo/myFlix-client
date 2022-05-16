@@ -1,74 +1,65 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 
-import { MovieCard } from '../movie-card/movie-card';
-import { MovieView } from '../movie-view/movie-view';
-import { LoginView } from '../login-view/login-view';
-import { Row, Col } from 'react-bootstrap/';
+import { Row, Col, Spinner } from 'react-bootstrap/';
+import { MovieCard } from '../component/card';
 
-export class MainView extends React.Component {
+export function MovieList() {
 
-    constructor(){
-        super();
-        this.state = {
-          movies: [],
-          selectedMovie: null,
-          user: null,
-          isRegistered: false
-        }
-      }
+    const [movies, setMovies] = useState([]);
+    const [user, setUser] = useState('');
+    const [loading, setLoading] = useState(true);
+		const [error, setError] = useState();
 
-      //Logic to be executed after loading page
-      componentDidMount(){
-        axios.get('https://my-flix-cf.herokuapp.com/movies')
-          .then(response => {
-            this.setState({
-              movies: response.data
-            });
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }
+    useEffect(() => {
+      let accessToken = localStorage.getItem('token');
+      let activeUser = localStorage.getItem('user');
+      getMovies(accessToken, activeUser);
+      },[])
  
-      setSelectedMovie(newSelectedMovie){
-          this.setState({
-               selectedMovie: newSelectedMovie
-            });
+    //fetch movies from API
+    async function getMovies(token, activeUser) {
+        const response =  await axios.get('https://my-flix-cf.herokuapp.com/movies', {
+          headers: { Authorization: `Bearer ${token}`}
+        })
+        setMovies(response.data)
+        getUserInfo(token, activeUser);
       }
 
-      /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
-      onLoggedIn(user) {
-        this.setState({
-          user
-        });
-      }
-
-      render() {
-        const { movies, selectedMovie, user } = this.state;
-
-        /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-     
-        if (movies.length === 0) return <div className="main-view" />;
-      
-        return (
-          <Row className="main-view justify-content-md-evenly m-0 p-5 align-items-center">
-            {selectedMovie
-              ? (
-                // <Col md={12}>
-                  <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
-                // </Col>
-              )
-              : movies.map(movie => (
-                <Col md={3}>
-                    <MovieCard key={movie._id} movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
-                </Col>
-              ))
-            }
-          </Row>
-        );
-      }
+      //fetch movies from API
+    async function getUserInfo(token, activeUser) {
+      const response =  await axios.get('https://my-flix-cf.herokuapp.com/users/'+activeUser, {
+        headers: { Authorization: `Bearer ${token}`}
+      })
+      setUser(response.data) 
+      console.log('User in MovieList')        
+      console.log(user)        
+      setLoading(false);
     }
 
+    //If data is not fetched, show spinner
+		if (loading) {
+			return <Row className="justify-content-center my-5">
+						<div className="h3 text-muted text-center">Loading Movies...
+							&nbsp;<Spinner animation="border" variant="secondary" role="status" />
+						</div>
+					</Row>		
+		 }
+
+		if (error) {
+			return <Row className="justify-content-center my-5">
+				<p>There was an error loading your data!</p>
+				</Row>
+		}
+
+  return (
+
     
+    <Row className="main-view justify-content-md-evenly m-0 p-5 align-items-start">
+        
+        {movies.map(m => (<Col md={3} key={m._id}><MovieCard userData={user} movieData={m} /></Col>))}
+        
+    </Row>  
+    
+  )
+}

@@ -8,18 +8,54 @@ import './login-view.css';
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
+
+  const [usernameErr, setUsernameErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
+
+  const baseURL = 'https://my-flix-cf.herokuapp.com/';
  
   const handleSubmit = (e) => {
-    //e.preventDefault();
-    //console.log(username, password);
-    /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
-     props.onLoggedIn('tony');
+    e.preventDefault();
+    // const isReq = validate()
+    // if (isReq) {
+    //   /* Send a request to the server for authentication */
+    //   axios.post(baseURL+'/login', {
+    //       username: username,
+    //       password: password,
+    //     })
+    //     .then((response) => {
+    //       const data = response.data;
+          props.onLoggedIn('tony');
+        // })
+        // .catch((e) => {
+        //   console.log("There is no such user");
+        // });
+    }
+  
+
+  const validate = () => {
+    let isReq = true;
+    if (!username) {
+      setUsernameErr("Username is required!");
+      isReq = false;
+    } else if (username.length < 2) {
+      setUsernameErr("Username must be 2 characters long!");
+      isReq = false;
+    }
+    if (!password) {
+      setPasswordErr("Password is required!");
+      isReq = false;
+    } else if (password.length < 6) {
+      setPassword("Password must be 6 characters long!");
+      isReq = false;
+    }
+    return isReq;
   };
 
   const handleNewUser = (e) => {
+
     console.log('Registration...');
-    props.useRef
+    //props.useRef
     return <RegisterView />;
   };
 

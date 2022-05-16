@@ -1,106 +1,160 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
-import {Card, ListGroup, ListGroupItem, Button, Row, Col, Image} from 'react-bootstrap';
+import {Card, ListGroup, ListGroupItem, Button, Row, Col, Image, Stack, Spinner} from 'react-bootstrap';
+import {
+	Link,
+	useParams,
+	useNavigate,
+	useLocation
+} from "react-router-dom";
 import CardGroup from 'react-bootstrap/CardGroup';
-import './movie-view.css'
+import '../styles/movie-view.css'
 
-export class MovieView extends React.Component {
-
-  render() {
-    const { movie, onBackClick } = this.props;
-
-    const defineGenre = () =>{
-      // axios.get('https://my-flix-cf.herokuapp.com//movies/'+movie.Title+'/details')
-      //     .then(response => {}
-      //     )
-      //     .catch(error => {
-      //       console.log(error);
-      //     });
-    };
-
-    function isFeatured(val){
-      if (val)
-       return <strong>Available in Theathers</strong>;
-       else
-       return 'N/A in Theathers';
-    }
-
-
-    return (
-      
-    <Row className="w-100 justify-content-around mx-auto">
-        <Col md={8}>   
-			<ListGroup>
-				<ListGroup.Item><h3>{movie.Title}</h3></ListGroup.Item>
-				<ListGroup.Item>Genre: {defineGenre()}</ListGroup.Item>
-				<ListGroup.Item>Actors:{}</ListGroup.Item>
-				<ListGroup.Item>{isFeatured(movie.Featured)}</ListGroup.Item>
-				<div>
-					<ListGroup.Item className="w-100 d-flex justify-content-between">
-						<Button variant="link text-muted">Add to favourites</Button>
-						<Button variant="link text-muted">Remove from Favourites</Button>
-					</ListGroup.Item>
-				</div>
+export function SingleMovie(props) {
+		
+		const baseURL = 'https://my-flix-cf.herokuapp.com/';
 				
-			</ListGroup>  
-			<div className="p-5 h4 text-muted">
-			{movie.Description}
-			</div>  
-        </Col>
+		//Destructuring the params Object
+		const {movie_id} = useParams();
+		const navigate = useNavigate();
+		const location = useLocation();
+		const userData = location.state;
 
-		<Col md={4}> 
-        	<Image className="poster" src={movie.ImagePath} crossOrigin="anonymous" onClick={() => onMovieClick(movie)}/>
-        </Col>
-		<Button variant="primary" onClick={() => { onBackClick(null); }}>Back</Button>
-    </Row>
+		const [user, setUser] = useState(userData);
+		const [movie, setMovie ] = useState('');
+		const [director, setDirector ] = useState('');
+		const [genres, setGenres] = useState([]);
+		const [isFavourite, setIsFavourite] = useState(false);
 
-      
- 
-      
-     
-        // <Card>
-        // <Card.Img variant="top" src={movie.ImagePath} crossOrigin="anonymous" onClick={() => onMovieClick(movie)}/>
-        //   <Card.Body>
-        //   <Card.Title as="h5" className="description mh-200">{movie.Title}</Card.Title>
-        //     <Card.Text>{movie.Description}</Card.Text>
-        //   </Card.Body>
-        //   <ListGroup className="list-group-flush">
-        //     <ListGroupItem key={movie._id}>Genre: {defineGenre()}</ListGroupItem>
-        //     <ListGroupItem key={movie._Actors}>Actors:{}</ListGroupItem>
-        //     <ListGroupItem key="theater" className="text-center">{isFeatured(movie.Featured)}</ListGroupItem>
-        //   </ListGroup>
-        //   <Card.Body className="d-flex justify-content-between">
-        //   <Card.Link href="#">Add to favourites</Card.Link>
-        //   <Card.Link href="#">Remove from Favourites</Card.Link>
-        //   </Card.Body>
-        //   <Button variant="primary" onClick={() => { onBackClick(null); }}>Back</Button>
-        // </Card>
-      
-      
-      
-      
-     
+		//Setting loading and error variables 
+		const [loading, setLoading] = useState(true);
+		const [error, setError] = useState();
+		
+		useEffect(() => {
+			let accessToken = localStorage.getItem('token');
+			getMovieData(accessToken);
+		},[])
+
+		async function getMovieData(accessToken) {
+			const movieURL = baseURL + 'movies/' + movie_id;
+			const response = await axios.get(movieURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
+			
+			setMovie(response.data);
+			
+			//Fetching Director from ID
+			getDirectorData(accessToken, response.data.Director);
+			
+			//Fetching Genres from ID
+			response.data.Genre.forEach(g => {
+				getGenresData(accessToken, g)
+			})
+			
+			//If movie exists in user favourite list
+			if (user.FavoriteMovies.includes(movie_id)) setIsFavourite(true)
+			
+			// //Movie can be displayed and the loading spinner set off
+			 setLoading(false)
+		}
+
+		async function getDirectorData(accessToken, directorID){
+			//console.log('Movie director id: '+directorID);
+			const directorURL = baseURL + 'directors/' + directorID;
+			const response = await axios.get(directorURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
+			setDirector(response.data);
+		}
+
+		async function getGenresData(accessToken, genreID){
+			// console.log('Genre id: '+genreID);
+			const genreURL = baseURL + 'genres/' + genreID;
+			const response = await axios.get(genreURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
+			const genreData = response.data.Name;
+			setGenres(prevData => {
+			 	return [...prevData, genreData] 
+			})
+		}
+
+		const isFeatured = (val) => {
+			if (movie != '') { 
+				console.log('isFeatured')
+								if (val)
+							return <strong>Available</strong>;
+							else
+							return 'Not Available';
+			}
+		}
+
+		const addFavouriteMovie = () => {
+			let accessToken = localStorage.getItem('token');
+			let compositeURL = baseURL + 'users/' + user +'/favourites/'+ movie._id;
+			axios.put(compositeURL, { headers: { Authorization: `Bearer ${accessToken}`} } 
+						).then(response => {
+							console.log(response.data);
+							setIsFavourite(true)
+							})
+						.catch(error => {
+							console.log(compositeURL);
+							console.log(error);
+							setError(error);
+						})
+		}
+
+		//If data is not fetched, show spinner
+		if (loading) {
+			return <Row className="justify-content-center my-5">
+						<div className="h3 text-muted text-center">Data is loading
+							&nbsp;<Spinner animation="border" variant="secondary" role="status" />
+						</div>
+					</Row>		
+		 }
+
+		if (error || !Array.isArray(movie.Actors)) {
+			return <Row className="justify-content-center my-5">
+				<p>There was an error loading your data!</p>
+				</Row>
+		}
 
 
-      // <Card>
-      //   <Card.Img variant="top" src={movie.ImagePath} crossorigin="anonymous"/>
-      //   <Card.Body>
-      //   <Card.Header as="h5">{movie.Title}</Card.Header>
-      //     <Card.Text>
-      //     {movie.Description}
-      //     </Card.Text>
-      //     <Button variant="primary" onClick={() => { onBackClick(null); }}>Back</Button>
-      //   </Card.Body>
-      // </Card>
-    );
-  }
+		return (
+		<>
+		<Row className="justify-content-center my-5">
+				<Col md={6}> 
+						<div className="h3 text-muted text-center">{movie.Title}</div>
+							
+							<div className="p-1 m-1 h6 text-muted text-center">
+								<p>({genres.map((g, i) => (i !=0 ) ? ', '+{g} : <Link to={`/genres/${genres}`}>{g}</Link>)})</p>
+							</div>
+
+							<div className="p-4 m-3 h5 text-muted text-center">
+								<p>Directed by <Link to={`../directors/${director._id}`}>{director.Name}</Link></p>
+								&nbsp;
+								<p>{movie.Description}</p>
+							</div>    
+
+						<Stack gap={2} className="d-flex justify-content-center align-items-center">
+										<div>Actors</div><div className="bg-light border p-2 m-3 px-3">
+											{ 
+											movie.Actors.map((actor, i) => (i!=0) ? ', '+actor : actor)
+											}
+										</div>
+						</Stack>
+						<Stack gap={2} className="d-flex justify-content-center align-items-center">
+						<div>Available in Theathers</div><div className="bg-light border p-2 m-3 px-3">{isFeatured(movie.Featured)}</div>
+						</Stack>
+						<Stack gap={3} className="col-md-5 text-center mx-auto">
+										<Button variant="link text-muted" onClick={addFavouriteMovie}>Add to favourites</Button>
+										{(isFavourite) && <Button variant="link text-muted">Remove from Favourites</Button>}
+						</Stack>
+						<Stack gap={2} className="col-md-5 mx-auto text-center m-4 p-2">
+										<Button variant="secondary" onClick={() => { navigate('/') }}>Back to all movies</Button>     
+						</Stack>
+				</Col>
+
+		<Col md={2}> 
+					<Image className="poster" src={movie.ImagePath} crossOrigin="anonymous"/>
+				</Col>
+		</Row>
+		
+		</>
+		)
 }
-
-MovieView.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired
-  }).isRequired,
-  onBackClick: PropTypes.func.isRequired
-};
