@@ -24,16 +24,16 @@ export default function MyFlixApplication() {
   
   const [user, setUser] = useState(null);
 
-        // /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
-        // function onLoggedIn(authData) {
-        //   console.log("OnLoggedIn...");
-        //   console.log(authData);
-        //   setUser(authData.user.Username)
+        /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
+        function onLoggedIn(authData) {
+          console.log("OnLoggedIn...");
+          console.log(authData);
+          setUser(authData.user.Username)
           
-        //   localStorage.setItem('token', authData.token);
-        //   localStorage.setItem('user', authData.user.Username);
-        //   //getMovies(authData.token);
-        // }
+          localStorage.setItem('token', authData.token);
+          localStorage.setItem('user', authData.user.Username);
+          //getMovies(authData.token);
+        }
 
   useEffect(() => {
     let accessToken = localStorage.getItem('token');
@@ -48,18 +48,13 @@ export default function MyFlixApplication() {
               <Routes>
                     {/*If user exists then Home, otherwise Login form*/}
                     <Route path="/" element={<SharedView />}> 
-                        <Route index element={(user) ? (<MainView user={user}/>) : (<LoginView />)}/>
-                         
+                        <Route index element={(user) ? (<MainView user={user}/>) : (<LoginView onLoggedIn={user => onLoggedIn(user)} />)}/>
                         <Route path="profile" element={<ProfileView />} />
                         <Route path="favourites" element={<FavouritesView />} />
-                        
                         <Route path="movies/:movie_id" element={<MovieView />} /> 
-                        
-                        
                         <Route path="directors/:director_id" element={<DirectorView />} />
                         <Route path="genres/:genre_id" element={<GenreView />} />
                     </Route>
-
               </Routes>
             </Router>  
         </>

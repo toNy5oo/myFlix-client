@@ -960,15 +960,14 @@ var _s = $RefreshSig$();
 function MyFlixApplication() {
     _s();
     const [user, setUser] = _react.useState(null);
-    // /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
-    // function onLoggedIn(authData) {
-    //   console.log("OnLoggedIn...");
-    //   console.log(authData);
-    //   setUser(authData.user.Username)
-    //   localStorage.setItem('token', authData.token);
-    //   localStorage.setItem('user', authData.user.Username);
-    //   //getMovies(authData.token);
-    // }
+    /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/ function onLoggedIn(authData) {
+        console.log("OnLoggedIn...");
+        console.log(authData);
+        setUser(authData.user.Username);
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.user.Username);
+    //getMovies(authData.token);
+    }
     _react.useEffect(()=>{
         let accessToken = localStorage.getItem('token');
         if (accessToken !== null) setUser(localStorage.getItem('user'));
@@ -1002,6 +1001,7 @@ function MyFlixApplication() {
                                 element: user ? /*#__PURE__*/ _jsxRuntime.jsx(_mainView.MainView, {
                                     user: user
                                 }) : /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
+                                    onLoggedIn: (user1)=>onLoggedIn(user1)
                                 }),
                                 __source: {
                                     fileName: "src/index.jsx",
@@ -1015,7 +1015,7 @@ function MyFlixApplication() {
                                 }),
                                 __source: {
                                     fileName: "src/index.jsx",
-                                    lineNumber: 53
+                                    lineNumber: 52
                                 },
                                 __self: this
                             }),
@@ -1025,7 +1025,7 @@ function MyFlixApplication() {
                                 }),
                                 __source: {
                                     fileName: "src/index.jsx",
-                                    lineNumber: 54
+                                    lineNumber: 53
                                 },
                                 __self: this
                             }),
@@ -1035,7 +1035,7 @@ function MyFlixApplication() {
                                 }),
                                 __source: {
                                     fileName: "src/index.jsx",
-                                    lineNumber: 56
+                                    lineNumber: 54
                                 },
                                 __self: this
                             }),
@@ -1045,7 +1045,7 @@ function MyFlixApplication() {
                                 }),
                                 __source: {
                                     fileName: "src/index.jsx",
-                                    lineNumber: 59
+                                    lineNumber: 55
                                 },
                                 __self: this
                             }),
@@ -1055,7 +1055,7 @@ function MyFlixApplication() {
                                 }),
                                 __source: {
                                     fileName: "src/index.jsx",
-                                    lineNumber: 60
+                                    lineNumber: 56
                                 },
                                 __self: this
                             })
@@ -42621,13 +42621,12 @@ function LoginView(props) {
             console.table({
                 user
             });
-            //Set data into LocalStorage
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', data.user.Username);
+            // //Set data into LocalStorage
+            // localStorage.setItem('token', data.token);
+            // localStorage.setItem('user', data.user.Username);
             //Redirect Homepage
-            navigate.push('/', user = {
-                user
-            });
+            //navigate.push('/', user={user});
+            props.onLoggedIn(data);
         }).catch((err)=>{
             console.log(err);
             console.log('no such user');
@@ -42638,14 +42637,14 @@ function LoginView(props) {
             className: "d-flex justify-content-evenly",
             __source: {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 70
+                lineNumber: 71
             },
             __self: this,
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 71
+                        lineNumber: 72
                     },
                     __self: this
                 }),
@@ -42654,14 +42653,14 @@ function LoginView(props) {
                     className: "left_side",
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 72
+                        lineNumber: 73
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                         className: "d-flex flex-column justify-content-between align-items-center p-2 mt-4",
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 73
+                            lineNumber: 74
                         },
                         __self: this,
                         children: [
@@ -42670,14 +42669,14 @@ function LoginView(props) {
                                 className: "mt-3",
                                 __source: {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 74
+                                    lineNumber: 75
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                         __source: {
                                             fileName: "src/components/login-view/login-view.jsx",
-                                            lineNumber: 75
+                                            lineNumber: 76
                                         },
                                         __self: this,
                                         children: "Username:"
@@ -42690,14 +42689,14 @@ function LoginView(props) {
                                         value: username,
                                         __source: {
                                             fileName: "src/components/login-view/login-view.jsx",
-                                            lineNumber: 76
+                                            lineNumber: 77
                                         },
                                         __self: this
                                     }),
                                     usernameErr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                                         __source: {
                                             fileName: "src/components/login-view/login-view.jsx",
-                                            lineNumber: 76
+                                            lineNumber: 77
                                         },
                                         __self: this,
                                         children: usernameErr
@@ -42709,14 +42708,14 @@ function LoginView(props) {
                                 className: "mt-3",
                                 __source: {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 79
+                                    lineNumber: 80
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                         __source: {
                                             fileName: "src/components/login-view/login-view.jsx",
-                                            lineNumber: 80
+                                            lineNumber: 81
                                         },
                                         __self: this,
                                         children: "Password:"
@@ -42729,7 +42728,7 @@ function LoginView(props) {
                                         ,
                                         __source: {
                                             fileName: "src/components/login-view/login-view.jsx",
-                                            lineNumber: 81
+                                            lineNumber: 82
                                         },
                                         __self: this
                                     })
@@ -42742,7 +42741,7 @@ function LoginView(props) {
                                 className: "mt-4",
                                 __source: {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 84
+                                    lineNumber: 85
                                 },
                                 __self: this,
                                 children: "Submit"
@@ -42755,14 +42754,14 @@ function LoginView(props) {
                     className: "right_side d-flex flex-column justify-content-center align-items-center p-2 mt-4",
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 90
+                        lineNumber: 91
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsx("p", {
                             __source: {
                                 fileName: "src/components/login-view/login-view.jsx",
-                                lineNumber: 91
+                                lineNumber: 92
                             },
                             __self: this,
                             children: "Please enter your details to login into the application."
@@ -42770,7 +42769,7 @@ function LoginView(props) {
                         /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                             __source: {
                                 fileName: "src/components/login-view/login-view.jsx",
-                                lineNumber: 92
+                                lineNumber: 93
                             },
                             __self: this,
                             children: [
@@ -42779,7 +42778,7 @@ function LoginView(props) {
                                     to: "/register",
                                     __source: {
                                         fileName: "src/components/login-view/login-view.jsx",
-                                        lineNumber: 92
+                                        lineNumber: 93
                                     },
                                     __self: this,
                                     children: "register"
@@ -42791,7 +42790,7 @@ function LoginView(props) {
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 94
+                        lineNumber: 95
                     },
                     __self: this
                 })

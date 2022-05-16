@@ -52,11 +52,12 @@ const validate = () => {
           console.log("LoggedIn...");
           setUser(data.user.Username)
           console.table({user})
-          //Set data into LocalStorage
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('user', data.user.Username);
+          // //Set data into LocalStorage
+          // localStorage.setItem('token', data.token);
+          // localStorage.setItem('user', data.user.Username);
           //Redirect Homepage
-          navigate.push('/', user={user});
+          //navigate.push('/', user={user});
+          props.onLoggedIn(data)
     })
     .catch(err => {
       console.log(err)
