@@ -106,7 +106,9 @@ export function MovieView(props) {
 							
 							<div className="p-1 m-1 h6 text-muted text-center">
 								{/* <p>({genres.map((g, i) => (i !=0 ) ? ', '+{g} : <Link to={`/genres/${genres}`}>{g}</Link>)})</p> */}
-								<p>({genres.map(g => <Link to={`/genres/${genres}`}>&nbsp;{g}</Link>)}&nbsp;)</p>
+								<p>({
+										genres.map((g, i) => (i!=0) ? <>, <Link to={`/genres/${g}`}>{g}</Link></> : <Link to={`/genres/${g}`}>{g}</Link>)
+									})</p>
 							</div>
 
 							<div className="p-4 m-3 h5 text-muted text-center">
