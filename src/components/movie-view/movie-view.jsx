@@ -16,14 +16,17 @@ export function MovieView(props) {
 		const baseURL = 'https://my-flix-cf.herokuapp.com/';
 				
 		//Destructuring the params Object
-		const {movie_id} = useParams();
 		const navigate = useNavigate();
 		const location = useLocation();
+		
+		//Retrieving data from Link state
 		const userData = location.state[0];
 		const movieData = location.state[1];
-
+		//Initializing movie and user obj
 		const [user, setUser] = useState(userData);
 		const [movie, setMovie ] = useState(movieData);
+		
+		
 		const [director, setDirector ] = useState('');
 		const [genres, setGenres] = useState([]);
 		const [isFavourite, setIsFavourite] = useState(false);
@@ -33,59 +36,34 @@ export function MovieView(props) {
 		const [error, setError] = useState();
 		
 		useEffect(() => {
-			//let accessToken = localStorage.getItem('token');
-			//getMovieData(accessToken);
-			console.log('Movie view loaded')
-			console.table(user)
-			console.table(movie)
-			setLoading(false)
+			let accessToken = localStorage.getItem('token');
+			getDirectorData(accessToken)
+			movie.Genre.forEach(genre_id => {
+				getGenresData(accessToken, genre_id)
+			})
+			console.table(genres);
+			setLoading(false)			
 		},[])
 
-		async function getMovieData(accessToken) {
-			const movieURL = baseURL + 'movies/' + movie_id;
-			const response = await axios.get(movieURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-			
-			setMovie(response.data);
-			
-			//Fetching Director from ID
-			getDirectorData(accessToken, response.data.Director);
-			
-			//Fetching Genres from ID
-			response.data.Genre.forEach(g => {
-				getGenresData(accessToken, g)
-			})
-			
-			//If movie exists in user favourite list
-			if (user.FavoriteMovies.includes(movie_id)) setIsFavourite(true)
-			
-			// //Movie can be displayed and the loading spinner set off
-			 setLoading(false)
-		}
-
-		async function getDirectorData(accessToken, directorID){
-			//console.log('Movie director id: '+directorID);
-			const directorURL = baseURL + 'directors/' + directorID;
+		async function getDirectorData(accessToken){
+			const directorURL = baseURL + 'directors/' + movie.Director;
 			const response = await axios.get(directorURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
 			setDirector(response.data);
 		}
 
 		async function getGenresData(accessToken, genreID){
-			// console.log('Genre id: '+genreID);
 			const genreURL = baseURL + 'genres/' + genreID;
 			const response = await axios.get(genreURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
 			const genreData = response.data.Name;
 			setGenres(prevData => {
-			 	return [...prevData, genreData] 
+				return [...prevData, genreData] 
 			})
 		}
 
 		const isFeatured = (val) => {
 			if (movie != '') { 
-				console.log('isFeatured')
-								if (val)
-							return <strong>Available</strong>;
-							else
-							return 'Not Available';
+				if (val) 		return <strong>Available</strong>;
+				else			return 'Not Available';
 			}
 		}
 
@@ -119,7 +97,6 @@ export function MovieView(props) {
 				</Row>
 		}
 
-
 		return (
 		<>
 		
@@ -128,7 +105,8 @@ export function MovieView(props) {
 						<div className="h3 text-muted text-center">{movie.Title}</div>
 							
 							<div className="p-1 m-1 h6 text-muted text-center">
-								<p>({genres.map((g, i) => (i !=0 ) ? ', '+{g} : <Link to={`/genres/${genres}`}>{g}</Link>)})</p>
+								{/* <p>({genres.map((g, i) => (i !=0 ) ? ', '+{g} : <Link to={`/genres/${genres}`}>{g}</Link>)})</p> */}
+								<p>({genres.map(g => <Link to={`/genres/${genres}`}>&nbsp;{g}</Link>)}&nbsp;)</p>
 							</div>
 
 							<div className="p-4 m-3 h5 text-muted text-center">
@@ -164,3 +142,25 @@ export function MovieView(props) {
 		</>
 		)
 }
+
+
+// //async function getMovieData(accessToken) {
+// 	const movieURL = baseURL + 'movies/' + movie_id;
+// 	const response = await axios.get(movieURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
+	
+// 	setMovie(response.data);
+	
+// 	//Fetching Director from ID
+// 	getDirectorData(accessToken, response.data.Director);
+	
+// 	//Fetching Genres from ID
+// 	response.data.Genre.forEach(g => {
+// 		getGenresData(accessToken, g)
+// 	})
+	
+// 	//If movie exists in user favourite list
+// 	if (user.FavoriteMovies.includes(movie_id)) setIsFavourite(true)
+	
+// 	// //Movie can be displayed and the loading spinner set off
+// 	 setLoading(false)
+// }
