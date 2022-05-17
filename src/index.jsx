@@ -23,8 +23,8 @@ import './index.css';
 export default function MyFlixApplication() {
   
   const [user, setUser] = useState(null);
-
-        /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
+  
+  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
         function onLoggedIn(authData) {
           console.log("OnLoggedIn...");
           console.log(authData);

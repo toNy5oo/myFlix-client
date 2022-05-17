@@ -42,27 +42,20 @@ const validate = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const isReq = validate();
-    axios.post('https://my-flix-cf.herokuapp.com/login', {
-      Username: username,
-      Password: password,
-    })
+    axios.post('https://my-flix-cf.herokuapp.com/login', { Username: username, Password: password} )
     .then(response => {
           const data = response.data;
           console.table(data)
-          console.log("LoggedIn...");
-          setUser(data.user.Username)
-          console.table({user})
+          props.onLoggedIn(data)
+          //setUser(data.user.Username)
           // //Set data into LocalStorage
           // localStorage.setItem('token', data.token);
           // localStorage.setItem('user', data.user.Username);
-          //Redirect Homepage
-          //navigate.push('/', user={user});
-          props.onLoggedIn(data)
     })
     .catch(err => {
       console.log(err)
       console.log('no such user')
-    });
+    })
   };
 
    return (

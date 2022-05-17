@@ -11,15 +11,13 @@ export function MovieCard(props) {
   const [user, setUser ] = useState(props.userData);
  
     useEffect(() =>{
-      console.log('User')
-      console.log(user)
     },[])
 
     return (
       
         <Card>
         {/* crossorigin="anonymous" is important to bypass CORP security protection */}
-          <Link to={`/movies/${movie._id}`} state={user}>
+          <Link to={`/movies/${movie._id}`} state={[user, movie]}>
               <Card.Img variant="top" src={movie.ImagePath} crossOrigin="anonymous"/>
           </Link>
           <Card.Body>

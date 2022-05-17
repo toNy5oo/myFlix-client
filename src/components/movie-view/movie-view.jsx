@@ -19,10 +19,11 @@ export function MovieView(props) {
 		const {movie_id} = useParams();
 		const navigate = useNavigate();
 		const location = useLocation();
-		const userData = location.state;
+		const userData = location.state[0];
+		const movieData = location.state[1];
 
 		const [user, setUser] = useState(userData);
-		const [movie, setMovie ] = useState('');
+		const [movie, setMovie ] = useState(movieData);
 		const [director, setDirector ] = useState('');
 		const [genres, setGenres] = useState([]);
 		const [isFavourite, setIsFavourite] = useState(false);
@@ -32,8 +33,12 @@ export function MovieView(props) {
 		const [error, setError] = useState();
 		
 		useEffect(() => {
-			let accessToken = localStorage.getItem('token');
-			getMovieData(accessToken);
+			//let accessToken = localStorage.getItem('token');
+			//getMovieData(accessToken);
+			console.log('Movie view loaded')
+			console.table(user)
+			console.table(movie)
+			setLoading(false)
 		},[])
 
 		async function getMovieData(accessToken) {
@@ -117,6 +122,7 @@ export function MovieView(props) {
 
 		return (
 		<>
+		
 		<Row className="justify-content-center my-5">
 				<Col md={6}> 
 						<div className="h3 text-muted text-center">{movie.Title}</div>
