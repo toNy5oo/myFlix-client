@@ -17,15 +17,25 @@ export function MovieView(props) {
 				
 		//Destructuring the params Object
 		const navigate = useNavigate();
-		const location = useLocation();
-		
-		//Retrieving data from Link state
-		const userData = location.state[0];
-		const movieData = location.state[1];
+		const {movie_id} = useParams();
+			
 		//Initializing movie and user obj
-		const [user, setUser] = useState(userData);
-		const [movie, setMovie ] = useState(movieData);
-		
+		const [user, setUser] = useState();
+		const [movie, setMovie ] = useState(props.movieData);	
+
+		// The location.state doesn't work if typed directly into the URL
+
+		// if (location.state[0] != null ){
+		// 	//Retrieving data from Link state
+		// 	setUser();
+		// 	setMovie(location.state[1]);
+		// }
+		// else {
+		// 	let movie_id = params;
+		// 	console.log(movie_id)
+		// }
+
+	
 		
 		const [director, setDirector ] = useState('');
 		const [genres, setGenres] = useState([]);
@@ -36,113 +46,145 @@ export function MovieView(props) {
 		const [error, setError] = useState();
 		
 		useEffect(() => {
-			let accessToken = localStorage.getItem('token');
-			getDirectorData(accessToken)
-			movie.Genre.forEach(genre_id => {
-				getGenresData(accessToken, genre_id)
-			})
-			console.table(genres);
-			setLoading(false)			
-		},[])
+				console.log(movie);
+		})
 
-		async function getDirectorData(accessToken){
-			const directorURL = baseURL + 'directors/' + movie.Director;
-			const response = await axios.get(directorURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-			setDirector(response.data);
-		}
+	// 	useEffect(() => {
+	// 		let accessToken = localStorage.getItem('token');
+	// 		let activeUser = localStorage.getItem('user');
+	// 		Promise.all([getUserData(accessToken, activeUser), getMovieData(accessToken)]).then((values) => {
+	// 			setUser(values[0].data);
+	// 			setMovie(values[1].data);
+	// 			console.table(user);
+	// 			console.table(movie);
 
-		async function getGenresData(accessToken, genreID){
-			const genreURL = baseURL + 'genres/' + genreID;
-			const response = await axios.get(genreURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-			const genreData = response.data.Name;
-			setGenres(prevData => {
-				return [...prevData, genreData] 
-			})
-		}
+	// 			getDirectorData(accessToken, activeUser)
+				
+	// 				movie.Genre.forEach(genre_id => {
+	// 						getGenresData(accessToken, genre_id)
+	// 				})
+	// 			if (user.FavoriteMovies.includes(movie_id)) setIsFavourite(true)
+	// 			setLoading(false)	
+	// 			})
+	// 	},[])
 
-		const isFeatured = (val) => {
-			if (movie != '') { 
-				if (val) 		return <strong>Available</strong>;
-				else			return 'Not Available';
-			}
-		}
+	// 	async function getUserData(accessToken, activeUser) {
+	// 		return await axios('https://my-flix-cf.herokuapp.com/users/'+activeUser,{ headers: { Authorization: `Bearer ${accessToken}`} } );
+	// 	}
 
-		const addFavouriteMovie = () => {
-			let accessToken = localStorage.getItem('token');
-			let compositeURL = baseURL + 'users/' + user +'/favourites/'+ movie._id;
-			axios.put(compositeURL, { headers: { Authorization: `Bearer ${accessToken}`} } 
-						).then(response => {
-							console.log(response.data);
-							setIsFavourite(true)
-							})
-						.catch(error => {
-							console.log(compositeURL);
-							console.log(error);
-							setError(error);
-						})
-		}
+	// 	async function getMovieData(accessToken) {
+	// 		return await axios('https://my-flix-cf.herokuapp.com/movies/'+movie_id,{ headers: { Authorization: `Bearer ${accessToken}`} } )
+	// 	}
 
-		//If data is not fetched, show spinner
-		if (loading) {
-			return <Row className="justify-content-center my-5">
-						<div className="h3 text-muted text-center">Data is loading
-							&nbsp;<Spinner animation="border" variant="secondary" role="status" />
-						</div>
-					</Row>		
-		 }
+	// 	async function getDirectorData(accessToken, director_id){
+	// 		const directorURL = baseURL + 'directors/' + director_id;
+	// 		const response = await axios(directorURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
+	// 		return response.data;
+	// 	}
 
-		if (error || !Array.isArray(movie.Actors)) {
-			return <Row className="justify-content-center my-5">
-				<p>There was an error loading your data!</p>
-				</Row>
-		}
+	// 	async function getGenresData(accessToken, genreID){
+	// 		const genreURL = baseURL + 'genres/' + genreID;
+	// 		const response = await axios.get(genreURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
+	// 		const genreData = response.data;
+	// 		setGenres(prevData => {
+	// 			return [...prevData, genreData] 
+	// 		})
+			
+	// 	}
 
-		return (
-		<>
+	// 	const isFeatured = (val) => {
+	// 		if (movie != '') { 
+	// 			if (val) 		return <strong>Available</strong>;
+	// 			else			return 'Not Available';
+	// 		}
+	// 	}
+
+	// 	const addFavouriteMovie = () => {
+	// 		let accessToken = localStorage.getItem('token');
+	// 		let compositeURL = baseURL + 'users/' + user +'/favourites/'+ movie._id;
+	// 		axios.put(compositeURL, { headers: { Authorization: `Bearer ${accessToken}`} } 
+	// 					).then(response => {
+	// 						console.log(response.data);
+	// 						setIsFavourite(true)
+	// 						})
+	// 					.catch(error => {
+	// 						console.log(compositeURL);
+	// 						console.log(error);
+	// 						setError(error);
+	// 					})
+	// 	}
+
+	// if (!movie || !user) {
+	// 		return <Row className="justify-content-center my-5">
+	// 			<p>There was an error loading your data!</p>
+	// 			</Row>
+	// 	} 
+
+	// 	//If data is not fetched, show spinner
+	// 	if (loading) {
+	// 		return <Row className="justify-content-center my-5">
+	// 					<div className="h3 text-muted text-center">Data is loading
+	// 						&nbsp;<Spinner animation="border" variant="secondary" role="status" />
+	// 					</div>
+	// 				</Row>		
+	// 	 }
+
+	// 	if (error || !Array.isArray(movie.Actors)) {
+	// 		return <Row className="justify-content-center my-5">
+	// 			<p>There was an error loading your data!</p>
+	// 			</Row>
+	// 	}
+
+	// 	return (
+	// 	<>
 		
-		<Row className="justify-content-center my-5">
-				<Col md={6}> 
-						<div className="h3 text-muted text-center">{movie.Title}</div>
+	// 	<Row className="justify-content-center my-5">
+	// 			<Col md={6}> 
+	// 					<div className="h3 text-muted text-center">{movie.Title}</div>
 							
-							<div className="p-1 m-1 h6 text-muted text-center">
-								{/* <p>({genres.map((g, i) => (i !=0 ) ? ', '+{g} : <Link to={`/genres/${genres}`}>{g}</Link>)})</p> */}
-								<p>({
-										genres.map((g, i) => (i!=0) ? <>, <Link to={`/genres/${g}`}>{g}</Link></> : <Link to={`/genres/${g}`}>{g}</Link>)
-									})</p>
-							</div>
+	// 						<div className="p-1 m-1 h6 text-muted text-center">
+	// 							{/* <p>({genres.map((g, i) => (i !=0 ) ? ', '+{g} : <Link to={`/genres/${genres}`}>{g}</Link>)})</p> */}
+	// 							<p>({
+	// 									genres.map((g, i) => (i!=0) ? <>, <Link to={`/genres/${g._id}`}>{g.Name}</Link></> : <Link to={`/genres/${g._id}`}>{g.Name}</Link>)
+	// 								})</p>
+	// 						</div>
 
-							<div className="p-4 m-3 h5 text-muted text-center">
-								<p>Directed by <Link to={`../directors/${director._id}`}>{director.Name}</Link></p>
-								&nbsp;
-								<p>{movie.Description}</p>
-							</div>    
+	// 						<div className="p-4 m-3 h5 text-muted text-center">
+	// 							<p>Directed by <Link to={`../directors/${director._id}`}>{director.Name}</Link></p>
+	// 							&nbsp;
+	// 							<p>{movie.Description}</p>
+	// 						</div>    
 
-						<Stack gap={2} className="d-flex justify-content-center align-items-center">
-										<div>Actors</div><div className="bg-light border p-2 m-3 px-3">
-											{ 
-											movie.Actors.map((actor, i) => (i!=0) ? ', '+actor : actor)
-											}
-										</div>
-						</Stack>
-						<Stack gap={2} className="d-flex justify-content-center align-items-center">
-						<div>Available in Theathers</div><div className="bg-light border p-2 m-3 px-3">{isFeatured(movie.Featured)}</div>
-						</Stack>
-						<Stack gap={3} className="col-md-5 text-center mx-auto">
-										<Button variant="link text-muted" onClick={addFavouriteMovie}>Add to favourites</Button>
-										{(isFavourite) && <Button variant="link text-muted">Remove from Favourites</Button>}
-						</Stack>
-						<Stack gap={2} className="col-md-5 mx-auto text-center m-4 p-2">
-										<Button variant="secondary" onClick={() => { navigate('/') }}>Back to all movies</Button>     
-						</Stack>
-				</Col>
+	// 					<Stack gap={2} className="d-flex justify-content-center align-items-center">
+	// 									<div>Actors</div><div className="bg-light border p-2 m-3 px-3">
+	// 										{ 
+	// 										movie.Actors.map((actor, i) => (i!=0) ? ', '+actor : actor)
+	// 										}
+	// 									</div>
+	// 					</Stack>
+	// 					<Stack gap={2} className="d-flex justify-content-center align-items-center">
+	// 					<div>Available in Theathers</div><div className="bg-light border p-2 m-3 px-3">{isFeatured(movie.Featured)}</div>
+	// 					</Stack>
+	// 					<Stack gap={3} className="col-md-5 text-center mx-auto">
+	// 									<>{(!isFavourite) && <Button variant="link text-muted" onClick={addFavouriteMovie}>Add to favourites</Button>}</>
+	// 									<>{(isFavourite) && <Button variant="link text-muted">Remove from Favourites</Button>}</>
+	// 					</Stack>
+	// 					<Stack gap={2} className="col-md-5 mx-auto text-center m-4 p-2">
+	// 									<Button variant="secondary" onClick={() => { navigate('/') }}>Back to all movies</Button>     
+	// 					</Stack>
+	// 			</Col>
 
-		<Col md={2}> 
-					<Image className="poster" src={movie.ImagePath} crossOrigin="anonymous"/>
-				</Col>
-		</Row>
+	// 	<Col md={2}> 
+	// 				<Image className="poster" src={movie.ImagePath} crossOrigin="anonymous"/>
+	// 			</Col>
+	// 	</Row>
 		
-		</>
-		)
+	// 	</>
+	// 	)
+
+	return (
+		<>{movie}</>
+	)
 }
 
 

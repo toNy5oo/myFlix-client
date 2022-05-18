@@ -3,12 +3,12 @@ import {ListGroup, ListGroupItem, Button, Row, Col, Spinner, Form, Stack} from '
 import axios from 'axios';
 
 
-export function ProfileView() {
+export function ProfileView(props) {
 
   const baseURL = 'https://my-flix-cf.herokuapp.com/';
   const accessToken = localStorage.getItem('token');
   
-  const username = localStorage.getItem('user');
+  const activeUser = localStorage.getItem('user');
 
   const [user, setUser] = useState('');
   const [updateUser, setUpdateUser] = useState('');
@@ -20,20 +20,27 @@ export function ProfileView() {
   const [error, setError] = useState();
 
   useEffect(() => {
-    
-        axios.get(baseURL+'users/'+username, { headers: { Authorization: `Bearer ${accessToken}`} })
-            .then(response => {
-                console.log(response.data);
-                setUser(response.data);
-                })
-            .catch(error => {
-                console.log(error);
-                setError(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            })
+	getUserData()
+
+	// axios.get(baseURL+'users/'+activeUser, { headers: { Authorization: `Bearer ${accessToken}`} })
+    //         .then(response => {
+    //             console.log(response.data);
+    //             setUser(response.data);
+    //             })
+    //         .catch(error => {
+    //             console.log(error);
+    //             setError(error);
+    //         })
+    //         .finally(() => {
+                
+    //         })
   },[])
+
+  async function getUserData(){
+	  const response = await axios.get(baseURL+'users/'+activeUser, { headers: { Authorization: `Bearer ${accessToken}`} })
+	  setUser(response.data);
+	  setLoading(false);
+  }
 
   const showPasswordInput = (e) => {
 	console.log('click');
@@ -84,9 +91,9 @@ export function ProfileView() {
 	  }
 
   	const parseDate = (date) => {
-		  console.log(date);
-		let newDate = date.split('T');
-		return newDate[0]
+		  		console.log(date);
+				let newDate = date.split('T');
+				return newDate[0]
 	  }
 
 	if (error) {
@@ -168,7 +175,7 @@ export function ProfileView() {
 								<div className="h5 text-muted text-center"><Form.Control 
 																				type="email"
 																				name="Birthday" 
-																				placeholder={parseDate(user.Birthday)} 
+																				placeholder={(user.Birthday) ? parseDate(user.Birthday) : 'Date of birth'} 
 																				/></div>
 						</div>
 					</Form.Group>
@@ -176,10 +183,9 @@ export function ProfileView() {
 					<Form.Group className="mb-3" controlId="formFavourites">		
 						<div className="d-flex justify-content-between align-items-center my-5">
 								<div className="h5 text-muted text-center"><Form.Label>Favourite Movies</Form.Label></div>
-								<div className="h5 text-muted text-center"><Form.Control 
-																				type="email" 
-																				placeholder="Test" 
-																				/></div>
+								<div className="h5 text-muted text-center"><>
+																			{}
+																			</></div>
 						</div>
 					</Form.Group>
 				
