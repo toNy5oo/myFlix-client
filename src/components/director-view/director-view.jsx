@@ -57,11 +57,11 @@ export function DirectorView() {
 
   return (
     <>
-        <Row className="justify-content-center my-5">
+        {/* <Row className="justify-content-center my-5">
 				<Col md={4}> 
 				                    <div className="h3 text-muted text-center m-1 p-3">Director View: {director_id}</div>			
                 </Col>
-        </Row>
+        </Row> */}Test
     </>
     
   )
