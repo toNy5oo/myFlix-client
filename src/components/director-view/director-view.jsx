@@ -1,67 +1,89 @@
 import React, {useState, useEffect} from 'react'
-import {ListGroup, ListGroupItem, Button, Row, Col, Spinner} from 'react-bootstrap';
+import {Row, Col, Spinner, Stack, ListGroup, Container} from 'react-bootstrap';
 import axios from 'axios';
 import {
-	Link,
 	useParams,
-	useNavigate
 } from "react-router-dom";
+import { MovieCard } from '../movie-card/movie-card'
+import { func } from 'prop-types';
 
 export function DirectorView() {
 
+    const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    const [director, setDirector ] = useState('');
+    const [movies, setMovies] = useState('');
+    const [directorMovies, setDirectorMovies] = useState('');
+
+    //Setting loading and error variables 
+		const [loading, setLoading] = useState(true);
+		const [error, setError] = useState();
+
     const {director_id} = useParams();
-//   const baseURL = 'https://my-flix-cf.herokuapp.com/';
-  
-//   const [user, setUser] = useState(localStorage.getItem('user'));
-//   const [userDocument, setUserDocument] = useState('');
-//   const [updateUsername, setUpdateUsername] = useState(false);
-  
-//   //Setting loading and error variables 
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState();
 
-//   useEffect(() => {
-//     let accessToken = localStorage.getItem('token');
-//         axios.get(baseURL+'users/'+user, { headers: { Authorization: `Bearer ${accessToken}`} })
-//             .then(response => {
-//                 console.log(response.data);
-//                 setUserDocument(response.data);
-//                 })
-//             .catch(error => {
-//                 console.log(error);
-//                 setError(error);
-//             })
-//             .finally(() => {
-//                 setLoading(false);
-//             })
-//   },[])
+    useEffect(() => {
+      let accessToken = localStorage.getItem('token');
+        getMissingData(accessToken)
+      },[])
 
-//     if (error) {
-//     return <Row className="justify-content-center my-5">
-//         <p>There was an error loading your data!</p>
-//         </Row>
-//     }
+      async function getMissingData(accessToken) {
+        axios.all([
+              axios(baseURL + 'directors/' + director_id,{ headers: { Authorization: `Bearer ${accessToken}`} } ),
+              axios(baseURL + 'movies/',{ headers: { Authorization: `Bearer ${accessToken}`} } )
+              ])
+                .then(axios.spread((directorData, moviesData) => {
+                  setDirector(directorData.data)
+                  setMovies(moviesData.data)
+                  moviesData.data.forEach(movie => {
+                    if (movie.Director === director_id) setDirectorMovies(prevData => {
+                        return [...prevData, movie]
+                    })
+                  })
+                  console.log('Director movies: ', directorMovies)
+                }))
+                .catch(error => console.error(error))
+                .finally(() => {
+                  setLoading(false)
+                })												
+      }
+       
+      //While data is not fetched, show spinner
+  if (loading) {
+    return <Row className="justify-content-center my-5">
+          <div className="h3 text-muted text-center">Data is loading
+            &nbsp;<Spinner animation="border" variant="secondary" role="status" />
+          </div>
+        </Row>		
+   }
 
-//     //If data is not fetched, show spinner
-//     if (loading) {
-//         return <Row className="justify-content-center my-5">
-//                     <div className="h3 text-muted text-center">Data is loading
-//                         &nbsp;<Spinner animation="border" variant="secondary" role="status" />
-//                     </div>
-//                 </Row>		
-//     }
-
-//     const updateUsernameField = () => {
-//         setUpdateUsername(true);
-//     }
+  if (error) {
+    return <Row className="justify-content-center my-5">
+      <p>There was an error loading your data!</p>
+      </Row>
+  }
 
   return (
-    <>
-        {/* <Row className="justify-content-center my-5">
-				<Col md={4}> 
-				                    <div className="h3 text-muted text-center m-1 p-3">Director View: {director_id}</div>			
-                </Col>
-        </Row> */}Test
+    <>  
+        <Row className="justify-content-center my-4">
+            <ListGroup>
+              <ListGroup.Item className="h3 justify-content-center">{director.Name}</ListGroup.Item>
+              <ListGroup.Item className="h5 text-muted">{director.Bio}</ListGroup.Item>
+            </ListGroup>
+        </Row>
+        <Row className="justify-content-center my-4">
+            <ListGroup horizontal>
+            <Row className="main-view justify-content-md-evenly m-0 p-5 align-items-start">{directorMovies.map(movie => 
+                  (
+                  <Col md={3} key={movie._id}>
+                          <MovieCard md={8} movieData={movie} />
+                  </Col>
+                  )
+                  )}
+            </Row>
+            </ListGroup>
+        </Row>
+        
+       
+           
     </>
     
   )

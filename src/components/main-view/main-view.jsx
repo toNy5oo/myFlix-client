@@ -10,7 +10,7 @@ import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
 import { LoginView } from '../login-view/login-view';
 import { RegisterView } from '../register-view/register-view';
-import { SharedView } from '../shared-view/shared-view';
+import { NavbarView } from '../navbar-view/navbar-view';
 import {
   BrowserRouter as Router,
   Routes,
@@ -72,6 +72,7 @@ export function MainView(props) {
     <>
         <>
             <Router>
+                <NavbarView />
                 <Routes>
                 <Route
                     path="/"
@@ -87,17 +88,17 @@ export function MainView(props) {
 
                         <Route path="directors/:director_id" element={
                                 (!user) ? <Col><LoginView onLoggedIn={user => onLoggedIn(user)} /></Col>
-                                : <Col md={8}><DirectorView /></Col>
+                                : <DirectorView />
                               }/>
 
                         <Route path="genres/:genre_id" element={
                               (!user) ? <Col><LoginView onLoggedIn={user => onLoggedIn(user)} /></Col>
-                              : <Col md={8}><GenreView /></Col>
+                              : <GenreView />
                               } />
 
                         <Route path='profile' element={
                               (!user) ? <LoginView onLoggedIn={user => onLoggedIn(user)} />
-                              : <Col><ProfileView /></Col>
+                              : <ProfileView />
                                } />
 
                                 {/*<Route path="profile" element={<ProfileView user={user} />} />

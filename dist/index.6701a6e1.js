@@ -25130,7 +25130,7 @@ var _genreView = require("../genre-view/genre-view");
 var _profileView = require("../profile-view/profile-view");
 var _loginView = require("../login-view/login-view");
 var _registerView = require("../register-view/register-view");
-var _sharedView = require("../shared-view/shared-view");
+var _navbarView = require("../navbar-view/navbar-view");
 var _ = require("react-bootstrap/");
 var _s = $RefreshSig$();
 function MainView(props) {
@@ -25209,17 +25209,24 @@ function MainView(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
         children: [
             /*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
-                children: [
-                    /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
-                        __source: {
-                            fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 74
-                        },
-                        __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.Routes, {
+                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.BrowserRouter, {
+                    __source: {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 74
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx(_navbarView.NavbarView, {
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
                                 lineNumber: 75
+                            },
+                            __self: this
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.Routes, {
+                            __source: {
+                                fileName: "src/components/main-view/main-view.jsx",
+                                lineNumber: 76
                             },
                             __self: this,
                             children: [
@@ -25252,7 +25259,7 @@ function MainView(props) {
                                     }),
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 76
+                                        lineNumber: 77
                                     },
                                     __self: this
                                 }),
@@ -25262,7 +25269,7 @@ function MainView(props) {
                                     }),
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 82
+                                        lineNumber: 83
                                     },
                                     __self: this
                                 }),
@@ -25274,7 +25281,7 @@ function MainView(props) {
                                     }),
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 84
+                                        lineNumber: 85
                                     },
                                     __self: this
                                 }),
@@ -25284,14 +25291,11 @@ function MainView(props) {
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
                                             onLoggedIn: (user1)=>onLoggedIn(user1)
                                         })
-                                    }) : /*#__PURE__*/ _jsxRuntime.jsx(_.Col, {
-                                        md: 8,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_directorView.DirectorView, {
-                                        })
+                                    }) : /*#__PURE__*/ _jsxRuntime.jsx(_directorView.DirectorView, {
                                     }),
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 88
+                                        lineNumber: 89
                                     },
                                     __self: this
                                 }),
@@ -25301,14 +25305,11 @@ function MainView(props) {
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
                                             onLoggedIn: (user1)=>onLoggedIn(user1)
                                         })
-                                    }) : /*#__PURE__*/ _jsxRuntime.jsx(_.Col, {
-                                        md: 8,
-                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_genreView.GenreView, {
-                                        })
+                                    }) : /*#__PURE__*/ _jsxRuntime.jsx(_genreView.GenreView, {
                                     }),
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 93
+                                        lineNumber: 94
                                     },
                                     __self: this
                                 }),
@@ -25316,20 +25317,18 @@ function MainView(props) {
                                     path: "profile",
                                     element: !user ? /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
                                         onLoggedIn: (user1)=>onLoggedIn(user1)
-                                    }) : /*#__PURE__*/ _jsxRuntime.jsx(_.Col, {
-                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_profileView.ProfileView, {
-                                        })
+                                    }) : /*#__PURE__*/ _jsxRuntime.jsx(_profileView.ProfileView, {
                                     }),
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 98
+                                        lineNumber: 99
                                     },
                                     __self: this
                                 })
                             ]
                         })
-                    })
-                ]
+                    ]
+                })
             })
         ]
     }));
@@ -25344,7 +25343,7 @@ $RefreshReg$(_c, "MainView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","../main-view/main-view":"2zHas","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","../login-view/login-view":"054li","../register-view/register-view":"F9ahz","react-bootstrap/":"h2YVd","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","react-router-dom":"kjA5T","../favourite-view/favourite-view":"jDzT4","../director-view/director-view":"ck15y","../genre-view/genre-view":"8WCoL","../profile-view/profile-view":"2E7Aw","../shared-view/shared-view":"ieOa9"}],"iYoWk":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","../main-view/main-view":"2zHas","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","../login-view/login-view":"054li","../register-view/register-view":"F9ahz","../navbar-view/navbar-view":"j0Dt2","react-bootstrap/":"h2YVd","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","react-router-dom":"kjA5T","../favourite-view/favourite-view":"jDzT4","../director-view/director-view":"ck15y","../genre-view/genre-view":"8WCoL","../profile-view/profile-view":"2E7Aw"}],"iYoWk":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"3QmO2"}],"3QmO2":[function(require,module,exports) {
@@ -41598,133 +41597,12 @@ parcelHelpers.export(exports, "MovieView", ()=>MovieView
  // 	// //Movie can be displayed and the loading spinner set off
  // 	 setLoading(false)
  // }
- // useEffect(() => {
- // 	let accessToken = localStorage.getItem('token');
- // 	let activeUser = localStorage.getItem('user');
- // 	Promise.all([getUserData(accessToken, activeUser), getMovieData(accessToken)]).then((values) => {
- // 		console.table(values[0].data);
- // 		console.table(values[1].data);
- // 		const directorResponse = getDirectorData(accessToken, activeUser)
- // 		setDirector(directorResponse.data)
- // 		values[1].data.Genre.forEach(genre_id => {
- // 					getGenresData(accessToken, genre_id)
- // 			})
- // 		if (values[0].data.FavoriteMovies.includes(movie_id)) setIsFavourite(true)
- // 		setUser(values[0].data);
- // 		setMovie(values[1].data);
- // 		})
- // 		setLoading(false)
- // },[director])
- // useEffect(() => {
- // 	let accessToken = localStorage.getItem('token');
- // 	let activeUser = localStorage.getItem('user');
- // 	getData(accessToken, activeUser);
- // 	console.log(movie)
- // 	setLoading(false)
- // 	console.log('end useEffect')
- // },[])
- // function getData(accessToken, activeUser) {
- // 	axios.all([
- // 		axios(baseURL + 'users/' + activeUser,{ headers: { Authorization: `Bearer ${accessToken}`} } ),
- // 		axios(baseURL + 'movies/' + movie_id,{ headers: { Authorization: `Bearer ${accessToken}`} } )
- // 		])
- // 		.then(axios.spread((user, movie) => {
- // 			console.log('In spread')
- // 			setUser(user)
- // 			setMovie(movie)
- // 			console.log(user)
- // 			console.log(movie)
- // 		}))
- // 		.catch(error => console.error(error))
- // }
- // async function getUserData(accessToken, activeUser) {
- // 	return await axios('https://my-flix-cf.herokuapp.com/users/'+activeUser,{ headers: { Authorization: `Bearer ${accessToken}`} } );
- // }
- // async function getMovieData(accessToken) {
- // 	return await axios('https://my-flix-cf.herokuapp.com/movies/'+movie_id,{ headers: { Authorization: `Bearer ${accessToken}`} } )
- // }
- // async function getDirectorData(accessToken, director_id){
- // 	const directorURL = baseURL + 'directors/' + director_id;
- // 	const response = await axios(directorURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
- // 	return response.data;
- // }
  // async function getGenresData(accessToken, genreID){
  // 	const genreURL = baseURL + 'genres/' + genreID;
  // 	const response = await axios.get(genreURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
  // 	const genreData = response.data;
  // 	setGenres(prevData => {
  // 		return [...prevData, genreData] 
- // 	})
- // }
- // useEffect(() => {
- // 	let accessToken = localStorage.getItem('token');
- // 	getMovieData(accessToken);
- // },[])
- // async function getMovieData(accessToken) {
- // 	const movieURL = baseURL + 'movies/' + movie_id;
- // 	const response = await axios.get(movieURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
- // 	setMovie(response.data);
- // 	//Fetching Director from ID
- // 	getDirectorData(accessToken, response.data.Director);
- // 	//Fetching Genres from ID
- // 	response.data.Genre.forEach(g => {
- // 		getGenresData(accessToken, g)
- // 	})
- // 	//If movie exists in user favourite list
- // 	if (user.FavoriteMovies.includes(movie_id)) setIsFavourite(true)
- // 	// //Movie can be displayed and the loading spinner set off
- // 	 setLoading(false)
- // }
- // async function getDirectorData(accessToken, directorID){
- // 	//console.log('Movie director id: '+directorID);
- // 	const directorURL = baseURL + 'directors/' + directorID;
- // 	const response = await axios.get(directorURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
- // 	setDirector(response.data);
- // }
- // async function getGenresData(accessToken, genreID){
- // 	// console.log('Genre id: '+genreID);
- // 	const genreURL = baseURL + 'genres/' + genreID;
- // 	const response = await axios.get(genreURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
- // 	const genreData = response.data.Name;
- // 	setGenres(prevData => {
- // 		 return [...prevData, genreData] 
- // 	})
- // }
- // useEffect(() => {
- // 	let accessToken = localStorage.getItem('token');
- // 	getMovieData(accessToken);
- // },[])
- // async function getUserData(accessToken, activeUser) {
- // 		return await axios('https://my-flix-cf.herokuapp.com/users/'+activeUser,{ headers: { Authorization: `Bearer ${accessToken}`} } );
- // }
- // async function getMovieData(accessToken) {
- // 	const movieURL = baseURL + 'movies/' + movie_id;
- // 	const response = await axios.get(movieURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
- // 	setMovie(response.data);
- // 	//Fetching Director from ID
- // 	getDirectorData(accessToken, response.data.Director);
- // 	//Fetching Genres from ID
- // 	response.data.Genre.forEach(g => {
- // 		getGenresData(accessToken, g)
- // 	})
- // 	//If movie exists in user favourite list
- // 	if (user.FavoriteMovies.includes(movie_id)) setIsFavourite(true)
- // 	// //Movie can be displayed and the loading spinner set off
- // 	 setLoading(false)
- // }
- // async function getDirectorData(accessToken, directorID){
- // 	//console.log('Movie director id: '+directorID);
- // 	const directorURL = baseURL + 'directors/' + directorID;
- // 	const response = await axios.get(directorURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
- // 	setDirector(response.data);
- // }
- // async function getGenresData(accessToken, genreID){
- // 	// console.log('Genre id: '+genreID);
- // 	const genreURL = baseURL + 'genres/' + genreID;
- // 	const response = await axios.get(genreURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
- // 	const genreData = response.data.Name;
- // 	setGenres(prevData => {
- // 	 	return [...prevData, genreData] 
  // 	})
  // }
 ;
@@ -42068,7 +41946,7 @@ function MovieView(props) {
                     ]
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
-                    md: 2,
+                    md: 5,
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 142
@@ -42564,7 +42442,189 @@ $RefreshReg$(_c, "RegisterView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","axios":"iYoWk","react-bootstrap":"h2YVd","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"jDzT4":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","axios":"iYoWk","react-bootstrap":"h2YVd","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"j0Dt2":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$469c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$469c.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "NavbarView", ()=>NavbarView
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactBootstrap = require("react-bootstrap");
+var _reactRouterDom = require("react-router-dom");
+var _navbarCss = require("./navbar.css");
+function NavbarView() {
+    let user = localStorage.getItem("user");
+    const onLoggedOut = ()=>{
+        localStorage.clear();
+        window.open("/", "_self");
+    };
+    const isAuth = ()=>{
+        if (typeof window == "undefined") return false;
+        if (localStorage.getItem("token")) return localStorage.getItem("token");
+        else return false;
+    };
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar, {
+                collapseOnSelect: true,
+                expand: "lg",
+                bg: "alert",
+                variant: "dark",
+                __source: {
+                    fileName: "src/components/navbar-view/navbar-view.jsx",
+                    lineNumber: 28
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
+                    __source: {
+                        fileName: "src/components/navbar-view/navbar-view.jsx",
+                        lineNumber: 29
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar.Brand, {
+                            href: "#home",
+                            __source: {
+                                fileName: "src/components/navbar-view/navbar-view.jsx",
+                                lineNumber: 30
+                            },
+                            __self: this,
+                            children: "MyFlix"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar.Toggle, {
+                            "aria-controls": "responsive-navbar-nav",
+                            __source: {
+                                fileName: "src/components/navbar-view/navbar-view.jsx",
+                                lineNumber: 31
+                            },
+                            __self: this
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar.Collapse, {
+                            id: "responsive-navbar-nav",
+                            __source: {
+                                fileName: "src/components/navbar-view/navbar-view.jsx",
+                                lineNumber: 32
+                            },
+                            __self: this,
+                            children: isAuth() && /*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
+                                children: [
+                                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Nav, {
+                                        className: "mx-auto",
+                                        __source: {
+                                            fileName: "src/components/navbar-view/navbar-view.jsx",
+                                            lineNumber: 34
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                                to: "/",
+                                                __source: {
+                                                    fileName: "src/components/navbar-view/navbar-view.jsx",
+                                                    lineNumber: 35
+                                                },
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
+                                                    href: "#api",
+                                                    __source: {
+                                                        fileName: "src/components/navbar-view/navbar-view.jsx",
+                                                        lineNumber: 36
+                                                    },
+                                                    __self: this,
+                                                    children: "Movies"
+                                                })
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                                to: "/profile",
+                                                __source: {
+                                                    fileName: "src/components/navbar-view/navbar-view.jsx",
+                                                    lineNumber: 38
+                                                },
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
+                                                    href: "#portfolio",
+                                                    __source: {
+                                                        fileName: "src/components/navbar-view/navbar-view.jsx",
+                                                        lineNumber: 39
+                                                    },
+                                                    __self: this,
+                                                    children: "Profile"
+                                                })
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                                to: "/favourites",
+                                                __source: {
+                                                    fileName: "src/components/navbar-view/navbar-view.jsx",
+                                                    lineNumber: 41
+                                                },
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
+                                                    href: "#favourites",
+                                                    __source: {
+                                                        fileName: "src/components/navbar-view/navbar-view.jsx",
+                                                        lineNumber: 42
+                                                    },
+                                                    __self: this,
+                                                    children: "Favourites"
+                                                })
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Nav, {
+                                        className: "mx-auto",
+                                        __source: {
+                                            fileName: "src/components/navbar-view/navbar-view.jsx",
+                                            lineNumber: 45
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
+                                                href: "#logout",
+                                                onClick: ()=>onLoggedOut()
+                                                ,
+                                                __source: {
+                                                    fileName: "src/components/navbar-view/navbar-view.jsx",
+                                                    lineNumber: 46
+                                                },
+                                                __self: this,
+                                                children: "Logout"
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
+                                                disabled: true,
+                                                __source: {
+                                                    fileName: "src/components/navbar-view/navbar-view.jsx",
+                                                    lineNumber: 49
+                                                },
+                                                __self: this,
+                                                children: user
+                                            })
+                                        ]
+                                    })
+                                ]
+                            })
+                        })
+                    ]
+                })
+            })
+        ]
+    }));
+}
+_c = NavbarView;
+var _c;
+$RefreshReg$(_c, "NavbarView");
+
+  $parcel$ReactRefreshHelpers$469c.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","react-router-dom":"kjA5T","./navbar.css":"968hO","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"968hO":[function() {},{}],"jDzT4":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$58c9 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -42710,53 +42770,181 @@ var _reactBootstrap = require("react-bootstrap");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _reactRouterDom = require("react-router-dom");
+var _movieCard = require("../movie-card/movie-card");
+var _propTypes = require("prop-types");
 var _s = $RefreshSig$();
 function DirectorView() {
     _s();
+    const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    const [director, setDirector] = _react.useState('');
+    const [movies, setMovies] = _react.useState('');
+    const [directorMovies, setDirectorMovies] = _react.useState('');
+    //Setting loading and error variables 
+    const [loading, setLoading] = _react.useState(true);
+    const [error, setError] = _react.useState();
     const { director_id  } = _reactRouterDom.useParams();
-    //   const baseURL = 'https://my-flix-cf.herokuapp.com/';
-    //   const [user, setUser] = useState(localStorage.getItem('user'));
-    //   const [userDocument, setUserDocument] = useState('');
-    //   const [updateUsername, setUpdateUsername] = useState(false);
-    //   //Setting loading and error variables 
-    //   const [loading, setLoading] = useState(true);
-    //   const [error, setError] = useState();
-    //   useEffect(() => {
-    //     let accessToken = localStorage.getItem('token');
-    //         axios.get(baseURL+'users/'+user, { headers: { Authorization: `Bearer ${accessToken}`} })
-    //             .then(response => {
-    //                 console.log(response.data);
-    //                 setUserDocument(response.data);
-    //                 })
-    //             .catch(error => {
-    //                 console.log(error);
-    //                 setError(error);
-    //             })
-    //             .finally(() => {
-    //                 setLoading(false);
-    //             })
-    //   },[])
-    //     if (error) {
-    //     return <Row className="justify-content-center my-5">
-    //         <p>There was an error loading your data!</p>
-    //         </Row>
-    //     }
-    //     //If data is not fetched, show spinner
-    //     if (loading) {
-    //         return <Row className="justify-content-center my-5">
-    //                     <div className="h3 text-muted text-center">Data is loading
-    //                         &nbsp;<Spinner animation="border" variant="secondary" role="status" />
-    //                     </div>
-    //                 </Row>		
-    //     }
-    //     const updateUsernameField = () => {
-    //         setUpdateUsername(true);
-    //     }
-    return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
-        children: "Test"
+    _react.useEffect(()=>{
+        let accessToken = localStorage.getItem('token');
+        getMissingData(accessToken);
+    }, []);
+    async function getMissingData(accessToken) {
+        _axiosDefault.default.all([
+            _axiosDefault.default(baseURL + 'directors/' + director_id, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            }),
+            _axiosDefault.default(baseURL + 'movies/', {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            })
+        ]).then(_axiosDefault.default.spread((directorData, moviesData)=>{
+            setDirector(directorData.data);
+            setMovies(moviesData.data);
+            moviesData.data.forEach((movie)=>{
+                if (movie.Director === director_id) setDirectorMovies((prevData)=>{
+                    return [
+                        ...prevData,
+                        movie
+                    ];
+                });
+            });
+            console.log('Director movies: ', directorMovies);
+        })).catch((error1)=>console.error(error1)
+        ).finally(()=>{
+            setLoading(false);
+        });
+    }
+    //While data is not fetched, show spinner
+    if (loading) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+        className: "justify-content-center my-5",
+        __source: {
+            fileName: "src/components/director-view/director-view.jsx",
+            lineNumber: 51
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+            className: "h3 text-muted text-center",
+            __source: {
+                fileName: "src/components/director-view/director-view.jsx",
+                lineNumber: 52
+            },
+            __self: this,
+            children: [
+                "Data is loading \xa0",
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Spinner, {
+                    animation: "border",
+                    variant: "secondary",
+                    role: "status",
+                    __source: {
+                        fileName: "src/components/director-view/director-view.jsx",
+                        lineNumber: 53
+                    },
+                    __self: this
+                })
+            ]
+        })
+    }));
+    if (error) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+        className: "justify-content-center my-5",
+        __source: {
+            fileName: "src/components/director-view/director-view.jsx",
+            lineNumber: 59
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
+            __source: {
+                fileName: "src/components/director-view/director-view.jsx",
+                lineNumber: 60
+            },
+            __self: this,
+            children: "There was an error loading your data!"
+        })
+    }));
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                className: "justify-content-center my-4",
+                __source: {
+                    fileName: "src/components/director-view/director-view.jsx",
+                    lineNumber: 66
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup, {
+                    __source: {
+                        fileName: "src/components/director-view/director-view.jsx",
+                        lineNumber: 67
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup.Item, {
+                            className: "h3 justify-content-center",
+                            __source: {
+                                fileName: "src/components/director-view/director-view.jsx",
+                                lineNumber: 68
+                            },
+                            __self: this,
+                            children: director.Name
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup.Item, {
+                            className: "h5 text-muted",
+                            __source: {
+                                fileName: "src/components/director-view/director-view.jsx",
+                                lineNumber: 69
+                            },
+                            __self: this,
+                            children: director.Bio
+                        })
+                    ]
+                })
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                className: "justify-content-center my-4",
+                __source: {
+                    fileName: "src/components/director-view/director-view.jsx",
+                    lineNumber: 72
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup, {
+                    horizontal: true,
+                    __source: {
+                        fileName: "src/components/director-view/director-view.jsx",
+                        lineNumber: 73
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                        className: "main-view justify-content-md-evenly m-0 p-5 align-items-start",
+                        __source: {
+                            fileName: "src/components/director-view/director-view.jsx",
+                            lineNumber: 74
+                        },
+                        __self: this,
+                        children: directorMovies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                                md: 3,
+                                __source: {
+                                    fileName: "src/components/director-view/director-view.jsx",
+                                    lineNumber: 76
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
+                                    md: 8,
+                                    movieData: movie,
+                                    __source: {
+                                        fileName: "src/components/director-view/director-view.jsx",
+                                        lineNumber: 77
+                                    },
+                                    __self: this
+                                })
+                            }, movie._id)
+                        )
+                    })
+                })
+            })
+        ]
     }));
 }
-_s(DirectorView, "J8ByiOpey2WnOoKQ1O8ViRZ35VE=", false, function() {
+_s(DirectorView, "d91iZfKJmWRg6VTEfJJWT0ru7Fw=", false, function() {
     return [_reactRouterDom.useParams];
 });
 _c = DirectorView;
@@ -42768,7 +42956,7 @@ $RefreshReg$(_c, "DirectorView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","react-router-dom":"kjA5T","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"8WCoL":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","react-router-dom":"kjA5T","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","../movie-card/movie-card":"6EiBJ"}],"8WCoL":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$5f0a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -43369,275 +43557,6 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"ieOa9":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$269f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$269f.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "SharedView", ()=>SharedView
-);
-var _jsxRuntime = require("react/jsx-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _axios = require("axios");
-var _axiosDefault = parcelHelpers.interopDefault(_axios);
-var _navbarView = require("../navbar-view/navbar-view");
-var _ = require("react-bootstrap/");
-var _reactRouterDom = require("react-router-dom");
-function SharedView() {
-    // const [user, setUser] = useState(props.user);
-    // const [movies, setMovies] = useState(props.movie)
-    // const navigate = useNavigate();
-    //     /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
-    //     function onLoggedIn(authData) {
-    //       console.log("OnLoggedIn...");
-    //       console.log(authData);
-    //       setUser(authData.user.Username)
-    //       localStorage.setItem('token', authData.token);
-    //       localStorage.setItem('user', authData.user.Username);
-    //       //getMovies(authData.token);
-    //       // navigate("./movies");
-    //     }
-    //     function onLoggedOut() {
-    //       console.log('Token: ' + localStorage.getItem('token'));
-    //       console.log('User: ' + localStorage.getItem('user'));
-    //       localStorage.removeItem('token');
-    //       localStorage.removeItem('user');
-    //       setUser(null)
-    //     }
-    //     //fetch movies from API
-    //   function getMovies(token) {
-    //     console.log('getMovies');
-    //       axios.get('https://my-flix-cf.herokuapp.com/movies', {
-    //         //headers: { Authorization: `Bearer ${token}`}
-    //       })
-    //       .then(response => {
-    //         // Assign the result to the state
-    //         console.log('Setting Movies: '+response.data);
-    //         setMovies(response.data)
-    //       })
-    //       .catch(function (error) {
-    //         console.log(error);
-    //       });
-    //     }
-    //     useEffect(() => {
-    //       // if (selectedMovie) return <MovieView movie={selectedMovie} />;
-    //       getMovies(true);
-    //      },[])
-    /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/ return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
-        children: [
-            /*#__PURE__*/ _jsxRuntime.jsx(_navbarView.NavbarView, {
-                __source: {
-                    fileName: "src/components/shared-view/shared-view.jsx",
-                    lineNumber: 74
-                },
-                __self: this
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Outlet, {
-                __source: {
-                    fileName: "src/components/shared-view/shared-view.jsx",
-                    lineNumber: 75
-                },
-                __self: this
-            })
-        ]
-    }));
-}
-_c = SharedView;
-var _c;
-$RefreshReg$(_c, "SharedView");
-
-  $parcel$ReactRefreshHelpers$269f.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","../navbar-view/navbar-view":"j0Dt2","react-bootstrap/":"h2YVd","react-router-dom":"kjA5T","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"j0Dt2":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$469c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$469c.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "NavbarView", ()=>NavbarView
-);
-var _jsxRuntime = require("react/jsx-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reactBootstrap = require("react-bootstrap");
-var _reactRouterDom = require("react-router-dom");
-var _navbarCss = require("./navbar.css");
-function NavbarView() {
-    let user = localStorage.getItem("user");
-    const onLoggedOut = ()=>{
-        localStorage.clear();
-        window.open("/", "_self");
-    };
-    const isAuth = ()=>{
-        if (typeof window == "undefined") return false;
-        if (localStorage.getItem("token")) return localStorage.getItem("token");
-        else return false;
-    };
-    return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
-        children: [
-            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar, {
-                collapseOnSelect: true,
-                expand: "lg",
-                bg: "alert",
-                variant: "dark",
-                __source: {
-                    fileName: "src/components/navbar-view/navbar-view.jsx",
-                    lineNumber: 28
-                },
-                __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
-                    __source: {
-                        fileName: "src/components/navbar-view/navbar-view.jsx",
-                        lineNumber: 29
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar.Brand, {
-                            href: "#home",
-                            __source: {
-                                fileName: "src/components/navbar-view/navbar-view.jsx",
-                                lineNumber: 30
-                            },
-                            __self: this,
-                            children: "MyFlix"
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar.Toggle, {
-                            "aria-controls": "responsive-navbar-nav",
-                            __source: {
-                                fileName: "src/components/navbar-view/navbar-view.jsx",
-                                lineNumber: 31
-                            },
-                            __self: this
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Navbar.Collapse, {
-                            id: "responsive-navbar-nav",
-                            __source: {
-                                fileName: "src/components/navbar-view/navbar-view.jsx",
-                                lineNumber: 32
-                            },
-                            __self: this,
-                            children: isAuth() && /*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
-                                children: [
-                                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Nav, {
-                                        className: "mx-auto",
-                                        __source: {
-                                            fileName: "src/components/navbar-view/navbar-view.jsx",
-                                            lineNumber: 34
-                                        },
-                                        __self: this,
-                                        children: [
-                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                                to: "/",
-                                                __source: {
-                                                    fileName: "src/components/navbar-view/navbar-view.jsx",
-                                                    lineNumber: 35
-                                                },
-                                                __self: this,
-                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
-                                                    href: "#api",
-                                                    __source: {
-                                                        fileName: "src/components/navbar-view/navbar-view.jsx",
-                                                        lineNumber: 36
-                                                    },
-                                                    __self: this,
-                                                    children: "Movies"
-                                                })
-                                            }),
-                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                                to: "/profile",
-                                                __source: {
-                                                    fileName: "src/components/navbar-view/navbar-view.jsx",
-                                                    lineNumber: 38
-                                                },
-                                                __self: this,
-                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
-                                                    href: "#portfolio",
-                                                    __source: {
-                                                        fileName: "src/components/navbar-view/navbar-view.jsx",
-                                                        lineNumber: 39
-                                                    },
-                                                    __self: this,
-                                                    children: "Profile"
-                                                })
-                                            }),
-                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                                to: "/favourites",
-                                                __source: {
-                                                    fileName: "src/components/navbar-view/navbar-view.jsx",
-                                                    lineNumber: 41
-                                                },
-                                                __self: this,
-                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
-                                                    href: "#favourites",
-                                                    __source: {
-                                                        fileName: "src/components/navbar-view/navbar-view.jsx",
-                                                        lineNumber: 42
-                                                    },
-                                                    __self: this,
-                                                    children: "Favourites"
-                                                })
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Nav, {
-                                        className: "mx-auto",
-                                        __source: {
-                                            fileName: "src/components/navbar-view/navbar-view.jsx",
-                                            lineNumber: 45
-                                        },
-                                        __self: this,
-                                        children: [
-                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
-                                                href: "#logout",
-                                                onClick: ()=>onLoggedOut()
-                                                ,
-                                                __source: {
-                                                    fileName: "src/components/navbar-view/navbar-view.jsx",
-                                                    lineNumber: 46
-                                                },
-                                                __self: this,
-                                                children: "Logout"
-                                            }),
-                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
-                                                disabled: true,
-                                                __source: {
-                                                    fileName: "src/components/navbar-view/navbar-view.jsx",
-                                                    lineNumber: 49
-                                                },
-                                                __self: this,
-                                                children: user
-                                            })
-                                        ]
-                                    })
-                                ]
-                            })
-                        })
-                    ]
-                })
-            })
-        ]
-    }));
-}
-_c = NavbarView;
-var _c;
-$RefreshReg$(_c, "NavbarView");
-
-  $parcel$ReactRefreshHelpers$469c.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","react-router-dom":"kjA5T","./navbar.css":"968hO","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"968hO":[function() {},{}],"1dfYM":[function() {},{}]},["lpjO7","fHeZ2","dLPEP"], "dLPEP", "parcelRequireaec4")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"1dfYM":[function() {},{}]},["lpjO7","fHeZ2","dLPEP"], "dLPEP", "parcelRequireaec4")
 
 //# sourceMappingURL=index.6701a6e1.js.map
