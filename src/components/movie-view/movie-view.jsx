@@ -139,7 +139,7 @@ export function MovieView(props) {
 						</Stack>
 				</Col>
 
-		<Col md={2}> 
+		<Col md={5}> 
 					<Image className="poster" src={movie.ImagePath} crossOrigin="anonymous"/>
 				</Col>
 		</Row>
@@ -191,67 +191,6 @@ export function MovieView(props) {
 
 
 
-
-
-// useEffect(() => {
-// 	let accessToken = localStorage.getItem('token');
-// 	let activeUser = localStorage.getItem('user');
-// 	Promise.all([getUserData(accessToken, activeUser), getMovieData(accessToken)]).then((values) => {
-		
-// 		console.table(values[0].data);
-// 		console.table(values[1].data);
-
-// 		const directorResponse = getDirectorData(accessToken, activeUser)
-// 		setDirector(directorResponse.data)
-		
-// 		values[1].data.Genre.forEach(genre_id => {
-// 					getGenresData(accessToken, genre_id)
-// 			})
-// 		if (values[0].data.FavoriteMovies.includes(movie_id)) setIsFavourite(true)
-// 		setUser(values[0].data);
-// 		setMovie(values[1].data);
-// 		})
-// 		setLoading(false)
-// },[director])
-
-// useEffect(() => {
-// 	let accessToken = localStorage.getItem('token');
-// 	let activeUser = localStorage.getItem('user');
-// 	getData(accessToken, activeUser);
-// 	console.log(movie)
-// 	setLoading(false)
-// 	console.log('end useEffect')
-// },[])
-
-// function getData(accessToken, activeUser) {
-// 	axios.all([
-// 		axios(baseURL + 'users/' + activeUser,{ headers: { Authorization: `Bearer ${accessToken}`} } ),
-// 		axios(baseURL + 'movies/' + movie_id,{ headers: { Authorization: `Bearer ${accessToken}`} } )
-// 		])
-// 		.then(axios.spread((user, movie) => {
-// 			console.log('In spread')
-// 			setUser(user)
-// 			setMovie(movie)
-// 			console.log(user)
-// 			console.log(movie)
-// 		}))
-// 		.catch(error => console.error(error))
-// }
-
-// async function getUserData(accessToken, activeUser) {
-// 	return await axios('https://my-flix-cf.herokuapp.com/users/'+activeUser,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-// }
-
-// async function getMovieData(accessToken) {
-// 	return await axios('https://my-flix-cf.herokuapp.com/movies/'+movie_id,{ headers: { Authorization: `Bearer ${accessToken}`} } )
-// }
-
-// async function getDirectorData(accessToken, director_id){
-// 	const directorURL = baseURL + 'directors/' + director_id;
-// 	const response = await axios(directorURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-// 	return response.data;
-// }
-
 // async function getGenresData(accessToken, genreID){
 // 	const genreURL = baseURL + 'genres/' + genreID;
 // 	const response = await axios.get(genreURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
@@ -260,94 +199,4 @@ export function MovieView(props) {
 // 		return [...prevData, genreData] 
 // 	})
 	
-// }
-
-// useEffect(() => {
-// 	let accessToken = localStorage.getItem('token');
-// 	getMovieData(accessToken);
-// },[])
-
-// async function getMovieData(accessToken) {
-// 	const movieURL = baseURL + 'movies/' + movie_id;
-// 	const response = await axios.get(movieURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-	
-// 	setMovie(response.data);
-	
-// 	//Fetching Director from ID
-// 	getDirectorData(accessToken, response.data.Director);
-	
-// 	//Fetching Genres from ID
-// 	response.data.Genre.forEach(g => {
-// 		getGenresData(accessToken, g)
-// 	})
-	
-// 	//If movie exists in user favourite list
-// 	if (user.FavoriteMovies.includes(movie_id)) setIsFavourite(true)
-	
-// 	// //Movie can be displayed and the loading spinner set off
-// 	 setLoading(false)
-// }
-
-// async function getDirectorData(accessToken, directorID){
-// 	//console.log('Movie director id: '+directorID);
-// 	const directorURL = baseURL + 'directors/' + directorID;
-// 	const response = await axios.get(directorURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-// 	setDirector(response.data);
-// }
-
-// async function getGenresData(accessToken, genreID){
-// 	// console.log('Genre id: '+genreID);
-// 	const genreURL = baseURL + 'genres/' + genreID;
-// 	const response = await axios.get(genreURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-// 	const genreData = response.data.Name;
-// 	setGenres(prevData => {
-// 		 return [...prevData, genreData] 
-// 	})
-// }
-// useEffect(() => {
-// 	let accessToken = localStorage.getItem('token');
-
-// 	getMovieData(accessToken);
-// },[])
-
-// async function getUserData(accessToken, activeUser) {
-// 		return await axios('https://my-flix-cf.herokuapp.com/users/'+activeUser,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-// }
-
-// async function getMovieData(accessToken) {
-// 	const movieURL = baseURL + 'movies/' + movie_id;
-// 	const response = await axios.get(movieURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-	
-// 	setMovie(response.data);
-	
-// 	//Fetching Director from ID
-// 	getDirectorData(accessToken, response.data.Director);
-	
-// 	//Fetching Genres from ID
-// 	response.data.Genre.forEach(g => {
-// 		getGenresData(accessToken, g)
-// 	})
-	
-// 	//If movie exists in user favourite list
-// 	if (user.FavoriteMovies.includes(movie_id)) setIsFavourite(true)
-	
-// 	// //Movie can be displayed and the loading spinner set off
-// 	 setLoading(false)
-// }
-
-// async function getDirectorData(accessToken, directorID){
-// 	//console.log('Movie director id: '+directorID);
-// 	const directorURL = baseURL + 'directors/' + directorID;
-// 	const response = await axios.get(directorURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-// 	setDirector(response.data);
-// }
-
-// async function getGenresData(accessToken, genreID){
-// 	// console.log('Genre id: '+genreID);
-// 	const genreURL = baseURL + 'genres/' + genreID;
-// 	const response = await axios.get(genreURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-// 	const genreData = response.data.Name;
-// 	setGenres(prevData => {
-// 	 	return [...prevData, genreData] 
-// 	})
 // }
