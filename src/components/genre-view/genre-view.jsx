@@ -1,69 +1,91 @@
 import React, {useState, useEffect} from 'react'
-import {ListGroup, ListGroupItem, Button, Row, Col, Spinner} from 'react-bootstrap';
+import {Row, Col, Spinner, Stack, ListGroup, Container} from 'react-bootstrap';
 import axios from 'axios';
 import {
-	Link,
 	useParams,
-	useNavigate
 } from "react-router-dom";
+import { MovieCard } from '../movie-card/movie-card'
+import { func } from 'prop-types';
 
 export function GenreView() {
 
+    const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    const [genre, setGenre ] = useState('');
+    const [movies, setMovies] = useState('');
+    const [genresMovies, setGenresMovies] = useState('');
+
+    //Setting loading and error variables 
+		const [loading, setLoading] = useState(true);
+		const [error, setError] = useState();
+
     const {genre_id} = useParams();
-//   const baseURL = 'https://my-flix-cf.herokuapp.com/';
-  
-//   const [user, setUser] = useState(localStorage.getItem('user'));
-//   const [userDocument, setUserDocument] = useState('');
-//   const [updateUsername, setUpdateUsername] = useState(false);
-  
-//   //Setting loading and error variables 
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState();
 
-//   useEffect(() => {
-//     let accessToken = localStorage.getItem('token');
-//         axios.get(baseURL+'users/'+user, { headers: { Authorization: `Bearer ${accessToken}`} })
-//             .then(response => {
-//                 console.log(response.data);
-//                 setUserDocument(response.data);
-//                 })
-//             .catch(error => {
-//                 console.log(error);
-//                 setError(error);
-//             })
-//             .finally(() => {
-//                 setLoading(false);
-//             })
-//   },[])
+    useEffect(() => {
+      let accessToken = localStorage.getItem('token');
+      getMissingData(accessToken)
+      },[])
 
-//     if (error) {
-//     return <Row className="justify-content-center my-5">
-//         <p>There was an error loading your data!</p>
-//         </Row>
-//     }
+      async function getMissingData(accessToken) {
+        axios.all([
+              axios(baseURL + 'genres/' + genre_id,{ headers: { Authorization: `Bearer ${accessToken}`} } ),
+              axios(baseURL + 'movies/',{ headers: { Authorization: `Bearer ${accessToken}`} } )
+              ])
+                .then(axios.spread((genreData, moviesData) => {
+                  setGenre(genreData.data)
+                  setMovies(moviesData.data)
+                  moviesData.data.forEach(movie => {
+                    if (movie.Genre.includes(genre_id)) setGenresMovies(prevData => {
+                        return [...prevData, movie]
+                    })
+                  })
+                  
+                }))
+                .catch(error => console.error(error))
+                .finally(() => {
+                  console.log('Genres movies: '+ genresMovies)
+                  setLoading(false)
+                })												
+      }
+       
+      //While data is not fetched, show spinner
+  if (loading) {
+    return <Row className="justify-content-center my-5">
+          <div className="h3 text-muted text-center">Data is loading
+            &nbsp;<Spinner animation="border" variant="secondary" role="status" />
+          </div>
+        </Row>		
+   }
 
-//     //If data is not fetched, show spinner
-//     if (loading) {
-//         return <Row className="justify-content-center my-5">
-//                     <div className="h3 text-muted text-center">Data is loading
-//                         &nbsp;<Spinner animation="border" variant="secondary" role="status" />
-//                     </div>
-//                 </Row>		
-//     }
-
-//     const updateUsernameField = () => {
-//         setUpdateUsername(true);
-//     }
+  if (error) {
+    return <Row className="justify-content-center my-5">
+      <p>There was an error loading your data!</p>
+      </Row>
+  }
 
   return (
-    <>
-        <Row className="justify-content-center my-5">
-				<Col md={4}> 
-				
-                <div className="h3 text-muted text-center m-1 p-3">Genre view: {genre_id}</div>
-										
-                </Col>
+    <>  
+        <Row className="justify-content-center my-4">
+            <ListGroup>
+              <ListGroup.Item className="h3 justify-content-center">{genre.Name}</ListGroup.Item>
+              <ListGroup.Item className="h5 text-muted">{genre.Description}</ListGroup.Item>
+            </ListGroup>
         </Row>
+        <ListGroup horizontal>
+            <Row>
+              <Col>
+                <ListGroup>
+                   <ListGroup.Item className="h6 text-muted">Movies in the genre '{genre.Name}'</ListGroup.Item>
+                </ListGroup>
+              </Col>
+            </Row>
+            <Row className="main-view justify-content-md-evenly m-0 p-2 align-items-start">{(genresMovies) ? genresMovies.map(movie => 
+                  (<Col md={3} key={movie._id}><MovieCard md={8} movieData={movie} /></Col>)) : <Col md={3}>There are no movies in this genre</Col>}
+            </Row>
+        </ListGroup>
+        
+        
+       
+           
     </>
     
   )

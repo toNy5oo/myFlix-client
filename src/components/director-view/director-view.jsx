@@ -38,7 +38,6 @@ export function DirectorView() {
                         return [...prevData, movie]
                     })
                   })
-                  console.log('Director movies: ', directorMovies)
                 }))
                 .catch(error => console.error(error))
                 .finally(() => {
@@ -66,22 +65,21 @@ export function DirectorView() {
         <Row className="justify-content-center my-4">
             <ListGroup>
               <ListGroup.Item className="h3 justify-content-center">{director.Name}</ListGroup.Item>
-              <ListGroup.Item className="h5 text-muted">{director.Bio}</ListGroup.Item>
+              <ListGroup.Item className="h6 text-muted">{director.Bio}</ListGroup.Item>
             </ListGroup>
         </Row>
-        <Row className="justify-content-center my-4">
-            <ListGroup horizontal>
-            <Row className="main-view justify-content-md-evenly m-0 p-5 align-items-start">{directorMovies.map(movie => 
-                  (
-                  <Col md={3} key={movie._id}>
-                          <MovieCard md={8} movieData={movie} />
-                  </Col>
-                  )
-                  )}
+        <ListGroup horizontal>
+            <Row> 
+                <Col>
+                  <ListGroup>
+                      <ListGroup.Item className="h6 text-muted">Movies from {director.Name}</ListGroup.Item>
+                  </ListGroup>
+                </Col>
             </Row>
-            </ListGroup>
-        </Row>
-        
+            <Row className="main-view justify-content-md-evenly m-0 p-2 align-items-start">{(directorMovies) ? directorMovies.map(movie => 
+                  (<Col md={3} key={movie._id}><MovieCard md={8} movieData={movie} /></Col>)) : <Col md={3}>There are no movies of this director</Col>}
+            </Row>
+        </ListGroup>    
        
            
     </>

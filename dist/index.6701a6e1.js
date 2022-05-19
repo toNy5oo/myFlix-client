@@ -42810,7 +42810,6 @@ function DirectorView() {
                     ];
                 });
             });
-            console.log('Director movies: ', directorMovies);
         })).catch((error1)=>console.error(error1)
         ).finally(()=>{
             setLoading(false);
@@ -42821,14 +42820,14 @@ function DirectorView() {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/director-view/director-view.jsx",
-            lineNumber: 51
+            lineNumber: 50
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "h3 text-muted text-center",
             __source: {
                 fileName: "src/components/director-view/director-view.jsx",
-                lineNumber: 52
+                lineNumber: 51
             },
             __self: this,
             children: [
@@ -42839,7 +42838,7 @@ function DirectorView() {
                     role: "status",
                     __source: {
                         fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 53
+                        lineNumber: 52
                     },
                     __self: this
                 })
@@ -42850,13 +42849,13 @@ function DirectorView() {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/director-view/director-view.jsx",
-            lineNumber: 59
+            lineNumber: 58
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
             __source: {
                 fileName: "src/components/director-view/director-view.jsx",
-                lineNumber: 60
+                lineNumber: 59
             },
             __self: this,
             children: "There was an error loading your data!"
@@ -42868,13 +42867,13 @@ function DirectorView() {
                 className: "justify-content-center my-4",
                 __source: {
                     fileName: "src/components/director-view/director-view.jsx",
-                    lineNumber: 66
+                    lineNumber: 65
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup, {
                     __source: {
                         fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 67
+                        lineNumber: 66
                     },
                     __self: this,
                     children: [
@@ -42882,16 +42881,16 @@ function DirectorView() {
                             className: "h3 justify-content-center",
                             __source: {
                                 fileName: "src/components/director-view/director-view.jsx",
-                                lineNumber: 68
+                                lineNumber: 67
                             },
                             __self: this,
                             children: director.Name
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup.Item, {
-                            className: "h5 text-muted",
+                            className: "h6 text-muted",
                             __source: {
                                 fileName: "src/components/director-view/director-view.jsx",
-                                lineNumber: 69
+                                lineNumber: 68
                             },
                             __self: this,
                             children: director.Bio
@@ -42899,32 +42898,59 @@ function DirectorView() {
                     ]
                 })
             }),
-            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
-                className: "justify-content-center my-4",
+            /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup, {
+                horizontal: true,
                 __source: {
                     fileName: "src/components/director-view/director-view.jsx",
-                    lineNumber: 72
+                    lineNumber: 71
                 },
                 __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup, {
-                    horizontal: true,
-                    __source: {
-                        fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 73
-                    },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
-                        className: "main-view justify-content-md-evenly m-0 p-5 align-items-start",
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                         __source: {
                             fileName: "src/components/director-view/director-view.jsx",
-                            lineNumber: 74
+                            lineNumber: 72
                         },
                         __self: this,
-                        children: directorMovies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                            __source: {
+                                fileName: "src/components/director-view/director-view.jsx",
+                                lineNumber: 73
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup, {
+                                __source: {
+                                    fileName: "src/components/director-view/director-view.jsx",
+                                    lineNumber: 74
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup.Item, {
+                                    className: "h6 text-muted",
+                                    __source: {
+                                        fileName: "src/components/director-view/director-view.jsx",
+                                        lineNumber: 75
+                                    },
+                                    __self: this,
+                                    children: [
+                                        "Movies from ",
+                                        director.Name
+                                    ]
+                                })
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                        className: "main-view justify-content-md-evenly m-0 p-2 align-items-start",
+                        __source: {
+                            fileName: "src/components/director-view/director-view.jsx",
+                            lineNumber: 79
+                        },
+                        __self: this,
+                        children: directorMovies ? directorMovies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                 md: 3,
                                 __source: {
                                     fileName: "src/components/director-view/director-view.jsx",
-                                    lineNumber: 76
+                                    lineNumber: 80
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
@@ -42932,14 +42958,22 @@ function DirectorView() {
                                     movieData: movie,
                                     __source: {
                                         fileName: "src/components/director-view/director-view.jsx",
-                                        lineNumber: 77
+                                        lineNumber: 80
                                     },
                                     __self: this
                                 })
                             }, movie._id)
-                        )
+                        ) : /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                            md: 3,
+                            __source: {
+                                fileName: "src/components/director-view/director-view.jsx",
+                                lineNumber: 80
+                            },
+                            __self: this,
+                            children: "There are no movies of this director"
+                        })
                     })
-                })
+                ]
             })
         ]
     }));
@@ -42956,7 +42990,7 @@ $RefreshReg$(_c, "DirectorView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","react-router-dom":"kjA5T","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","../movie-card/movie-card":"6EiBJ"}],"8WCoL":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","react-router-dom":"kjA5T","../movie-card/movie-card":"6EiBJ","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"8WCoL":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$5f0a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -42974,82 +43008,217 @@ var _reactBootstrap = require("react-bootstrap");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _reactRouterDom = require("react-router-dom");
+var _movieCard = require("../movie-card/movie-card");
+var _propTypes = require("prop-types");
 var _s = $RefreshSig$();
 function GenreView() {
     _s();
+    const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    const [genre, setGenre] = _react.useState('');
+    const [movies, setMovies] = _react.useState('');
+    const [genresMovies, setGenresMovies] = _react.useState('');
+    //Setting loading and error variables 
+    const [loading, setLoading] = _react.useState(true);
+    const [error, setError] = _react.useState();
     const { genre_id  } = _reactRouterDom.useParams();
-    //   const baseURL = 'https://my-flix-cf.herokuapp.com/';
-    //   const [user, setUser] = useState(localStorage.getItem('user'));
-    //   const [userDocument, setUserDocument] = useState('');
-    //   const [updateUsername, setUpdateUsername] = useState(false);
-    //   //Setting loading and error variables 
-    //   const [loading, setLoading] = useState(true);
-    //   const [error, setError] = useState();
-    //   useEffect(() => {
-    //     let accessToken = localStorage.getItem('token');
-    //         axios.get(baseURL+'users/'+user, { headers: { Authorization: `Bearer ${accessToken}`} })
-    //             .then(response => {
-    //                 console.log(response.data);
-    //                 setUserDocument(response.data);
-    //                 })
-    //             .catch(error => {
-    //                 console.log(error);
-    //                 setError(error);
-    //             })
-    //             .finally(() => {
-    //                 setLoading(false);
-    //             })
-    //   },[])
-    //     if (error) {
-    //     return <Row className="justify-content-center my-5">
-    //         <p>There was an error loading your data!</p>
-    //         </Row>
-    //     }
-    //     //If data is not fetched, show spinner
-    //     if (loading) {
-    //         return <Row className="justify-content-center my-5">
-    //                     <div className="h3 text-muted text-center">Data is loading
-    //                         &nbsp;<Spinner animation="border" variant="secondary" role="status" />
-    //                     </div>
-    //                 </Row>		
-    //     }
-    //     const updateUsernameField = () => {
-    //         setUpdateUsername(true);
-    //     }
-    return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
-        children: [
-            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
-                className: "justify-content-center my-5",
-                __source: {
-                    fileName: "src/components/genre-view/genre-view.jsx",
-                    lineNumber: 60
-                },
-                __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
-                    md: 4,
+    _react.useEffect(()=>{
+        let accessToken = localStorage.getItem('token');
+        getMissingData(accessToken);
+    }, []);
+    async function getMissingData(accessToken) {
+        _axiosDefault.default.all([
+            _axiosDefault.default(baseURL + 'genres/' + genre_id, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            }),
+            _axiosDefault.default(baseURL + 'movies/', {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            })
+        ]).then(_axiosDefault.default.spread((genreData, moviesData)=>{
+            setGenre(genreData.data);
+            setMovies(moviesData.data);
+            moviesData.data.forEach((movie)=>{
+                if (movie.Genre.includes(genre_id)) setGenresMovies((prevData)=>{
+                    return [
+                        ...prevData,
+                        movie
+                    ];
+                });
+            });
+        })).catch((error1)=>console.error(error1)
+        ).finally(()=>{
+            console.log('Genres movies: ' + genresMovies);
+            setLoading(false);
+        });
+    }
+    //While data is not fetched, show spinner
+    if (loading) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+        className: "justify-content-center my-5",
+        __source: {
+            fileName: "src/components/genre-view/genre-view.jsx",
+            lineNumber: 52
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+            className: "h3 text-muted text-center",
+            __source: {
+                fileName: "src/components/genre-view/genre-view.jsx",
+                lineNumber: 53
+            },
+            __self: this,
+            children: [
+                "Data is loading \xa0",
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Spinner, {
+                    animation: "border",
+                    variant: "secondary",
+                    role: "status",
                     __source: {
                         fileName: "src/components/genre-view/genre-view.jsx",
-                        lineNumber: 61
+                        lineNumber: 54
+                    },
+                    __self: this
+                })
+            ]
+        })
+    }));
+    if (error) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+        className: "justify-content-center my-5",
+        __source: {
+            fileName: "src/components/genre-view/genre-view.jsx",
+            lineNumber: 60
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
+            __source: {
+                fileName: "src/components/genre-view/genre-view.jsx",
+                lineNumber: 61
+            },
+            __self: this,
+            children: "There was an error loading your data!"
+        })
+    }));
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                className: "justify-content-center my-4",
+                __source: {
+                    fileName: "src/components/genre-view/genre-view.jsx",
+                    lineNumber: 67
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup, {
+                    __source: {
+                        fileName: "src/components/genre-view/genre-view.jsx",
+                        lineNumber: 68
                     },
                     __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        className: "h3 text-muted text-center m-1 p-3",
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup.Item, {
+                            className: "h3 justify-content-center",
+                            __source: {
+                                fileName: "src/components/genre-view/genre-view.jsx",
+                                lineNumber: 69
+                            },
+                            __self: this,
+                            children: genre.Name
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup.Item, {
+                            className: "h5 text-muted",
+                            __source: {
+                                fileName: "src/components/genre-view/genre-view.jsx",
+                                lineNumber: 70
+                            },
+                            __self: this,
+                            children: genre.Description
+                        })
+                    ]
+                })
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup, {
+                horizontal: true,
+                __source: {
+                    fileName: "src/components/genre-view/genre-view.jsx",
+                    lineNumber: 73
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                         __source: {
                             fileName: "src/components/genre-view/genre-view.jsx",
-                            lineNumber: 63
+                            lineNumber: 74
                         },
                         __self: this,
-                        children: [
-                            "Genre view: ",
-                            genre_id
-                        ]
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                            __source: {
+                                fileName: "src/components/genre-view/genre-view.jsx",
+                                lineNumber: 75
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup, {
+                                __source: {
+                                    fileName: "src/components/genre-view/genre-view.jsx",
+                                    lineNumber: 76
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup.Item, {
+                                    className: "h6 text-muted",
+                                    __source: {
+                                        fileName: "src/components/genre-view/genre-view.jsx",
+                                        lineNumber: 77
+                                    },
+                                    __self: this,
+                                    children: [
+                                        "Movies in the genre '",
+                                        genre.Name,
+                                        "'"
+                                    ]
+                                })
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                        className: "main-view justify-content-md-evenly m-0 p-2 align-items-start",
+                        __source: {
+                            fileName: "src/components/genre-view/genre-view.jsx",
+                            lineNumber: 81
+                        },
+                        __self: this,
+                        children: genresMovies ? genresMovies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                                md: 3,
+                                __source: {
+                                    fileName: "src/components/genre-view/genre-view.jsx",
+                                    lineNumber: 82
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
+                                    md: 8,
+                                    movieData: movie,
+                                    __source: {
+                                        fileName: "src/components/genre-view/genre-view.jsx",
+                                        lineNumber: 82
+                                    },
+                                    __self: this
+                                })
+                            }, movie._id)
+                        ) : /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                            md: 3,
+                            __source: {
+                                fileName: "src/components/genre-view/genre-view.jsx",
+                                lineNumber: 82
+                            },
+                            __self: this,
+                            children: "There are no movies in this genre"
+                        })
                     })
-                })
+                ]
             })
         ]
     }));
 }
-_s(GenreView, "7VxZ4qb8bwGOw6iio8qAgFjMNPQ=", false, function() {
+_s(GenreView, "VNFknp5C9doUmHg4vfkMwVgcDJQ=", false, function() {
     return [_reactRouterDom.useParams];
 });
 _c = GenreView;
@@ -43061,7 +43230,7 @@ $RefreshReg$(_c, "GenreView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","react-router-dom":"kjA5T","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"2E7Aw":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","react-router-dom":"kjA5T","../movie-card/movie-card":"6EiBJ","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"2E7Aw":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$58c6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
