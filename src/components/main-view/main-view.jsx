@@ -54,7 +54,7 @@ export function MainView(props) {
       }
 
    //If data is not fetched, show spinner
-		if (loading) {
+		if ((user) && (loading)) {
 			return <Row className="justify-content-center my-5">
 						<div className="h3 text-muted text-center">Loading Movies...
 							&nbsp;<Spinner animation="border" variant="secondary" role="status" />
@@ -82,9 +82,9 @@ export function MainView(props) {
                     </>}/>
                         <Route path="/movies/:movie_id" element={<MovieView />} /> 
 
-                        <Route path="/register" element={
+                        {/* <Route path="/register" element={
                                 (user) ? <Redirect to="/" /> : <RegisterView />
-                              } />
+                              } /> */}
 
                         <Route path="directors/:director_id" element={
                                 (!user) ? <Col><LoginView onLoggedIn={user => onLoggedIn(user)} /></Col>
@@ -96,10 +96,17 @@ export function MainView(props) {
                               : <GenreView />
                               } />
 
+                        <Route path="favourites" element={
+                              (!user) ? <Col><LoginView onLoggedIn={user => onLoggedIn(user)} /></Col>
+                              : <FavouritesView />
+                              } />
+
                         <Route path='profile' element={
                               (!user) ? <LoginView onLoggedIn={user => onLoggedIn(user)} />
                               : <ProfileView />
                                } />
+
+                        <Route path='register' element={<RegisterView />} />
 
                                 {/*<Route path="profile" element={<ProfileView user={user} />} />
                         <Route path="favourites" element={<FavouritesView user={user} />} />

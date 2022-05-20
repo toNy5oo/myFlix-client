@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import {Card, ListGroup, ListGroupItem, Button, Row, Col, Image, Stack, Spinner} from 'react-bootstrap';
 import axios from 'axios';
+import { MovieCard} from '../movie-card/movie-card'
 
 export function FavouritesView() {
 
   const baseURL = 'https://my-flix-cf.herokuapp.com/';
   
-  const [user, setUser] = useState(localStorage.getItem('user'));
-  const [userDocument, setUserDocument] = useState('');
+  const [user, setUser] = useState('');
+  const [favouriteMovies, setFavouriteMovies] = useState('');
+  const [movies, setMovies] = useState('');
   
   //Setting loading and error variables 
   const [loading, setLoading] = useState(true);
@@ -15,25 +17,37 @@ export function FavouritesView() {
 
   useEffect(() => {
     let accessToken = localStorage.getItem('token');
-        axios.get(baseURL+'users/'+user, { headers: { Authorization: `Bearer ${accessToken}`} })
-            .then(response => {
-                console.log(response.data);
-                setUserDocument(response.data);
+    let activeUser = localStorage.getItem('user');
+    
+    getMissingData(accessToken, activeUser)
+    },[])
+
+    async function getMissingData(accessToken, activeUser) {
+      axios.all([
+            axios(baseURL + 'users/' + activeUser,{ headers: { Authorization: `Bearer ${accessToken}`} } ),
+            axios(baseURL + 'movies/',{ headers: { Authorization: `Bearer ${accessToken}`} } )
+            ])
+              .then(axios.spread((userData, moviesData) => {
+                setUser(userData.data)
+                setMovies(moviesData.data)
+                moviesData.data.forEach(movie => {
+                  if (userData.data.FavoriteMovies.includes(movie._id)) setFavouriteMovies(prevData => {
+                      return [...prevData, movie]
+                  })
                 })
-            .catch(error => {
-                console.log(error);
-                setError(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            })
-  },[])
+                
+              }))
+              .catch(error => console.error(error))
+              .finally(() => {
+                setLoading(false)
+              })												
+    }
 
 
   if (error) {
     return <Row className="justify-content-center my-5">
         <p>There was an error loading your data!</p>
-        </Row>
+        </Row> 
     }
 
     //If data is not fetched, show spinner
@@ -47,10 +61,16 @@ export function FavouritesView() {
 
   return (
     <>
-        <Row className="justify-content-center my-5">
+        <Row className="justify-content-center my-4">
 				<Col md={6}> 
-						<div className="h3 text-muted text-center">List of my favourite movies</div>
+						{ (favouriteMovies) && <div className="h4 text-muted text-center">List of your favourite movies</div>}
         </Col>
+        </Row>
+        <Row className="main-view justify-content-md-evenly m-0 p-2 align-items-start">{(favouriteMovies) ? favouriteMovies.map(movie => 
+                  (<Col md={3} key={movie._id}><MovieCard md={8} movieData={movie} /></Col>)) : 
+                  (<Row className="justify-self-center my-2">
+                  <Col><div className="h4 text-muted text-center">You have not added yet a favourite movie</div></Col>
+                  </Row>)}
         </Row>
     </>
     
