@@ -4,6 +4,12 @@
     transition: ease 200ms;
 }
 
+.card-img-bottom:hover {
+    cursor: pointer;
+    opacity: 0.92;
+    transition: ease 200ms;
+}
+
 .list-group-item {
     color: grey;
     font-weight: 300;

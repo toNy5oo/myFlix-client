@@ -38,9 +38,9 @@ export function NavbarView() {
 							  <Link to="/profile">
 								  <Nav.Link href="#portfolio">Profile</Nav.Link>
 							  </Link>
-							  <Link to="/favourites">
+							  {/* <Link to="/favourites">
 								  <Nav.Link href="#favourites">Favourites</Nav.Link>
-							  </Link>
+							  </Link> */}
 						  		</Nav>
 								  <Nav className="mx-auto">
 								  <Nav.Link href="#logout" onClick={() => onLoggedOut()}>

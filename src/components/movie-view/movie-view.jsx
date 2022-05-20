@@ -18,26 +18,26 @@ export function MovieView(props) {
 		//Destructuring the params Object
 		const navigate = useNavigate();
 		const {movie_id} = useParams();
-			
+		const accessToken = localStorage.getItem('token');
+		const activeUser = localStorage.getItem('user');
+
 		//Initializing movie and user obj
 		const [user, setUser] = useState('');
 		const [movie, setMovie] = useState('');	
 
-		const [directors, setDirectors ] = useState('');
+		const [director, setDirector ] = useState('');
 		const [genres, setGenres] = useState([]);
 		const [isFavourite, setIsFavourite] = useState(false);
 
 		//Setting loading and error variables 
 		const [loading, setLoading] = useState(true);
 		const [error, setError] = useState();
-	
+
 		useEffect(() => {
-			let accessToken = localStorage.getItem('token');
-			let activeUser = localStorage.getItem('user');
-			getMissingData(accessToken, activeUser)
+			getMissingData(activeUser)
 		},[])		
 
-		async function getMissingData(accessToken, activeUser) {
+		async function getMissingData(activeUser) {
 			axios.all([
 						axios(baseURL + 'users/' + activeUser,{ headers: { Authorization: `Bearer ${accessToken}`} } ),
 						axios(baseURL + 'movies/' + movie_id,{ headers: { Authorization: `Bearer ${accessToken}`} } ),
@@ -47,21 +47,21 @@ export function MovieView(props) {
 							.then(axios.spread((userData, movieData, directorsData, genresData) => {
 								setUser(userData.data)
 								setMovie(movieData.data)
-								setDirectors(directorsData.data)
-								setGenres(genresData.data)
+								let movieDirector = {
+									Name: directorsData.data.find(dir => dir._id === movieData.data.Director).Name,
+									_id: directorsData.data.find(dir => dir._id === movieData.data.Director)._id
+								};
+								let movieGenres = [];
+								movieData.data.Genre.forEach((g, i) => {
+									movieGenres.push(genresData.data.find(gen => gen._id === g));
+								})
+								setDirector(movieDirector)
+								setGenres(movieGenres)
 							}))
 							.catch(error => console.error(error))
 							.finally(() => {
 								setLoading(false)
 							})												
-		}
-
-		function parseDirectorName(){
-			return directors.find(directors => directors._id === movie.Director).Name
-		}
-
-		function parseDirectorId(){
-			return directors.find(directors => directors._id === movie.Director)._id
 		}
 
 		const isFeatured = (val) => {
@@ -72,15 +72,13 @@ export function MovieView(props) {
 		}
 
 		const addFavouriteMovie = () => {
-			let accessToken = localStorage.getItem('token');
-			let compositeURL = baseURL + 'users/' + user +'/favourites/'+ movie._id;
-			axios.put(compositeURL, { headers: { Authorization: `Bearer ${accessToken}`} } 
-						).then(response => {
+			console.log(accessToken)
+			 axios.put(baseURL + 'users/' + activeUser + '/favs/'+ movie._id,{}, { headers: { Authorization: `Bearer ${accessToken}`} } )
+			.then(response => {
 							console.log(response.data);
 							setIsFavourite(true)
 							})
 						.catch(error => {
-							console.log(compositeURL);
 							console.log(error);
 							setError(error);
 						})
@@ -110,23 +108,21 @@ export function MovieView(props) {
 							
 							<div className="p-1 m-1 h6 text-muted text-center">
 									<p>({
-										genres.map((g, i) => (i!=0) ? <>, <Link to={`/genres/${g._id}`}>{g.Name}</Link></> : <Link to={`/genres/${g._id}`}>{g.Name}</Link>)
-									})</p>
+										genres.map((g, i) => (i!=0) ? <>, <Link key={g._id} to={`/genres/${g._id}`}>{g.Name}</Link></> : <Link key={g._id} to={`/genres/${g._id}`}>{g.Name}</Link>)
+										})</p>
 							</div>
 
 							<div className="p-4 m-3 h5 text-muted text-center">
-								<p>Directed by <Link to={`../directors/${parseDirectorId()}`}>{(directors) && parseDirectorName()}</Link></p>
+								<p>Directed by <Link to={`../directors/${director._id}`}>{(director) && director.Name}</Link></p>
 								&nbsp;
 								<p>{movie.Description}</p>
 							</div>    
 
-						{/* <Stack gap={2} className="d-flex justify-content-center align-items-center">
+						 <Stack gap={2} className="d-flex justify-content-center align-items-center">
 										<div>Actors</div><div className="bg-light border p-2 m-3 px-3">
-											{ 
-											movie.Actors.map((actor, i) => (i!=0) ? ', '+actor : actor)
-											}
+											{ movie.Actors.map((actor, i) => (i!=0) ? ', '+actor : actor)}
 										</div>
-						</Stack> */}
+						</Stack> 
 						<Stack gap={2} className="d-flex justify-content-center align-items-center">
 						<div>Available in Theathers</div><div className="bg-light border p-2 m-3 px-3">{isFeatured(movie.Featured)}</div>
 						</Stack>
