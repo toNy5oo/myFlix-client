@@ -14,8 +14,7 @@ import { NavbarView } from '../navbar-view/navbar-view';
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Redirect
+  Route
 } from "react-router-dom";
 import { Row, Col, Spinner } from 'react-bootstrap/';
 
@@ -119,16 +118,3 @@ export function MainView(props) {
   )
 }
 
-
-
-// ________________________________________________________________
-//   //fetch movies from API
-    // async function getUserInfo(token, activeUser) {
-    //   const response =  await axios.get('https://my-flix-cf.herokuapp.com/users/'+activeUser, {
-    //     headers: { Authorization: `Bearer ${token}`}
-    //   })
-    //   setUser(response.data) 
-    //   console.log('User in MovieList')        
-    //   console.log(user)        
-    //   setLoading(false);
-    // }

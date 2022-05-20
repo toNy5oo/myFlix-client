@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import {Row, Col, Spinner, Stack, ListGroup, Container} from 'react-bootstrap';
+import {Row, Col, Spinner, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
 import {
 	useParams,
 } from "react-router-dom";
 import { MovieCard } from '../movie-card/movie-card'
-import { func } from 'prop-types';
+import PropTypes from 'prop-types';
 
 export function GenreView() {
 
@@ -65,7 +65,7 @@ export function GenreView() {
   return (
     <>  
         <Row className="justify-content-center my-4">
-            <ListGroup>
+            <ListGroup className="my-list">
               <ListGroup.Item className="h3 justify-content-center">{genre.Name}</ListGroup.Item>
               <ListGroup.Item className="h5 text-muted">{genre.Description}</ListGroup.Item>
             </ListGroup>
@@ -90,3 +90,15 @@ export function GenreView() {
     
   )
 }
+
+
+GenreView.propTypes = {
+  genre: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+  }).isRequired,
+  movies: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+  }).isRequired,
+  onBackClick: PropTypes.func.isRequired
+};

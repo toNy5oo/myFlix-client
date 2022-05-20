@@ -66,7 +66,7 @@ export function FavouritesView() {
 						{ (favouriteMovies) && <div className="h4 text-muted text-center">List of your favourite movies</div>}
         </Col>
         </Row>
-        <Row className="main-view justify-content-md-evenly m-0 p-2 align-items-start">{(favouriteMovies) ? favouriteMovies.map(movie => 
+        <Row className="main-view justify-content-md-evenly m-0 p-2 align-items-start">{(favouriteMovies.length > 0) ? favouriteMovies.map(movie => 
                   (<Col md={3} key={movie._id}><MovieCard md={8} movieData={movie} /></Col>)) : 
                   (<Row className="justify-self-center my-2">
                   <Col><div className="h4 text-muted text-center">You have not added yet a favourite movie</div></Col>

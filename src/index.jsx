@@ -11,7 +11,7 @@ export default function MyFlixApplication() {
   
      return (
         <>
-          <Container>
+          <Container id="container">
             <MainView />
           </Container>
         </>

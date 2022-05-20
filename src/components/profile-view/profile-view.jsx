@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import {ListGroup, ListGroupItem, Button, Row, Col, Spinner, Form, Stack} from 'react-bootstrap';
+import { Button, Row, Col, Spinner, Form} from 'react-bootstrap';
 import axios from 'axios';
-import { MovieCard } from '../movie-card/movie-card'
 import { Card } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-
 
 export function ProfileView(props) {
 
@@ -14,7 +12,7 @@ export function ProfileView(props) {
 
   const [user, setUser] = useState('');
   const [updateUser, setUpdateUser] = useState('');
-  const [favouriteMovies, setFavouriteMovies] = useState('');
+  const [favouriteMovies, setFavouriteMovies] = useState([]);
   const [movies, setMovies] = useState('');
    
   //Setting loading and error variables 
@@ -63,8 +61,6 @@ export function ProfileView(props) {
 				[e.target.name]: e.target.value
 			}
 		})
-		// console.log(e.target.name)
-		// console.log(e.target.value)
 	  }
 
 	  function handleUpdate () {
@@ -99,6 +95,21 @@ export function ProfileView(props) {
 				return newDate[0]
 	  }
 
+	const removeMovieFromFavs = (e) => {
+		let movieToRemove = ([e.target.id]);
+		axios.delete(baseURL+'users/'+ activeUser +'/favs/'+ movieToRemove, { headers: { Authorization: `Bearer ${accessToken}`} })
+			.then(response => {
+                console.log(response.data);
+				setFavouriteMovies(favouriteMovies.filter(mov => mov._id != movieToRemove))
+				})
+            .catch(error => {
+				console.log(baseURL+activeUser+'/favs/'+movieToRemove)
+                console.log(error);
+                setError(error);
+            })
+	}
+
+
 	const movieCardUnit = (movie) => {
 		return <>
 				<Card>
@@ -116,22 +127,6 @@ export function ProfileView(props) {
 				</Card>
 				</>
 	}  
-
-	const removeMovieFromFavs = (e) => {
-		let movieToRemove = ([e.target.id]);
-		axios.delete(baseURL+'users/'+ activeUser +'/favs/'+ movieToRemove, { headers: { Authorization: `Bearer ${accessToken}`} })
-			.then(response => {
-                console.log(response.data);
-					setFavouriteMovies(movie => {
-						if (movies.filter(movie._id != movieToRemove)) return movie
-					})
-				})
-            .catch(error => {
-				console.log(baseURL+activeUser+'/favs/'+movieToRemove)
-                console.log(error);
-                setError(error);
-            })
-	}
 
 	if (error) {
     return <Row className="justify-content-center my-5">
@@ -229,9 +224,9 @@ export function ProfileView(props) {
 			<Form.Group className="mb-3" controlId="formFavourites">		
 				<>
 					{<Row className="main-view justify-content-md-evenly m-0 p-2 align-items-start">
-						{(favouriteMovies) 
+						{(favouriteMovies.lenght > 0) 
 						? favouriteMovies.map(movie => (<Col md={3} key={movie._id}>{movieCardUnit(movie)}</Col>)) 
-						: (<Row className="justify-self-center my-2"><Col><div className="h4 text-muted text-center">You have not added yet a favourite movie</div></Col></Row>)}
+						: <Col><div className="h6 text-muted text-center">You have not added yet a favourite movie</div></Col>}
 					</Row>}
 				</>
 			</Form.Group>

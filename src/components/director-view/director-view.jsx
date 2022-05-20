@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import {Row, Col, Spinner, Stack, ListGroup, Container} from 'react-bootstrap';
+import {Row, Col, Spinner, ListGroup, Container} from 'react-bootstrap';
 import axios from 'axios';
 import {
 	useParams,
 } from "react-router-dom";
 import { MovieCard } from '../movie-card/movie-card'
-import { func } from 'prop-types';
+import PropTypes from 'prop-types';
 
 export function DirectorView() {
 
@@ -86,3 +86,10 @@ export function DirectorView() {
     
   )
 }
+
+DirectorView.propTypes = {
+  director: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+  }).isRequired,
+  onBackClick: PropTypes.func.isRequired
+};

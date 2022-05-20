@@ -55,6 +55,9 @@ export function MovieView(props) {
 								movieData.data.Genre.forEach((g, i) => {
 									movieGenres.push(genresData.data.find(gen => gen._id === g));
 								})
+								//If already favourite show only remove link
+								if (userData.data.FavoriteMovies.includes(movie_id)) setIsFavourite(true)
+
 								setDirector(movieDirector)
 								setGenres(movieGenres)
 							}))
@@ -72,8 +75,8 @@ export function MovieView(props) {
 		}
 
 		const addFavouriteMovie = () => {
-			console.log(accessToken)
-			 axios.put(baseURL + 'users/' + activeUser + '/favs/'+ movie._id,{}, { headers: { Authorization: `Bearer ${accessToken}`} } )
+			//The put method in Axios serialize the 2nd parameter as JSON string !!! IMPORTANT
+			axios.put(baseURL + 'users/' + activeUser + '/favs/'+ movie._id, {} , { headers: { Authorization: `Bearer ${accessToken}`} } )
 			.then(response => {
 							console.log(response.data);
 							setIsFavourite(true)
@@ -82,6 +85,19 @@ export function MovieView(props) {
 							console.log(error);
 							setError(error);
 						})
+		}
+
+		const removeFavouriteMovie = (e) => {
+			let movieToRemove = ([e.target.id]);
+			axios.delete(baseURL+'users/'+ activeUser +'/favs/'+ movie_id, { headers: { Authorization: `Bearer ${accessToken}`} })
+				.then(response => {
+					console.log(response.data);
+						setIsFavourite(false)
+					})
+				.catch(error => {
+					console.log(error);
+					setError(error);
+				})
 		}
 
 		//While data is not fetched, show spinner
@@ -107,13 +123,13 @@ export function MovieView(props) {
 						<div className="h3 text-muted text-center">{movie.Title}</div>
 							
 							<div className="p-1 m-1 h6 text-muted text-center">
-									<p>({
-										genres.map((g, i) => (i!=0) ? <>, <Link key={g._id} to={`/genres/${g._id}`}>{g.Name}</Link></> : <Link key={g._id} to={`/genres/${g._id}`}>{g.Name}</Link>)
+									<p>({ 
+										genres.map((g, i) => (i!=0) ? <>, <Link className="std-link" key={g._id} to={`/genres/${g._id}`}>{g.Name}</Link></> : <Link className="std-link" key={g._id} to={`/genres/${g._id}`}>{g.Name}</Link>)
 										})</p>
 							</div>
 
 							<div className="p-4 m-3 h5 text-muted text-center">
-								<p>Directed by <Link to={`../directors/${director._id}`}>{(director) && director.Name}</Link></p>
+								<p>Directed by <Link className="std-link" to={`../directors/${director._id}`}>{(director) && director.Name}</Link></p>
 								&nbsp;
 								<p>{movie.Description}</p>
 							</div>    
@@ -128,7 +144,7 @@ export function MovieView(props) {
 						</Stack>
 						<Stack gap={3} className="col-md-5 text-center mx-auto">
 										<>{(!isFavourite) && <Button variant="link text-muted" onClick={addFavouriteMovie}>Add to favourites</Button>}</>
-										<>{(isFavourite) && <Button variant="link text-muted">Remove from Favourites</Button>}</>
+										<>{(isFavourite) && <Button variant="link text-muted" onClick={removeFavouriteMovie}>Remove from Favourites</Button>}</>
 						</Stack>
 						<Stack gap={2} className="col-md-5 mx-auto text-center m-4 p-2">
 										<Button variant="secondary" onClick={() => { navigate('/') }}>Back to all movies</Button>     
@@ -144,55 +160,3 @@ export function MovieView(props) {
 		)
 
 }
-
-
-// //async function getMovieData(accessToken) {
-// 	const movieURL = baseURL + 'movies/' + movie_id;
-// 	const response = await axios.get(movieURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-	
-// 	setMovie(response.data);
-	
-// 	//Fetching Director from ID
-// 	getDirectorData(accessToken, response.data.Director);
-	
-// 	//Fetching Genres from ID
-// 	response.data.Genre.forEach(g => {
-// 		getGenresData(accessToken, g)
-// 	})
-	
-// 	//If movie exists in user favourite list
-// 	if (user.FavoriteMovies.includes(movie_id)) setIsFavourite(true)
-	
-// 	// //Movie can be displayed and the loading spinner set off
-// 	 setLoading(false)
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// async function getGenresData(accessToken, genreID){
-// 	const genreURL = baseURL + 'genres/' + genreID;
-// 	const response = await axios.get(genreURL,{ headers: { Authorization: `Bearer ${accessToken}`} } );
-// 	const genreData = response.data;
-// 	setGenres(prevData => {
-// 		return [...prevData, genreData] 
-// 	})
-	
-// }
