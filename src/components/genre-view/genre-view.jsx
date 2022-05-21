@@ -99,6 +99,5 @@ GenreView.propTypes = {
   movies: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
-  }).isRequired,
-  onBackClick: PropTypes.func.isRequired
+  }).isRequired
 };

@@ -4,7 +4,7 @@ import { BrowserRouter as Router} from "react-router-dom";
 import { MainView } from '../main-view/main-view';
 import { MovieView } from '../movie-view/movie-view';
 import { MovieCard } from '../movie-card/movie-card';
-import { FavouritesView } from '../favourite-view/favourite-view';
+// import { FavouritesView } from '../favourite-view/favourite-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
@@ -31,15 +31,15 @@ export function MainView(props) {
           setUser(localStorage.getItem('user'));
         }
       getMovies(accessToken);
-      },[])
+      },[user])
 
        /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
        function onLoggedIn(authData) {
         console.log("OnLoggedIn...");
         setUser(authData.user.Username)
-        
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
+        setLoading(false)
 
       }
  
@@ -95,10 +95,10 @@ export function MainView(props) {
                               : <GenreView />
                               } />
 
-                        <Route path="favourites" element={
+                        {/* <Route path="favourites" element={
                               (!user) ? <Col><LoginView onLoggedIn={user => onLoggedIn(user)} /></Col>
                               : <FavouritesView />
-                              } />
+                              } /> */}
 
                         <Route path='profile' element={
                               (!user) ? <LoginView onLoggedIn={user => onLoggedIn(user)} />

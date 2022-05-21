@@ -90,6 +90,5 @@ export function DirectorView() {
 DirectorView.propTypes = {
   director: PropTypes.shape({
     Name: PropTypes.string.isRequired,
-  }).isRequired,
-  onBackClick: PropTypes.func.isRequired
+  }).isRequired
 };
