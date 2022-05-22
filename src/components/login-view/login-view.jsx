@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Link,
   useNavigate
 } from "react-router-dom";
 import PropTypes from 'prop-types';
-import {Form, FormGroup, Button, Row, Col, Container } from 'react-bootstrap';
+import {Form, Button, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 
 import './login-view.css';
@@ -45,16 +45,12 @@ const validate = () => {
     axios.post('https://my-flix-cf.herokuapp.com/login', { Username: username, Password: password} )
     .then(response => {
           const data = response.data;
-          console.table(data)
           props.onLoggedIn(data)
-          //setUser(data.user.Username)
-          // //Set data into LocalStorage
-          // localStorage.setItem('token', data.token);
-          // localStorage.setItem('user', data.user.Username);
     })
     .catch(err => {
       console.log(err)
-      console.log('no such user')
+      console.log('Not a valid user')
+      // setUsernameErr('The credentials are not valid')
     })
   };
 
@@ -66,14 +62,19 @@ const validate = () => {
       <Col xs={4} className="left_side">
         <Form className="d-flex flex-column justify-content-between align-items-center p-2 mt-4"> 
           <Form.Group controlId="formUsername" className="mt-3">
+          {usernameErr && <p>{usernameErr}</p>}
             <Form.Label>Username:</Form.Label>
-            <Form.Control type="text" onChange={e => setUsername(e.target.value)} placeholder="Enter username" value={username}/>{usernameErr && <p>{usernameErr}</p>}
+            <Form.Control type="text" onChange={e => setUsername(e.target.value)} placeholder="Enter username" />
+            
           </Form.Group>
 
           <Form.Group controlId="formPassword" className="mt-3">
+          {passwordErr && <p>{passwordErr}</p>}
             <Form.Label>Password:</Form.Label>
-            <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-          </Form.Group>
+            <Form.Control type="password" placeholder="Password" value={password} 
+                                      onChange={e => setPassword(e.target.value)}  
+            />
+            </Form.Group>
 
           <Button variant="primary" type="submit" onClick={handleSubmit} className="mt-4">
             Submit
@@ -97,10 +98,3 @@ const validate = () => {
 //       password: PropTypes.string.isRequired,
 //     }).isRequired,
 //   };
-
-
- {/* <Route path="/register">
-          <RegisterView />
-      </Route>
-         */}
-          {/* <a href="#" onClick={handleNewUser()}>click here</a> to register.</p> */}

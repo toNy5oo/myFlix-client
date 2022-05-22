@@ -4,6 +4,12 @@
     transition: ease 200ms;
 }
 
+.card-img-bottom:hover {
+    cursor: pointer;
+    opacity: 0.92;
+    transition: ease 200ms;
+}
+
 .list-group-item {
     color: grey;
     font-weight: 300;
@@ -26,24 +32,40 @@
     font-size: xxx-large !important;
 }
 body {
-    background-color: whitesmoke !important;
+    background-color: white !important;
 }
 
 .navbar {
     background-color: rgba(161, 0, 0, 0.9);
-    color: white !important;
+    /* color: white !important; */
     padding: 1rem !important;
 }
 
 .navbar-text {
     margin-right: 2rem !important;
-    color: white !important;
+    /* color: white !important; */
 }
 
 .logo_navbar {
     font-family: 'Bebas Neue', cursive !important;
     font-size: 4rem !important;
     margin-left: 2rem !important;
-    color: white !important;
+    /* color: white !important; */
+}
+
+#container {
+    background-color: whitesmoke !important;
+}
+
+.my-list {
+    padding: 0 2rem;
+}
+
+.std-link {
+    color: rgba(121, 52, 52, 0.9) !important
+}
+
+.user-info-update {
+    font-size: 1.2rem;
 }
 /*# sourceMappingURL=index.466a7c52.css.map */

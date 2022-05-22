@@ -8,16 +8,15 @@ import '../movie-card/movie-card.css'
 export function MovieCard(props) {
  
   const [movie, setMovie ] = useState(props.movieData);
-  const [user, setUser ] = useState(props.userData);
+  const [user, setUser ] = useState('');
  
     useEffect(() =>{
     },[])
 
     return (
-      
         <Card>
         {/* crossorigin="anonymous" is important to bypass CORP security protection */}
-          <Link to={`/movies/${movie._id}`} state={[user, movie]}>
+          <Link to={`/movies/${movie._id}`}>
               <Card.Img variant="top" src={movie.ImagePath} crossOrigin="anonymous"/>
           </Link>
           <Card.Body>
@@ -27,3 +26,4 @@ export function MovieCard(props) {
         </Card>
        )
     }
+
