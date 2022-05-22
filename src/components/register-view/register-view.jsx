@@ -90,8 +90,8 @@ export function RegisterView (props) {
           //open in the current tab
         })
         .catch((response) => {
-          console.error(response);
-          alert("error registering the user");
+		alert("Your registration has NOT been successfully processed. Please try again.");
+		window.open("/register", "_self");			
         });
     }
   };
