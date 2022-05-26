@@ -8,6 +8,9 @@ import {UpdateView} from './update-view'
 import {UserView} from './user-view'
 import {FavouritesView} from './favourite-view'
 
+//Redux 
+import { setUser } from '../../redux/userSlice' 
+
 export function ProfileView(props) {
 
   const baseURL = 'https://my-flix-cf.herokuapp.com/';
@@ -41,7 +44,6 @@ export function ProfileView(props) {
 			  setLoading(false)
 			})												
   }
-
   
   const parseDate = (date) => {
 	  console.log(date);

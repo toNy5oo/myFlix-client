@@ -7,7 +7,8 @@ import '../movie-card/movie-card.css'
 
 export function MovieCard(props) {
  
-  const [movie, setMovie ] = useState(props.movieData);
+  const { movie } = props;
+  // const [movie, setMovie ] = useState(props.movieData);
   const [user, setUser ] = useState('');
  
     useEffect(() =>{

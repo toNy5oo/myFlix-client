@@ -3,13 +3,13 @@ import axios from 'axios';
 import { BrowserRouter as Router} from "react-router-dom";
 import { MainView } from '../main-view/main-view';
 import { MovieView } from '../movie-view/movie-view';
-import { MovieCard } from '../movie-card/movie-card';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
 import { LoginView } from '../login-view/login-view';
 import { RegisterView } from '../register-view/register-view';
 import { NavbarView } from '../navbar-view/navbar-view';
+import MoviesList from '../movies-list/movies-list'
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,14 +18,13 @@ import {
 import { Row, Col, Spinner } from 'react-bootstrap/';
 
 //Redux
-import { useDispatch, useSelector } from 'react-redux'
-import { setMovies } from '../../redux/movieSlice';
+import { setMovies } from "../../redux/movieSlice";
+import { connect, useDispatcher } from "react-redux";
+import { store } from "../../redux/store"
 
 export function MainView(props) {
 
-    const dispatch = useDispatch();
     
-    const movies = useSelector(state => state.movies);
     //const [movies, setMovies] = useState([]);
     const [user, setUser] = useState(props.user);
     const [loading, setLoading] = useState(true);
@@ -37,7 +36,7 @@ export function MainView(props) {
           setUser(localStorage.getItem('user'));
         }
       getMovies(accessToken);
-      },[user, movies])
+      },[user])
 
        /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
        function onLoggedIn(authData) {
@@ -46,7 +45,6 @@ export function MainView(props) {
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
         setLoading(false)
-
       }
  
     //fetch movies from API
@@ -54,8 +52,8 @@ export function MainView(props) {
          const response =  await axios.get('https://my-flix-cf.herokuapp.com/movies', {
          headers: { Authorization: `Bearer ${token}`}
         })
-        dispatch(setMovies(response.data));
-        console.log(movies);
+        store.dispatch(setMovies(response.data));
+        //console.log(movies);
         setLoading(false);
       }
 
@@ -84,13 +82,11 @@ export function MainView(props) {
                     path="/"
                     element={<>
                       {(!user) ? <><Col><LoginView onLoggedIn={(user) => onLoggedIn(user)} /></Col></> :
-                      <><Row className="main-view justify-content-md-evenly m-0 p-5 align-items-start">{movies.value.map((m) => (<Col md={3} key={m._id}><MovieCard md={8} key={m._id} movieData={m} /></Col>))}</Row></>}
+                      <><Row className="main-view justify-content-md-evenly m-0 p-5 align-items-start">
+                        {/* {movies.map((m) => (<Col md={3} key={m._id}><MovieCard md={8} key={m._id} movieData={m} /></Col>))} */}<MoviesList />
+                        </Row></>}
                     </>}/>
                         <Route path="/movies/:movie_id" element={<MovieView />} /> 
-
-                        {/* <Route path="/register" element={
-                                (user) ? <Redirect to="/" /> : <RegisterView />
-                              } /> */}
 
                         <Route path="directors/:director_id" element={
                                 (!user) ? <Col><LoginView onLoggedIn={user => onLoggedIn(user)} /></Col>
@@ -102,11 +98,6 @@ export function MainView(props) {
                               : <GenreView />
                               } />
 
-                        {/* <Route path="favourites" element={
-                              (!user) ? <Col><LoginView onLoggedIn={user => onLoggedIn(user)} /></Col>
-                              : <FavouritesView />
-                              } /> */}
-
                         <Route path='profile' element={
                               (!user) ? <LoginView onLoggedIn={user => onLoggedIn(user)} />
                               : <ProfileView />
@@ -114,10 +105,7 @@ export function MainView(props) {
 
                         <Route path='register' element={<RegisterView />} />
 
-                                {/*<Route path="profile" element={<ProfileView user={user} />} />
-                        <Route path="favourites" element={<FavouritesView user={user} />} />
-                        <Route path="directors/:director_id" element={<DirectorView user={user}/>} />
-                        <Route path="genres/:genre_id" element={<GenreView user={user}/>} />  */}
+                        
                 </Routes>
             </Router>
             </> 
@@ -125,3 +113,8 @@ export function MainView(props) {
   )
 }
 
+let mapStateToProps = state => {
+  return { movies: state.movies }
+}
+
+export default connect(mapStateToProps, { setMovies })(MainView);

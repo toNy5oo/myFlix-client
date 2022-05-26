@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { createRoot } from 'react-dom/client';
 import { Container } from "react-bootstrap";
-import { MainView } from "./components/main-view/main-view";
+import MainView from "./components/main-view/main-view";
 
 //Redux
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit'
-import store from './redux/store'
+import {store} from './redux/store'
 
 import './index.css';
 
