@@ -1,44 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import {Form, Button, Card, CardGroup, Container, Row, Col, Link} from 'react-bootstrap';
+
+import {Form, Button, Row, Col} from 'react-bootstrap';
+
+import './register-view.css'
 
 export function RegisterView (props) {
-	// const [user, setUser] = useState('');
 	
-	// const handleRegistration = () => {
-	// 	e.preventDefault();
-	// 	axios.post('https://my-flix-cf.herokuapp.com/users', {
-	// 		'Username': username,
-	// 		'Password': password,
-	// 		'Email': email,
-	// 		'Birthday': birthday
-	// 	})
-	// 	.then(response => {
-	// 		console.log(response.data);
-	// 		window.open('/', '_self');
-	// 	})
-	// 	.catch(e => {
-	// 		console.log('Error during registration');
-	// 		alert('Registration not completed');
-	// 	});
-	// };
-
-	// const handleChange = (e) => {
-	// 	//console.log('changing '+e.target.value)
-	// 	setUser(prevUser => {
-	// 		return {
-	// 			...prevUser,
-	// 			[e.target.name]: e.target.value
-	// 		}
-	// 	})
-	// 	console.log(e.target.name)
-	// 	console.log(e.target.value)
-	//   }
-
-
-  const baseURL = 'https://my-flix-cf.herokuapp.com/';
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -48,6 +17,7 @@ export function RegisterView (props) {
   const [usernameErr, setUsernameErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
   const [emailErr, setEmailErr] = useState("");
+
 
   //form validation logic
   const validate = () => {
@@ -67,7 +37,7 @@ export function RegisterView (props) {
       isReq = false;
     }
     if (!email) {
-      setEmailErr("Add Email");
+      setEmailErr("Email is required");
       isReq = false;
     } else if (email.indexOf("@") === -1) {
       setEmail("Email must be a valid email address");
@@ -81,10 +51,9 @@ export function RegisterView (props) {
     e.preventDefault();
     const isReq = validate();
     if (isReq) {
-      axios.post(baseURL + 'users', { Username: username, Password: password, Email: email, Birthday: birthday })
+      axios.post('users', { Username: username, Password: password, Email: email, Birthday: birthday })
         .then((response) => {
           const data = response.data;
-          console.log(data);
           alert("Your registration has been successfully processed. You can now proceed to login.");
           window.open("/", "_self");
           //open in the current tab
@@ -98,10 +67,11 @@ export function RegisterView (props) {
 	return (
     <>
           <Row className="justify-content-center my-5">
- 				<Col md={4}>
+ 			<Col md={4}>
  				<Form>
- 			<Form.Group>
- 				<Form.Label>Username*</Form.Label>
+				 
+ 			<Form.Group className="py-3">
+ 			<div className="d-flex justify-content-between"><Form.Label>Username*</Form.Label><Form.Label className="err">{usernameErr && <>{usernameErr}</>}</Form.Label></div>
  				<Form.Control 
 					type="text" 
 					placeholder="Username" 
@@ -110,8 +80,8 @@ export function RegisterView (props) {
 					required
 				/>
 			</Form.Group>
-			<Form.Group>
-				<Form.Label>Password*</Form.Label>
+			<Form.Group className="py-3">
+			<div className="d-flex justify-content-between"><Form.Label>Password*</Form.Label><Form.Label className="err">{passwordErr && <>{passwordErr}</>}</Form.Label></div>
 				<Form.Control 
 					type="password" 
 					placeholder="Password" 
@@ -121,8 +91,8 @@ export function RegisterView (props) {
 					minLength="8"
 				/>
 			</Form.Group>
-			<Form.Group>
-				<Form.Label>Email*</Form.Label>
+			<Form.Group className="py-3">
+			<div className="d-flex justify-content-between"><Form.Label>Email*</Form.Label><Form.Label className="err">{emailErr && <>{emailErr}</>}</Form.Label></div>
 				<Form.Control 
 					type="email" 
 					placeholder="Email" 
@@ -131,7 +101,7 @@ export function RegisterView (props) {
 					required
 				/>
 			</Form.Group>
-			<Form.Group>
+			<Form.Group className="py-3">
 				<Form.Label>Birthday</Form.Label>
 				<Form.Control 
 					type="date" 
@@ -140,10 +110,15 @@ export function RegisterView (props) {
 					value={birthday}
 				/>
 			</Form.Group>
-			<Button variant="secondary" className="my-4" type="submit" onClick={handleRegistration}>
-					Submit
-			</Button>
+			
 			</Form>
+			</Col>
+			</Row>
+			<Row>
+			<Col className="d-flex justify-content-center">
+			<Button variant="secondary" className="my-4" type="submit" onClick={handleRegistration}>
+					Create my account
+			</Button>
 			</Col>
 			</Row>
       </>

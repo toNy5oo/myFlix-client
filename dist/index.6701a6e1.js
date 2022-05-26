@@ -951,7 +951,11 @@ var _mainViewDefault = parcelHelpers.interopDefault(_mainView);
 //Redux
 var _reactRedux = require("react-redux");
 var _store = require("./redux/store");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _indexCss = require("./index.css");
+//Setting baseURL for axios calls
+_axiosDefault.default.defaults.baseURL = 'https://my-flix-cf.herokuapp.com/';
 function MyFlixApplication() {
     return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
         children: [
@@ -959,20 +963,20 @@ function MyFlixApplication() {
                 store: _store.store,
                 __source: {
                     fileName: "src/index.jsx",
-                    lineNumber: 17
+                    lineNumber: 21
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
                     id: "container",
                     __source: {
                         fileName: "src/index.jsx",
-                        lineNumber: 18
+                        lineNumber: 22
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_mainViewDefault.default, {
                         __source: {
                             fileName: "src/index.jsx",
-                            lineNumber: 19
+                            lineNumber: 23
                         },
                         __self: this
                     })
@@ -991,7 +995,7 @@ root.render(/*#__PURE__*/ _jsxRuntime.jsx(MyFlixApplication, {
     tab: "home",
     __source: {
         fileName: "src/index.jsx",
-        lineNumber: 30
+        lineNumber: 34
     },
     __self: undefined
 }));
@@ -1003,7 +1007,7 @@ $RefreshReg$(_c, "MyFlixApplication");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","./components/main-view/main-view":"2zHas","./index.css":"1dfYM","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","react-dom/client":"jdzvJ","react-redux":"2L0if","./redux/store":"15Dwr"}],"8xIwr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","./components/main-view/main-view":"2zHas","./index.css":"1dfYM","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","react-dom/client":"jdzvJ","react-redux":"2L0if","./redux/store":"15Dwr","axios":"iYoWk"}],"8xIwr":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-runtime.development.js');
 
@@ -37781,7 +37785,6 @@ function MainView(props) {
         user
     ]);
     /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/ function onLoggedIn(authData) {
-        console.log("OnLoggedIn...");
         setUser(authData.user.Username);
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
@@ -37789,13 +37792,12 @@ function MainView(props) {
     }
     //fetch movies from API
     async function getMovies(token) {
-        const response = await _axiosDefault.default.get('https://my-flix-cf.herokuapp.com/movies', {
+        const response = await _axiosDefault.default.get('/movies', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
         _store.store.dispatch(_movieSlice.setMovies(response.data));
-        //console.log(movies);
         setLoading(false);
     }
     //If data is not fetched, show spinner
@@ -37803,14 +37805,14 @@ function MainView(props) {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 60
+            lineNumber: 58
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "h3 text-muted text-center",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 61
+                lineNumber: 59
             },
             __self: this,
             children: [
@@ -37821,7 +37823,7 @@ function MainView(props) {
                     role: "status",
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 62
+                        lineNumber: 60
                     },
                     __self: this
                 })
@@ -37832,13 +37834,13 @@ function MainView(props) {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 68
+            lineNumber: 66
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 69
+                lineNumber: 67
             },
             __self: this,
             children: "There was an error loading your data!"
@@ -37850,21 +37852,21 @@ function MainView(props) {
                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.BrowserRouter, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 76
+                        lineNumber: 74
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsx(_navbarView.NavbarView, {
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 77
+                                lineNumber: 75
                             },
                             __self: this
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.Routes, {
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 78
+                                lineNumber: 76
                             },
                             __self: this,
                             children: [
@@ -37891,7 +37893,7 @@ function MainView(props) {
                                     }),
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 79
+                                        lineNumber: 77
                                     },
                                     __self: this
                                 }),
@@ -37901,7 +37903,7 @@ function MainView(props) {
                                     }),
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 87
+                                        lineNumber: 85
                                     },
                                     __self: this
                                 }),
@@ -37915,7 +37917,7 @@ function MainView(props) {
                                     }),
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 89
+                                        lineNumber: 87
                                     },
                                     __self: this
                                 }),
@@ -37929,7 +37931,7 @@ function MainView(props) {
                                     }),
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 94
+                                        lineNumber: 92
                                     },
                                     __self: this
                                 }),
@@ -37941,7 +37943,7 @@ function MainView(props) {
                                     }),
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 99
+                                        lineNumber: 97
                                     },
                                     __self: this
                                 }),
@@ -37951,7 +37953,7 @@ function MainView(props) {
                                     }),
                                     __source: {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 104
+                                        lineNumber: 102
                                     },
                                     __self: this
                                 })
@@ -41933,20 +41935,20 @@ function DirectorView() {
     //REACT REDUX way to get state
     const movies = _reactRedux.useSelector((state)=>state.movies
     );
-    const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    //Parameter of director_id from URL 
+    const { director_id  } = _reactRouterDom.useParams();
     const [director, setDirector] = _react.useState('');
     const [directorMovies, setDirectorMovies] = _react.useState('');
     //Setting loading and error variables 
     const [loading, setLoading] = _react.useState(true);
     const [error, setError] = _react.useState();
-    const { director_id  } = _reactRouterDom.useParams();
     _react.useEffect(()=>{
         let accessToken = localStorage.getItem('token');
         getMissingData(accessToken);
         setDirectorMovies(getMoviesFromDirector());
     }, []);
     async function getMissingData(accessToken) {
-        _axiosDefault.default(baseURL + 'directors/' + director_id, {
+        _axiosDefault.default('directors/' + director_id, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
@@ -41969,14 +41971,14 @@ function DirectorView() {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/director-view/director-view.jsx",
-            lineNumber: 55
+            lineNumber: 53
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "h3 text-muted text-center",
             __source: {
                 fileName: "src/components/director-view/director-view.jsx",
-                lineNumber: 56
+                lineNumber: 54
             },
             __self: this,
             children: [
@@ -41987,7 +41989,7 @@ function DirectorView() {
                     role: "status",
                     __source: {
                         fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 57
+                        lineNumber: 55
                     },
                     __self: this
                 })
@@ -41998,13 +42000,13 @@ function DirectorView() {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/director-view/director-view.jsx",
-            lineNumber: 63
+            lineNumber: 61
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
             __source: {
                 fileName: "src/components/director-view/director-view.jsx",
-                lineNumber: 64
+                lineNumber: 62
             },
             __self: this,
             children: "There was an error loading your data!"
@@ -42016,13 +42018,13 @@ function DirectorView() {
                 className: "justify-content-center p-2 m-4",
                 __source: {
                     fileName: "src/components/director-view/director-view.jsx",
-                    lineNumber: 70
+                    lineNumber: 68
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup, {
                     __source: {
                         fileName: "src/components/director-view/director-view.jsx",
-                        lineNumber: 71
+                        lineNumber: 69
                     },
                     __self: this,
                     children: [
@@ -42030,7 +42032,7 @@ function DirectorView() {
                             className: "h3 justify-content-center",
                             __source: {
                                 fileName: "src/components/director-view/director-view.jsx",
-                                lineNumber: 72
+                                lineNumber: 70
                             },
                             __self: this,
                             children: director.Name
@@ -42039,7 +42041,7 @@ function DirectorView() {
                             className: "h6 text-muted",
                             __source: {
                                 fileName: "src/components/director-view/director-view.jsx",
-                                lineNumber: 73
+                                lineNumber: 71
                             },
                             __self: this,
                             children: director.Bio
@@ -42051,33 +42053,33 @@ function DirectorView() {
                 horizontal: true,
                 __source: {
                     fileName: "src/components/director-view/director-view.jsx",
-                    lineNumber: 76
+                    lineNumber: 74
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                         __source: {
                             fileName: "src/components/director-view/director-view.jsx",
-                            lineNumber: 77
+                            lineNumber: 75
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                             __source: {
                                 fileName: "src/components/director-view/director-view.jsx",
-                                lineNumber: 78
+                                lineNumber: 76
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup, {
                                 __source: {
                                     fileName: "src/components/director-view/director-view.jsx",
-                                    lineNumber: 79
+                                    lineNumber: 77
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup.Item, {
                                     className: "h6 text-muted",
                                     __source: {
                                         fileName: "src/components/director-view/director-view.jsx",
-                                        lineNumber: 80
+                                        lineNumber: 78
                                     },
                                     __self: this,
                                     children: [
@@ -42092,14 +42094,14 @@ function DirectorView() {
                         className: "main-view justify-content-md-evenly m-0 p-2 align-items-start",
                         __source: {
                             fileName: "src/components/director-view/director-view.jsx",
-                            lineNumber: 84
+                            lineNumber: 82
                         },
                         __self: this,
                         children: directorMovies.length > 0 ? directorMovies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                 md: 3,
                                 __source: {
                                     fileName: "src/components/director-view/director-view.jsx",
-                                    lineNumber: 85
+                                    lineNumber: 83
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
@@ -42107,7 +42109,7 @@ function DirectorView() {
                                     movie: movie,
                                     __source: {
                                         fileName: "src/components/director-view/director-view.jsx",
-                                        lineNumber: 85
+                                        lineNumber: 83
                                     },
                                     __self: this
                                 })
@@ -42116,7 +42118,7 @@ function DirectorView() {
                             md: 3,
                             __source: {
                                 fileName: "src/components/director-view/director-view.jsx",
-                                lineNumber: 85
+                                lineNumber: 83
                             },
                             __self: this,
                             children: "There are no movies of this director"
@@ -42127,7 +42129,7 @@ function DirectorView() {
         ]
     }));
 }
-_s(DirectorView, "j5bVL5+dV9UMbSxFh6MupTFky0Y=", false, function() {
+_s(DirectorView, "X7tWbjZtPU4M2ud7unpBcyQs0R4=", false, function() {
     return [_reactRedux.useSelector, _reactRouterDom.useParams];
 });
 _c = DirectorView;
@@ -42163,17 +42165,12 @@ var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 var _movieCardCss = require("../movie-card/movie-card.css");
-var _s = $RefreshSig$();
 function MovieCard(props) {
-    _s();
     const { movie  } = props;
-    _react.useEffect(()=>{
-        console.log(movie);
-    }, []);
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card, {
         __source: {
             fileName: "src/components/movie-card/movie-card.jsx",
-            lineNumber: 17
+            lineNumber: 13
         },
         __self: this,
         children: [
@@ -42181,7 +42178,7 @@ function MovieCard(props) {
                 to: `/movies/${movie._id}`,
                 __source: {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 19
+                    lineNumber: 15
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Img, {
@@ -42190,7 +42187,7 @@ function MovieCard(props) {
                     crossOrigin: "anonymous",
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 20
+                        lineNumber: 16
                     },
                     __self: this
                 })
@@ -42198,7 +42195,7 @@ function MovieCard(props) {
             /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                 __source: {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 22
+                    lineNumber: 18
                 },
                 __self: this,
                 children: [
@@ -42207,7 +42204,7 @@ function MovieCard(props) {
                         className: "description",
                         __source: {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 23
+                            lineNumber: 19
                         },
                         __self: this,
                         children: movie.Title
@@ -42215,7 +42212,7 @@ function MovieCard(props) {
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Text, {
                         __source: {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 24
+                            lineNumber: 20
                         },
                         __self: this,
                         children: movie.Description
@@ -42225,7 +42222,6 @@ function MovieCard(props) {
         ]
     }));
 }
-_s(MovieCard, "OD7bBpZva5O2jO+Puf00hKivP7c=");
 _c = MovieCard;
 var _c;
 $RefreshReg$(_c, "MovieCard");
@@ -43887,20 +43883,20 @@ function GenreView() {
     //REACT REDUX way to get state
     const movies = _reactRedux.useSelector((state)=>state.movies
     );
-    const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    //Parameter of genre_id from URL
+    const { genre_id  } = _reactRouterDom.useParams();
     const [genre, setGenre] = _react.useState('');
     const [moviesOfGenre, setMoviesOfGenre] = _react.useState('');
     //Setting loading and error variables 
     const [loading, setLoading] = _react.useState(true);
     const [error, setError] = _react.useState();
-    const { genre_id  } = _reactRouterDom.useParams();
     _react.useEffect(()=>{
         let accessToken = localStorage.getItem('token');
         getMissingData(accessToken);
         setMoviesOfGenre(getMoviesOfGenre());
     }, []);
     async function getMissingData(accessToken) {
-        _axiosDefault.default.get(baseURL + 'genres/' + genre_id, {
+        _axiosDefault.default.get('genres/' + genre_id, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
@@ -43914,7 +43910,6 @@ function GenreView() {
     const getMoviesOfGenre = ()=>{
         let moviesInArray = [];
         movies.forEach((movie)=>{
-            console.log('Movie.genre', movie.Genre, 'genre_id', genre_id);
             if (movie.Genre.includes(genre_id)) moviesInArray.push(movie);
         });
         return moviesInArray;
@@ -43924,14 +43919,14 @@ function GenreView() {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/genre-view/genre-view.jsx",
-            lineNumber: 56
+            lineNumber: 54
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "h3 text-muted text-center",
             __source: {
                 fileName: "src/components/genre-view/genre-view.jsx",
-                lineNumber: 57
+                lineNumber: 55
             },
             __self: this,
             children: [
@@ -43942,7 +43937,7 @@ function GenreView() {
                     role: "status",
                     __source: {
                         fileName: "src/components/genre-view/genre-view.jsx",
-                        lineNumber: 58
+                        lineNumber: 56
                     },
                     __self: this
                 })
@@ -43953,13 +43948,13 @@ function GenreView() {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/genre-view/genre-view.jsx",
-            lineNumber: 64
+            lineNumber: 62
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
             __source: {
                 fileName: "src/components/genre-view/genre-view.jsx",
-                lineNumber: 65
+                lineNumber: 63
             },
             __self: this,
             children: "There was an error loading your data!"
@@ -43971,14 +43966,14 @@ function GenreView() {
                 className: "justify-content-center p-2 m-4",
                 __source: {
                     fileName: "src/components/genre-view/genre-view.jsx",
-                    lineNumber: 71
+                    lineNumber: 69
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup, {
                     className: "my-list",
                     __source: {
                         fileName: "src/components/genre-view/genre-view.jsx",
-                        lineNumber: 72
+                        lineNumber: 70
                     },
                     __self: this,
                     children: [
@@ -43986,7 +43981,7 @@ function GenreView() {
                             className: "h3 justify-content-center",
                             __source: {
                                 fileName: "src/components/genre-view/genre-view.jsx",
-                                lineNumber: 73
+                                lineNumber: 71
                             },
                             __self: this,
                             children: genre.Name
@@ -43995,7 +43990,7 @@ function GenreView() {
                             className: "h5 text-muted",
                             __source: {
                                 fileName: "src/components/genre-view/genre-view.jsx",
-                                lineNumber: 74
+                                lineNumber: 72
                             },
                             __self: this,
                             children: genre.Description
@@ -44007,33 +44002,33 @@ function GenreView() {
                 horizontal: true,
                 __source: {
                     fileName: "src/components/genre-view/genre-view.jsx",
-                    lineNumber: 77
+                    lineNumber: 75
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                         __source: {
                             fileName: "src/components/genre-view/genre-view.jsx",
-                            lineNumber: 78
+                            lineNumber: 76
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                             __source: {
                                 fileName: "src/components/genre-view/genre-view.jsx",
-                                lineNumber: 79
+                                lineNumber: 77
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ListGroup, {
                                 __source: {
                                     fileName: "src/components/genre-view/genre-view.jsx",
-                                    lineNumber: 80
+                                    lineNumber: 78
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ListGroup.Item, {
                                     className: "h6 text-muted",
                                     __source: {
                                         fileName: "src/components/genre-view/genre-view.jsx",
-                                        lineNumber: 81
+                                        lineNumber: 79
                                     },
                                     __self: this,
                                     children: [
@@ -44049,14 +44044,14 @@ function GenreView() {
                         className: "main-view justify-content-md-evenly m-0 p-2 align-items-start",
                         __source: {
                             fileName: "src/components/genre-view/genre-view.jsx",
-                            lineNumber: 85
+                            lineNumber: 83
                         },
                         __self: this,
                         children: moviesOfGenre.length !== 0 ? moviesOfGenre.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                 md: 3,
                                 __source: {
                                     fileName: "src/components/genre-view/genre-view.jsx",
-                                    lineNumber: 86
+                                    lineNumber: 84
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
@@ -44064,7 +44059,7 @@ function GenreView() {
                                     movie: movie,
                                     __source: {
                                         fileName: "src/components/genre-view/genre-view.jsx",
-                                        lineNumber: 86
+                                        lineNumber: 84
                                     },
                                     __self: this
                                 })
@@ -44073,7 +44068,7 @@ function GenreView() {
                             md: 3,
                             __source: {
                                 fileName: "src/components/genre-view/genre-view.jsx",
-                                lineNumber: 86
+                                lineNumber: 84
                             },
                             __self: this,
                             children: "There are no movies in this genre"
@@ -44084,7 +44079,7 @@ function GenreView() {
         ]
     }));
 }
-_s(GenreView, "y/2T3i9wlqjuOG4DcXm6QSdsTTw=", false, function() {
+_s(GenreView, "1neOrXxJwVttaMGgOTwhXG9cBMs=", false, function() {
     return [_reactRedux.useSelector, _reactRouterDom.useParams];
 });
 _c = GenreView;
@@ -44122,19 +44117,20 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
-var _reactRouterDom = require("react-router-dom");
 var _updateView = require("./update-view");
 var _userView = require("./user-view");
 var _favouriteView = require("./favourite-view");
+var _reactRedux = require("react-redux");
 var _s = $RefreshSig$();
 function ProfileView(props) {
     _s();
-    const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    //REACT REDUX way to get state
+    const movies = _reactRedux.useSelector((state)=>state.movies
+    );
     const accessToken = localStorage.getItem('token');
     const activeUser = localStorage.getItem('user');
     const [user, setUser] = _react.useState(props.user);
     const [isUpdate, setIsUpdate] = _react.useState(false);
-    const [movies, setMovies] = _react.useState(props.movies);
     //Setting loading and error variables 
     const [loading, setLoading] = _react.useState(true);
     const [error, setError] = _react.useState();
@@ -44142,21 +44138,13 @@ function ProfileView(props) {
         getMissingData();
     }, []);
     async function getMissingData() {
-        _axiosDefault.default.all([
-            _axiosDefault.default(baseURL + 'users/' + activeUser, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            }),
-            _axiosDefault.default(baseURL + 'movies/', {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            })
-        ]).then(_axiosDefault.default.spread((userData, moviesData)=>{
-            setUser(userData.data);
-            setMovies(moviesData.data);
-        })).catch((error1)=>console.error(error1)
+        _axiosDefault.default('users/' + activeUser, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        }).then((response)=>{
+            setUser(response.data);
+        }).catch((error1)=>console.error(error1)
         ).finally(()=>{
             setLoading(false);
         });
@@ -44167,8 +44155,7 @@ function ProfileView(props) {
         });
     };
     function handleDelete() {
-        console.log(baseURL + 'users/' + user.Username);
-        _axiosDefault.default.delete(baseURL + 'users/' + user.Username, {
+        _axiosDefault.default.delete('users/' + user.Username, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
@@ -44186,13 +44173,13 @@ function ProfileView(props) {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/profile-view/profile-view.jsx",
-            lineNumber: 67
+            lineNumber: 61
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
             __source: {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 68
+                lineNumber: 62
             },
             __self: this,
             children: "There was an error loading your profile!"
@@ -44203,14 +44190,14 @@ function ProfileView(props) {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/profile-view/profile-view.jsx",
-            lineNumber: 74
+            lineNumber: 68
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "h3 text-muted text-center loading",
             __source: {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 75
+                lineNumber: 69
             },
             __self: this,
             children: [
@@ -44221,7 +44208,7 @@ function ProfileView(props) {
                     role: "status",
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 76
+                        lineNumber: 70
                     },
                     __self: this
                 })
@@ -44234,21 +44221,21 @@ function ProfileView(props) {
                 className: "justify-content-between my-3",
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 83
+                    lineNumber: 77
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 84
+                            lineNumber: 78
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx("div", {
                             className: "h4 text-muted text-center m-1 p-2",
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 85
+                                lineNumber: 79
                             },
                             __self: this,
                             children: !isUpdate ? 'My Profile' : 'Update profile information'
@@ -44257,14 +44244,14 @@ function ProfileView(props) {
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 87
+                            lineNumber: 81
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                             className: "h3 text-muted text-center m-1 p-2",
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 88
+                                lineNumber: 82
                             },
                             __self: this,
                             children: [
@@ -44274,7 +44261,7 @@ function ProfileView(props) {
                                     onClick: toggleUpdateShow,
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 89
+                                        lineNumber: 83
                                     },
                                     __self: this,
                                     children: !isUpdate ? 'Update profile' : 'Show profile'
@@ -44285,7 +44272,7 @@ function ProfileView(props) {
                                     onClick: handleDelete,
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 90
+                                        lineNumber: 84
                                     },
                                     __self: this,
                                     children: "Delete my account"
@@ -44302,7 +44289,7 @@ function ProfileView(props) {
                         className: "justify-content-center",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 96
+                            lineNumber: 90
                         },
                         __self: this,
                         children: [
@@ -44310,7 +44297,7 @@ function ProfileView(props) {
                                 user: user,
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 97
+                                    lineNumber: 91
                                 },
                                 __self: this
                             }),
@@ -44318,15 +44305,14 @@ function ProfileView(props) {
                                 md: 12,
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 98
+                                    lineNumber: 92
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_favouriteView.FavouritesView, {
                                     user: user,
-                                    movies: movies,
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 99
+                                        lineNumber: 93
                                     },
                                     __self: this
                                 })
@@ -44336,7 +44322,7 @@ function ProfileView(props) {
                         user: user,
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 103
+                            lineNumber: 97
                         },
                         __self: this
                     })
@@ -44345,7 +44331,9 @@ function ProfileView(props) {
         ]
     }));
 }
-_s(ProfileView, "N/5vnB+fyW6LbKy5C8wLvDr4oIU=");
+_s(ProfileView, "2L9RNAgTeyj+WMLRhB4i9CrCr3A=", false, function() {
+    return [_reactRedux.useSelector];
+});
 _c = ProfileView;
 var _c;
 $RefreshReg$(_c, "ProfileView");
@@ -44355,7 +44343,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","./update-view":"24Lmb","./user-view":"fkW4I","./favourite-view":"e1lbf","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","react-router-dom":"kjA5T"}],"24Lmb":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","./update-view":"24Lmb","./user-view":"fkW4I","./favourite-view":"e1lbf","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","react-redux":"2L0if"}],"24Lmb":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$7b09 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -44389,7 +44377,6 @@ var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _s = $RefreshSig$();
 function UpdateView(props) {
     _s();
-    const baseURL = 'https://my-flix-cf.herokuapp.com/';
     const accessToken = localStorage.getItem('token');
     const [user, setUser] = _react.useState(props.user);
     const [updateUser, setUpdateUser] = _react.useState(props.user);
@@ -44402,7 +44389,7 @@ function UpdateView(props) {
     };
     const handleSubmit = (e)=>{
         e.preventDefault();
-        _axiosDefault.default.put(baseURL + 'users/' + user.Username + '/update', {
+        _axiosDefault.default.put('users/' + user.Username + '/update', {
             Username: updateUser.Username,
             Password: updateUser.Password,
             Email: updateUser.Email,
@@ -44426,7 +44413,7 @@ function UpdateView(props) {
                 className: "justify-content-center my-5",
                 __source: {
                     fileName: "src/components/profile-view/update-view.jsx",
-                    lineNumber: 44
+                    lineNumber: 43
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
@@ -44434,14 +44421,14 @@ function UpdateView(props) {
                     className: "",
                     __source: {
                         fileName: "src/components/profile-view/update-view.jsx",
-                        lineNumber: 45
+                        lineNumber: 44
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                         className: "justify-content-center my-3",
                         __source: {
                             fileName: "src/components/profile-view/update-view.jsx",
-                            lineNumber: 46
+                            lineNumber: 45
                         },
                         __self: this,
                         children: [
@@ -44450,14 +44437,14 @@ function UpdateView(props) {
                                 className: "mb-3",
                                 __source: {
                                     fileName: "src/components/profile-view/update-view.jsx",
-                                    lineNumber: 47
+                                    lineNumber: 46
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                         __source: {
                                             fileName: "src/components/profile-view/update-view.jsx",
-                                            lineNumber: 48
+                                            lineNumber: 47
                                         },
                                         __self: this,
                                         children: "Username:"
@@ -44470,7 +44457,7 @@ function UpdateView(props) {
                                         ,
                                         __source: {
                                             fileName: "src/components/profile-view/update-view.jsx",
-                                            lineNumber: 49
+                                            lineNumber: 48
                                         },
                                         __self: this
                                     })
@@ -44481,14 +44468,14 @@ function UpdateView(props) {
                                 className: "mb-3",
                                 __source: {
                                     fileName: "src/components/profile-view/update-view.jsx",
-                                    lineNumber: 57
+                                    lineNumber: 56
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                         __source: {
                                             fileName: "src/components/profile-view/update-view.jsx",
-                                            lineNumber: 58
+                                            lineNumber: 57
                                         },
                                         __self: this,
                                         children: "Password:"
@@ -44501,7 +44488,7 @@ function UpdateView(props) {
                                         ,
                                         __source: {
                                             fileName: "src/components/profile-view/update-view.jsx",
-                                            lineNumber: 59
+                                            lineNumber: 58
                                         },
                                         __self: this
                                     })
@@ -44512,14 +44499,14 @@ function UpdateView(props) {
                                 className: "mb-3",
                                 __source: {
                                     fileName: "src/components/profile-view/update-view.jsx",
-                                    lineNumber: 67
+                                    lineNumber: 66
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                         __source: {
                                             fileName: "src/components/profile-view/update-view.jsx",
-                                            lineNumber: 68
+                                            lineNumber: 67
                                         },
                                         __self: this,
                                         children: "Email:"
@@ -44532,7 +44519,7 @@ function UpdateView(props) {
                                         ,
                                         __source: {
                                             fileName: "src/components/profile-view/update-view.jsx",
-                                            lineNumber: 69
+                                            lineNumber: 68
                                         },
                                         __self: this
                                     })
@@ -44543,14 +44530,14 @@ function UpdateView(props) {
                                 className: "mb-3",
                                 __source: {
                                     fileName: "src/components/profile-view/update-view.jsx",
-                                    lineNumber: 77
+                                    lineNumber: 76
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                         __source: {
                                             fileName: "src/components/profile-view/update-view.jsx",
-                                            lineNumber: 78
+                                            lineNumber: 77
                                         },
                                         __self: this,
                                         children: "Birthday:"
@@ -44563,7 +44550,7 @@ function UpdateView(props) {
                                         ,
                                         __source: {
                                             fileName: "src/components/profile-view/update-view.jsx",
-                                            lineNumber: 79
+                                            lineNumber: 78
                                         },
                                         __self: this
                                     })
@@ -44576,14 +44563,14 @@ function UpdateView(props) {
             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                 __source: {
                     fileName: "src/components/profile-view/update-view.jsx",
-                    lineNumber: 89
+                    lineNumber: 88
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                     className: "d-flex justify-content-center",
                     __source: {
                         fileName: "src/components/profile-view/update-view.jsx",
-                        lineNumber: 90
+                        lineNumber: 89
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
@@ -44592,7 +44579,7 @@ function UpdateView(props) {
                         onClick: handleSubmit,
                         __source: {
                             fileName: "src/components/profile-view/update-view.jsx",
-                            lineNumber: 91
+                            lineNumber: 90
                         },
                         __self: this,
                         children: "Update Profile"
@@ -44808,39 +44795,22 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "FavouritesView", ()=>FavouritesView
-) // async function getMissingData(accessToken, activeUser) {
- //   axios.all([
- //         axios(baseURL + 'users/' + activeUser,{ headers: { Authorization: `Bearer ${accessToken}`} } ),
- //         axios(baseURL + 'movies/',{ headers: { Authorization: `Bearer ${accessToken}`} } )
- //         ])
- //           .then(axios.spread((userData, moviesData) => {
- //             setUser(userData.data)
- //             setMovies(moviesData.data)
- //             moviesData.data.forEach(movie => {
- //               if (userData.data.FavoriteMovies.includes(movie._id)) setFavouriteMovies(prevData => {
- //                   return [...prevData, movie]
- //               })
- //             })
- //           }))
- //           .catch(error => console.error(error))
- //           .finally(() => {
- //             setLoading(false)
- //           })												
- // }
-;
+);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _reactRedux = require("react-redux");
 var _s = $RefreshSig$();
 function FavouritesView(props) {
     _s();
-    const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    //REACT REDUX way to get state
+    const movies = _reactRedux.useSelector((state)=>state.movies
+    );
     const [user, setUser] = _react.useState(props.user);
     const [favouriteMovies, setFavouriteMovies] = _react.useState('');
-    const [movies, setMovies] = _react.useState(props.movies);
     //Setting loading and error variables 
     const [loading, setLoading] = _react.useState(true);
     const [error, setError] = _react.useState();
@@ -44861,13 +44831,13 @@ function FavouritesView(props) {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/profile-view/favourite-view.jsx",
-            lineNumber: 31
+            lineNumber: 33
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
             __source: {
                 fileName: "src/components/profile-view/favourite-view.jsx",
-                lineNumber: 32
+                lineNumber: 34
             },
             __self: this,
             children: "There was an error loading your data!"
@@ -44878,14 +44848,14 @@ function FavouritesView(props) {
         className: "justify-content-center my-5",
         __source: {
             fileName: "src/components/profile-view/favourite-view.jsx",
-            lineNumber: 38
+            lineNumber: 40
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "h3 text-muted text-center",
             __source: {
                 fileName: "src/components/profile-view/favourite-view.jsx",
-                lineNumber: 39
+                lineNumber: 41
             },
             __self: this,
             children: [
@@ -44896,7 +44866,7 @@ function FavouritesView(props) {
                     role: "status",
                     __source: {
                         fileName: "src/components/profile-view/favourite-view.jsx",
-                        lineNumber: 40
+                        lineNumber: 42
                     },
                     __self: this
                 })
@@ -44907,7 +44877,7 @@ function FavouritesView(props) {
         let movieToRemove = [
             e.target.id
         ];
-        _axiosDefault.default.delete(baseURL + 'users/' + activeUser + '/favs/' + movieToRemove, {
+        _axiosDefault.default.delete('users/' + activeUser + '/favs/' + movieToRemove, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
@@ -44925,7 +44895,7 @@ function FavouritesView(props) {
             children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card, {
                 __source: {
                     fileName: "src/components/profile-view/favourite-view.jsx",
-                    lineNumber: 60
+                    lineNumber: 62
                 },
                 __self: this,
                 children: [
@@ -44933,7 +44903,7 @@ function FavouritesView(props) {
                         className: "d-flex justify-content-between px-4 py-2 align-items-center",
                         __source: {
                             fileName: "src/components/profile-view/favourite-view.jsx",
-                            lineNumber: 61
+                            lineNumber: 63
                         },
                         __self: this,
                         children: [
@@ -44941,7 +44911,7 @@ function FavouritesView(props) {
                                 as: "div",
                                 __source: {
                                     fileName: "src/components/profile-view/favourite-view.jsx",
-                                    lineNumber: 62
+                                    lineNumber: 64
                                 },
                                 __self: this,
                                 children: movie.Title
@@ -44953,7 +44923,7 @@ function FavouritesView(props) {
                                 id: movie._id,
                                 __source: {
                                     fileName: "src/components/profile-view/favourite-view.jsx",
-                                    lineNumber: 65
+                                    lineNumber: 67
                                 },
                                 __self: this,
                                 children: "Remove"
@@ -44966,7 +44936,7 @@ function FavouritesView(props) {
                         crossOrigin: "anonymous",
                         __source: {
                             fileName: "src/components/profile-view/favourite-view.jsx",
-                            lineNumber: 70
+                            lineNumber: 72
                         },
                         __self: this
                     })
@@ -44980,20 +44950,20 @@ function FavouritesView(props) {
                 className: "justify-content-center my-3",
                 __source: {
                     fileName: "src/components/profile-view/favourite-view.jsx",
-                    lineNumber: 79
+                    lineNumber: 81
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                     __source: {
                         fileName: "src/components/profile-view/favourite-view.jsx",
-                        lineNumber: 79
+                        lineNumber: 81
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("div", {
                         className: "h6 text-muted text-center m-1 p-2",
                         __source: {
                             fileName: "src/components/profile-view/favourite-view.jsx",
-                            lineNumber: 79
+                            lineNumber: 81
                         },
                         __self: this,
                         children: "Favourite Movies"
@@ -45004,13 +44974,13 @@ function FavouritesView(props) {
                 className: "justify-content-center",
                 __source: {
                     fileName: "src/components/profile-view/favourite-view.jsx",
-                    lineNumber: 80
+                    lineNumber: 82
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                     __source: {
                         fileName: "src/components/profile-view/favourite-view.jsx",
-                        lineNumber: 81
+                        lineNumber: 83
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
@@ -45018,14 +44988,14 @@ function FavouritesView(props) {
                             className: "main-view justify-content-md-evenly m-0 p-2 align-items-start",
                             __source: {
                                 fileName: "src/components/profile-view/favourite-view.jsx",
-                                lineNumber: 83
+                                lineNumber: 85
                             },
                             __self: this,
                             children: favouriteMovies.length > 0 ? favouriteMovies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                     md: 3,
                                     __source: {
                                         fileName: "src/components/profile-view/favourite-view.jsx",
-                                        lineNumber: 85
+                                        lineNumber: 87
                                     },
                                     __self: this,
                                     children: cardUnit(movie)
@@ -45033,14 +45003,14 @@ function FavouritesView(props) {
                             ) : /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                 __source: {
                                     fileName: "src/components/profile-view/favourite-view.jsx",
-                                    lineNumber: 86
+                                    lineNumber: 88
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx("div", {
                                     className: "h6 text-muted text-center",
                                     __source: {
                                         fileName: "src/components/profile-view/favourite-view.jsx",
-                                        lineNumber: 86
+                                        lineNumber: 88
                                     },
                                     __self: this,
                                     children: "You have not added yet a favourite movie"
@@ -45053,7 +45023,9 @@ function FavouritesView(props) {
         ]
     }));
 }
-_s(FavouritesView, "y9YoZwVDgETqC0+SgzmYj6TkKo0=");
+_s(FavouritesView, "1zocOLiOojB6osopQ7M8Ls7fXcQ=", false, function() {
+    return [_reactRedux.useSelector];
+});
 _c = FavouritesView;
 var _c;
 $RefreshReg$(_c, "FavouritesView");
@@ -45063,7 +45035,7 @@ $RefreshReg$(_c, "FavouritesView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"054li":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","react-redux":"2L0if"}],"054li":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$02dd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -45073,13 +45045,7 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "LoginView", ()=>LoginView
-) // LoginView.propTypes = {
- //     user: PropTypes.exact({
- //       username: PropTypes.string.isRequired,
- //       password: PropTypes.string.isRequired,
- //     }).isRequired,
- //   };
-;
+);
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
@@ -45122,7 +45088,7 @@ function LoginView(props) {
     const handleSubmit = (e)=>{
         e.preventDefault();
         const isReq = validate();
-        _axiosDefault.default.post('https://my-flix-cf.herokuapp.com/login', {
+        _axiosDefault.default.post('login', {
             Username: username,
             Password: password
         }).then((response)=>{
@@ -45131,7 +45097,6 @@ function LoginView(props) {
         }).catch((err)=>{
             console.log(err);
             console.log('Not a valid user');
-        // setUsernameErr('The credentials are not valid')
         });
     };
     return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
@@ -45139,14 +45104,14 @@ function LoginView(props) {
             className: "d-flex justify-content-evenly",
             __source: {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 60
+                lineNumber: 59
             },
             __self: this,
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 61
+                        lineNumber: 60
                     },
                     __self: this
                 }),
@@ -45155,14 +45120,14 @@ function LoginView(props) {
                     className: "left_side",
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 62
+                        lineNumber: 61
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                         className: "d-flex flex-column justify-content-between align-items-center p-2 mt-4",
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 63
+                            lineNumber: 62
                         },
                         __self: this,
                         children: [
@@ -45171,14 +45136,14 @@ function LoginView(props) {
                                 className: "mt-3",
                                 __source: {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 64
+                                    lineNumber: 63
                                 },
                                 __self: this,
                                 children: [
                                     usernameErr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                                         __source: {
                                             fileName: "src/components/login-view/login-view.jsx",
-                                            lineNumber: 65
+                                            lineNumber: 64
                                         },
                                         __self: this,
                                         children: usernameErr
@@ -45186,7 +45151,7 @@ function LoginView(props) {
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                         __source: {
                                             fileName: "src/components/login-view/login-view.jsx",
-                                            lineNumber: 66
+                                            lineNumber: 65
                                         },
                                         __self: this,
                                         children: "Username:"
@@ -45198,7 +45163,7 @@ function LoginView(props) {
                                         placeholder: "Enter username",
                                         __source: {
                                             fileName: "src/components/login-view/login-view.jsx",
-                                            lineNumber: 67
+                                            lineNumber: 66
                                         },
                                         __self: this
                                     })
@@ -45209,14 +45174,14 @@ function LoginView(props) {
                                 className: "mt-3",
                                 __source: {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 71
+                                    lineNumber: 70
                                 },
                                 __self: this,
                                 children: [
                                     passwordErr && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                                         __source: {
                                             fileName: "src/components/login-view/login-view.jsx",
-                                            lineNumber: 72
+                                            lineNumber: 71
                                         },
                                         __self: this,
                                         children: passwordErr
@@ -45224,7 +45189,7 @@ function LoginView(props) {
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                         __source: {
                                             fileName: "src/components/login-view/login-view.jsx",
-                                            lineNumber: 73
+                                            lineNumber: 72
                                         },
                                         __self: this,
                                         children: "Password:"
@@ -45237,7 +45202,7 @@ function LoginView(props) {
                                         ,
                                         __source: {
                                             fileName: "src/components/login-view/login-view.jsx",
-                                            lineNumber: 74
+                                            lineNumber: 73
                                         },
                                         __self: this
                                     })
@@ -45250,7 +45215,7 @@ function LoginView(props) {
                                 className: "mt-4",
                                 __source: {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 79
+                                    lineNumber: 78
                                 },
                                 __self: this,
                                 children: "Submit"
@@ -45263,14 +45228,14 @@ function LoginView(props) {
                     className: "right_side d-flex flex-column justify-content-center align-items-center p-2 mt-4",
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 85
+                        lineNumber: 84
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsx("p", {
                             __source: {
                                 fileName: "src/components/login-view/login-view.jsx",
-                                lineNumber: 86
+                                lineNumber: 85
                             },
                             __self: this,
                             children: "Please enter your details to login into the application."
@@ -45278,7 +45243,7 @@ function LoginView(props) {
                         /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                             __source: {
                                 fileName: "src/components/login-view/login-view.jsx",
-                                lineNumber: 87
+                                lineNumber: 86
                             },
                             __self: this,
                             children: [
@@ -45287,7 +45252,7 @@ function LoginView(props) {
                                     to: "/register",
                                     __source: {
                                         fileName: "src/components/login-view/login-view.jsx",
-                                        lineNumber: 87
+                                        lineNumber: 86
                                     },
                                     __self: this,
                                     children: "register"
@@ -45299,7 +45264,7 @@ function LoginView(props) {
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 89
+                        lineNumber: 88
                     },
                     __self: this
                 })
@@ -45311,6 +45276,12 @@ _s(LoginView, "keaL6QjHrRQGTNid3zz27hwEktw=", false, function() {
     return [_reactRouterDom.useNavigate];
 });
 _c = LoginView;
+LoginView.propTypes = {
+    user: _propTypesDefault.default.exact({
+        username: _propTypesDefault.default.string.isRequired,
+        password: _propTypesDefault.default.string.isRequired
+    }).isRequired
+};
 var _c;
 $RefreshReg$(_c, "LoginView");
 
@@ -45337,41 +45308,11 @@ var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _reactRouterDom = require("react-router-dom");
 var _reactBootstrap = require("react-bootstrap");
+var _registerViewCss = require("./register-view.css");
 var _s = $RefreshSig$();
 function RegisterView(props) {
     _s();
-    // const [user, setUser] = useState('');
-    // const handleRegistration = () => {
-    // 	e.preventDefault();
-    // 	axios.post('https://my-flix-cf.herokuapp.com/users', {
-    // 		'Username': username,
-    // 		'Password': password,
-    // 		'Email': email,
-    // 		'Birthday': birthday
-    // 	})
-    // 	.then(response => {
-    // 		console.log(response.data);
-    // 		window.open('/', '_self');
-    // 	})
-    // 	.catch(e => {
-    // 		console.log('Error during registration');
-    // 		alert('Registration not completed');
-    // 	});
-    // };
-    // const handleChange = (e) => {
-    // 	//console.log('changing '+e.target.value)
-    // 	setUser(prevUser => {
-    // 		return {
-    // 			...prevUser,
-    // 			[e.target.name]: e.target.value
-    // 		}
-    // 	})
-    // 	console.log(e.target.name)
-    // 	console.log(e.target.value)
-    //   }
-    const baseURL = 'https://my-flix-cf.herokuapp.com/';
     const [username, setUsername] = _react.useState("");
     const [password, setPassword] = _react.useState("");
     const [email, setEmail] = _react.useState("");
@@ -45398,7 +45339,7 @@ function RegisterView(props) {
             isReq = false;
         }
         if (!email) {
-            setEmailErr("Add Email");
+            setEmailErr("Email is required");
             isReq = false;
         } else if (email.indexOf("@") === -1) {
             setEmail("Email must be a valid email address");
@@ -45409,14 +45350,13 @@ function RegisterView(props) {
     const handleRegistration = (e)=>{
         e.preventDefault();
         const isReq = validate();
-        if (isReq) _axiosDefault.default.post(baseURL + 'users', {
+        if (isReq) _axiosDefault.default.post('users', {
             Username: username,
             Password: password,
             Email: email,
             Birthday: birthday
         }).then((response)=>{
             const data = response.data;
-            console.log(data);
             alert("Your registration has been successfully processed. You can now proceed to login.");
             window.open("/", "_self");
         //open in the current tab
@@ -45425,43 +45365,65 @@ function RegisterView(props) {
             window.open("/register", "_self");
         });
     };
-    return(/*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
         children: [
             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                 className: "justify-content-center my-5",
                 __source: {
                     fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 100
+                    lineNumber: 69
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                     md: 4,
                     __source: {
                         fileName: "src/components/register-view/register-view.jsx",
-                        lineNumber: 101
+                        lineNumber: 70
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                         __source: {
                             fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 102
+                            lineNumber: 71
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                                className: "py-3",
                                 __source: {
                                     fileName: "src/components/register-view/register-view.jsx",
-                                    lineNumber: 103
+                                    lineNumber: 73
                                 },
                                 __self: this,
                                 children: [
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                        className: "d-flex justify-content-between",
                                         __source: {
                                             fileName: "src/components/register-view/register-view.jsx",
-                                            lineNumber: 104
+                                            lineNumber: 74
                                         },
                                         __self: this,
-                                        children: "Username*"
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                                __source: {
+                                                    fileName: "src/components/register-view/register-view.jsx",
+                                                    lineNumber: 74
+                                                },
+                                                __self: this,
+                                                children: "Username*"
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                                className: "err",
+                                                __source: {
+                                                    fileName: "src/components/register-view/register-view.jsx",
+                                                    lineNumber: 74
+                                                },
+                                                __self: this,
+                                                children: usernameErr && /*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
+                                                    children: usernameErr
+                                                })
+                                            })
+                                        ]
                                     }),
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                         type: "text",
@@ -45472,26 +45434,48 @@ function RegisterView(props) {
                                         required: true,
                                         __source: {
                                             fileName: "src/components/register-view/register-view.jsx",
-                                            lineNumber: 105
+                                            lineNumber: 75
                                         },
                                         __self: this
                                     })
                                 ]
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                                className: "py-3",
                                 __source: {
                                     fileName: "src/components/register-view/register-view.jsx",
-                                    lineNumber: 113
+                                    lineNumber: 83
                                 },
                                 __self: this,
                                 children: [
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                        className: "d-flex justify-content-between",
                                         __source: {
                                             fileName: "src/components/register-view/register-view.jsx",
-                                            lineNumber: 114
+                                            lineNumber: 84
                                         },
                                         __self: this,
-                                        children: "Password*"
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                                __source: {
+                                                    fileName: "src/components/register-view/register-view.jsx",
+                                                    lineNumber: 84
+                                                },
+                                                __self: this,
+                                                children: "Password*"
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                                className: "err",
+                                                __source: {
+                                                    fileName: "src/components/register-view/register-view.jsx",
+                                                    lineNumber: 84
+                                                },
+                                                __self: this,
+                                                children: passwordErr && /*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
+                                                    children: passwordErr
+                                                })
+                                            })
+                                        ]
                                     }),
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                         type: "password",
@@ -45503,26 +45487,48 @@ function RegisterView(props) {
                                         minLength: "8",
                                         __source: {
                                             fileName: "src/components/register-view/register-view.jsx",
-                                            lineNumber: 115
+                                            lineNumber: 85
                                         },
                                         __self: this
                                     })
                                 ]
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                                className: "py-3",
                                 __source: {
                                     fileName: "src/components/register-view/register-view.jsx",
-                                    lineNumber: 124
+                                    lineNumber: 94
                                 },
                                 __self: this,
                                 children: [
-                                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                        className: "d-flex justify-content-between",
                                         __source: {
                                             fileName: "src/components/register-view/register-view.jsx",
-                                            lineNumber: 125
+                                            lineNumber: 95
                                         },
                                         __self: this,
-                                        children: "Email*"
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                                __source: {
+                                                    fileName: "src/components/register-view/register-view.jsx",
+                                                    lineNumber: 95
+                                                },
+                                                __self: this,
+                                                children: "Email*"
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                                className: "err",
+                                                __source: {
+                                                    fileName: "src/components/register-view/register-view.jsx",
+                                                    lineNumber: 95
+                                                },
+                                                __self: this,
+                                                children: emailErr && /*#__PURE__*/ _jsxRuntime.jsx(_jsxRuntime.Fragment, {
+                                                    children: emailErr
+                                                })
+                                            })
+                                        ]
                                     }),
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                         type: "email",
@@ -45533,23 +45539,24 @@ function RegisterView(props) {
                                         required: true,
                                         __source: {
                                             fileName: "src/components/register-view/register-view.jsx",
-                                            lineNumber: 126
+                                            lineNumber: 96
                                         },
                                         __self: this
                                     })
                                 ]
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                                className: "py-3",
                                 __source: {
                                     fileName: "src/components/register-view/register-view.jsx",
-                                    lineNumber: 134
+                                    lineNumber: 104
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                         __source: {
                                             fileName: "src/components/register-view/register-view.jsx",
-                                            lineNumber: 135
+                                            lineNumber: 105
                                         },
                                         __self: this,
                                         children: "Birthday"
@@ -45562,25 +45569,40 @@ function RegisterView(props) {
                                         value: birthday,
                                         __source: {
                                             fileName: "src/components/register-view/register-view.jsx",
-                                            lineNumber: 136
+                                            lineNumber: 106
                                         },
                                         __self: this
                                     })
                                 ]
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                                variant: "secondary",
-                                className: "my-4",
-                                type: "submit",
-                                onClick: handleRegistration,
-                                __source: {
-                                    fileName: "src/components/register-view/register-view.jsx",
-                                    lineNumber: 143
-                                },
-                                __self: this,
-                                children: "Submit"
                             })
                         ]
+                    })
+                })
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                __source: {
+                    fileName: "src/components/register-view/register-view.jsx",
+                    lineNumber: 117
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                    className: "d-flex justify-content-center",
+                    __source: {
+                        fileName: "src/components/register-view/register-view.jsx",
+                        lineNumber: 118
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                        variant: "secondary",
+                        className: "my-4",
+                        type: "submit",
+                        onClick: handleRegistration,
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 119
+                        },
+                        __self: this,
+                        children: "Create my account"
                     })
                 })
             })
@@ -45605,7 +45627,7 @@ $RefreshReg$(_c, "RegisterView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","prop-types":"1tgq3","react-router-dom":"kjA5T","react-bootstrap":"h2YVd","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7"}],"j0Dt2":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","prop-types":"1tgq3","react-bootstrap":"h2YVd","@parcel/transformer-js/src/esmodule-helpers.js":"kvS8b","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bVmk7","./register-view.css":"bdhcz"}],"bdhcz":[function() {},{}],"j0Dt2":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$469c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

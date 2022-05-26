@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import {Card, Link, Button, Row, Col, Spinner} from 'react-bootstrap';
+import {Card, Button, Row, Col, Spinner} from 'react-bootstrap';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 export function FavouritesView(props) {
 
-  const baseURL = 'https://my-flix-cf.herokuapp.com/';
   
+  //REACT REDUX way to get state
+  const movies = useSelector((state) => state.movies)
+   
   const [user, setUser] = useState(props.user);
   const [favouriteMovies, setFavouriteMovies] = useState('');
-  const [movies, setMovies] = useState(props.movies);
  
   //Setting loading and error variables 
   const [loading, setLoading] = useState(true);
@@ -44,7 +46,7 @@ export function FavouritesView(props) {
 
     const removeMovieFromFavs = (e) => {
       let movieToRemove = ([e.target.id]);
-      axios.delete(baseURL+'users/'+ activeUser +'/favs/'+ movieToRemove, { headers: { Authorization: `Bearer ${accessToken}`} })
+      axios.delete('users/'+ activeUser +'/favs/'+ movieToRemove, { headers: { Authorization: `Bearer ${accessToken}`} })
         .then(response => {
                   console.log(response.data);
           setFavouriteMovies(favouriteMovies.filter(mov => mov._id != movieToRemove))
@@ -92,28 +94,4 @@ export function FavouritesView(props) {
 		</Row>
 		</>
   )
-
 }
-
-
-
-    // async function getMissingData(accessToken, activeUser) {
-    //   axios.all([
-    //         axios(baseURL + 'users/' + activeUser,{ headers: { Authorization: `Bearer ${accessToken}`} } ),
-    //         axios(baseURL + 'movies/',{ headers: { Authorization: `Bearer ${accessToken}`} } )
-    //         ])
-    //           .then(axios.spread((userData, moviesData) => {
-    //             setUser(userData.data)
-    //             setMovies(moviesData.data)
-    //             moviesData.data.forEach(movie => {
-    //               if (userData.data.FavoriteMovies.includes(movie._id)) setFavouriteMovies(prevData => {
-    //                   return [...prevData, movie]
-    //               })
-    //             })
-                
-    //           }))
-    //           .catch(error => console.error(error))
-    //           .finally(() => {
-    //             setLoading(false)
-    //           })												
-    // }

@@ -42,7 +42,7 @@ const validate = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const isReq = validate();
-    axios.post('https://my-flix-cf.herokuapp.com/login', { Username: username, Password: password} )
+    axios.post('login', { Username: username, Password: password} )
     .then(response => {
           const data = response.data;
           props.onLoggedIn(data)
@@ -50,7 +50,6 @@ const validate = () => {
     .catch(err => {
       console.log(err)
       console.log('Not a valid user')
-      // setUsernameErr('The credentials are not valid')
     })
   };
 
@@ -92,9 +91,9 @@ const validate = () => {
    )
 }
 
-// LoginView.propTypes = {
-//     user: PropTypes.exact({
-//       username: PropTypes.string.isRequired,
-//       password: PropTypes.string.isRequired,
-//     }).isRequired,
-//   };
+LoginView.propTypes = {
+    user: PropTypes.exact({
+      username: PropTypes.string.isRequired,
+      password: PropTypes.string.isRequired,
+    }).isRequired,
+  };

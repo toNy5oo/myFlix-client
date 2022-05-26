@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 
 export function UpdateView(props) {
 
-  const baseURL = 'https://my-flix-cf.herokuapp.com/';
   const accessToken = localStorage.getItem('token');
 
   const [user, setUser] = useState(props.user)
@@ -21,7 +20,7 @@ export function UpdateView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-     axios.put(baseURL+'users/'+user.Username+'/update', 
+     axios.put('users/'+user.Username+'/update', 
       {
        Username: updateUser.Username,
        Password: updateUser.Password,

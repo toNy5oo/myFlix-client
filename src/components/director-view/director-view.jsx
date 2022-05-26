@@ -12,8 +12,8 @@ export function DirectorView() {
 
     //REACT REDUX way to get state
     const movies = useSelector((state) => state.movies)
-
-    const baseURL = 'https://my-flix-cf.herokuapp.com/';
+    //Parameter of director_id from URL 
+    const {director_id} = useParams();
 
     const [director, setDirector ] = useState('');
     const [directorMovies, setDirectorMovies] = useState('');
@@ -21,9 +21,7 @@ export function DirectorView() {
     //Setting loading and error variables 
 		const [loading, setLoading] = useState(true);
 		const [error, setError] = useState();
-
-    const {director_id} = useParams();
-
+    
     useEffect(() => {
       let accessToken = localStorage.getItem('token');
         getMissingData(accessToken)
@@ -31,7 +29,7 @@ export function DirectorView() {
       },[])
 
       async function getMissingData(accessToken) {
-        axios(baseURL + 'directors/' + director_id,{ headers: { Authorization: `Bearer ${accessToken}`} } )
+        axios('directors/' + director_id,{ headers: { Authorization: `Bearer ${accessToken}`} } )
               .then(response => {
                   setDirector(response.data)
               })  

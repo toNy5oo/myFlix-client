@@ -6,6 +6,10 @@ import MainView from "./components/main-view/main-view";
 //Redux
 import { Provider } from 'react-redux';
 import {store} from './redux/store'
+import axios from 'axios';
+
+//Setting baseURL for axios calls
+axios.defaults.baseURL = 'https://my-flix-cf.herokuapp.com/';
 
 import './index.css';
 

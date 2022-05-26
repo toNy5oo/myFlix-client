@@ -19,7 +19,7 @@ import { Row, Col, Spinner } from 'react-bootstrap/';
 
 //Redux
 import { setMovies } from "../../redux/movieSlice";
-import { connect, useDispatcher } from "react-redux";
+import { connect } from "react-redux";
 import { store } from "../../redux/store"
 
 export function MainView(props) {
@@ -38,7 +38,6 @@ export function MainView(props) {
 
        /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
        function onLoggedIn(authData) {
-        console.log("OnLoggedIn...");
         setUser(authData.user.Username)
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
@@ -47,11 +46,10 @@ export function MainView(props) {
  
     //fetch movies from API
     async function getMovies(token) {
-         const response =  await axios.get('https://my-flix-cf.herokuapp.com/movies', {
+         const response =  await axios.get('/movies', {
          headers: { Authorization: `Bearer ${token}`}
         })
         store.dispatch(setMovies(response.data));
-        //console.log(movies);
         setLoading(false);
       }
 
@@ -101,9 +99,7 @@ export function MainView(props) {
                               : <ProfileView />
                                } />
 
-                        <Route path='register' element={<RegisterView />} />
-
-                        
+                        <Route path='register' element={<RegisterView />} />                
                 </Routes>
             </Router>
             </> 

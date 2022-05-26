@@ -12,17 +12,16 @@ export function GenreView() {
 
     //REACT REDUX way to get state
     const movies = useSelector((state) => state.movies) 
+    //Parameter of genre_id from URL
+    const { genre_id } = useParams();
 
-    const baseURL = 'https://my-flix-cf.herokuapp.com/';
     const [genre, setGenre ] = useState('');
-        
+       
     const [moviesOfGenre, setMoviesOfGenre] = useState('');
    
     //Setting loading and error variables 
 		const [loading, setLoading] = useState(true);
 		const [error, setError] = useState();
-
-    const { genre_id } = useParams();
 
     useEffect(() => {
       let accessToken = localStorage.getItem('token');
@@ -31,7 +30,7 @@ export function GenreView() {
       },[])
 
       async function getMissingData(accessToken) {
-                  axios.get(baseURL + 'genres/' + genre_id, { headers: { Authorization: `Bearer ${accessToken}`} } )
+                  axios.get('genres/' + genre_id, { headers: { Authorization: `Bearer ${accessToken}`} } )
                   .then(response => {
                     setGenre(response.data)
                   })
@@ -44,7 +43,6 @@ export function GenreView() {
       const getMoviesOfGenre = () => {
           let moviesInArray = []
           movies.forEach(movie => {
-          console.log('Movie.genre', movie.Genre, 'genre_id', genre_id)
           if (movie.Genre.includes(genre_id)) 
             moviesInArray.push(movie)
         })
