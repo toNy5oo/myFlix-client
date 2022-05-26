@@ -29,10 +29,9 @@ export function UpdateView(props) {
        Birthday: updateUser.Birthday
       }, { headers: { Authorization: `Bearer ${accessToken}`} }) 
     .then(response => {
-        console.log('response.data');
-        console.log(response.data);
         localStorage.setItem('user', response.data.Username);
         setUser(response.data)
+        //Redirect to profile page where the state updates everytime user changes
         window.open("/profile", "_self");
         })
     .catch(error => {
@@ -60,7 +59,7 @@ export function UpdateView(props) {
           <Form.Control
             type="password"
             name="Password"
-            //value={updateUser.Password}
+            placeholder="Enter your new password"
             onChange={(e) => handleUpdate(e)}
           />
         </Form.Group>
@@ -84,13 +83,16 @@ export function UpdateView(props) {
             onChange={(e) => handleUpdate(e)}
           />
         </Form.Group>
-
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
-          Update Profile
-        </Button>
       </Form>
       </Col>
-                </Row>		
+      </Row>		
+      <Row>
+        <Col className="d-flex justify-content-center">
+        <Button variant="secondary" type="submit" onClick={handleSubmit}>
+          Update Profile
+        </Button>
+        </Col>
+      </Row>
     </>
   )
 }

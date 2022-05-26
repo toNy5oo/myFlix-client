@@ -12,8 +12,7 @@ const mapStateToProps = state => {
 function MoviesList(props) {
     const {movies, visibilityFilter} = props;
     let filteredMovies = movies;
-    console.log({visibilityFilter});
-
+   
     if (visibilityFilter !== '') {
         filteredMovies = movies.filter(movie => {
             return movie.Title.toLowerCase().includes(visibilityFilter.toLowerCase());
@@ -23,6 +22,7 @@ function MoviesList(props) {
     if (!movies) return <div className="main-view"/>
 
     return <>
+        <Col md={12} className="mb-4 h4 text-center text-muted">Movies available</Col>
         <Col md={12} className="mb-4">
             <VisibilityFilterInput visibilityFilter={visibilityFilter}/>
         </Col>
@@ -34,4 +34,4 @@ function MoviesList(props) {
     </>;
 }
 
-export default connect(mapStateToProps)(MoviesList); 
+export default connect(mapStateToProps)(MoviesList);

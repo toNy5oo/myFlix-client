@@ -1,16 +1,19 @@
 body {
-    background-color: white !important;
+    background-color: whitesmoke !important;
 }
 
 .navbar {
-    background-color: rgba(161, 0, 0, 0.9);
-    /* color: white !important; */
+    background-color: rgba(9, 112, 180, 0.9);
     padding: 1rem !important;
+}
+
+#container {
+    background-color: rgb(240, 240, 240)!important;
+    padding: 0 min-height: 100vh !important;
 }
 
 .navbar-text {
     margin-right: 2rem !important;
-    /* color: white !important; */
 }
 
 .logo_navbar {
@@ -18,10 +21,6 @@ body {
     font-size: 4rem !important;
     margin-left: 2rem !important;
     /* color: white !important; */
-}
-
-#container {
-    background-color: whitesmoke !important;
 }
 
 .my-list {

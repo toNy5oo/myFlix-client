@@ -1,15 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { Row, Spinner, Col, Form, Button, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
-// import { Card } from 'react-bootstrap';
-// import { Link } from "react-router-dom";
+import { Card } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 import {UpdateView} from './update-view'
 import {UserView} from './user-view'
 import {FavouritesView} from './favourite-view'
-
-//Redux 
-import { setUser } from '../../redux/userSlice' 
 
 export function ProfileView(props) {
 
@@ -45,12 +42,6 @@ export function ProfileView(props) {
 			})												
   }
   
-  const parseDate = (date) => {
-	  console.log(date);
-	let newDate = date.split('T');
-	return newDate[0]
-}
-
 const toggleUpdateShow = () => {
   setIsUpdate((prevData) => {
 	  return !prevData;    
@@ -81,7 +72,7 @@ console.log(baseURL+ 'users/'+user.Username)
     //If data is not fetched, show spinner
     if (loading) {
         return <Row className="justify-content-center my-5">
-                    <div className="h3 text-muted text-center">Loading Profile
+                    <div className="h3 text-muted text-center loading">Loading Profile
                         &nbsp;<Spinner animation="border" variant="secondary" role="status" />
                     </div>
                 </Row>		

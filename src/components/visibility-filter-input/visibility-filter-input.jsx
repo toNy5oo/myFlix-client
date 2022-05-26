@@ -9,7 +9,7 @@ function VisibilityFilterInput (props){
                     type="text"
                     onChange={e=>props.setVisibilityFilter(e.target.value)}
                     value={props.visibilityFilter}
-                    placeholder="filter by movie title"
+                    placeholder="Search a movie..."
                 />
             </>)
 }

@@ -24,8 +24,6 @@ import { store } from "../../redux/store"
 
 export function MainView(props) {
 
-    
-    //const [movies, setMovies] = useState([]);
     const [user, setUser] = useState(props.user);
     const [loading, setLoading] = useState(true);
 		const [error, setError] = useState();
@@ -83,7 +81,7 @@ export function MainView(props) {
                     element={<>
                       {(!user) ? <><Col><LoginView onLoggedIn={(user) => onLoggedIn(user)} /></Col></> :
                       <><Row className="main-view justify-content-md-evenly m-0 p-5 align-items-start">
-                        {/* {movies.map((m) => (<Col md={3} key={m._id}><MovieCard md={8} key={m._id} movieData={m} /></Col>))} */}<MoviesList />
+                            <MoviesList />
                         </Row></>}
                     </>}/>
                         <Route path="/movies/:movie_id" element={<MovieView />} /> 

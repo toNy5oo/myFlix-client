@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import {Card, Link, Button, Row, Col, Image, Stack, Spinner} from 'react-bootstrap';
+import {Card, Link, Button, Row, Col, Spinner} from 'react-bootstrap';
 import axios from 'axios';
-import { MovieCard} from '../movie-card/movie-card'
 
 export function FavouritesView(props) {
 
@@ -68,9 +67,9 @@ export function FavouritesView(props) {
 				</Button>
 				</Card.Body>
                 {/* <Link to={`/movies/${movie._id}`}> */}
-                    <Card.Img variant="bottom" src={movie.ImagePath} crossOrigin="anonymous"/>
+                    <Card.Img variant="" src={movie.ImagePath} crossOrigin="anonymous"/>
                 {/* </Link>  */}
-            </Card>
+        </Card>
     	</>
     }
 

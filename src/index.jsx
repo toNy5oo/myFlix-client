@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Container } from "react-bootstrap";
 import MainView from "./components/main-view/main-view";
