@@ -3,17 +3,23 @@ import { createRoot } from 'react-dom/client';
 import { Container } from "react-bootstrap";
 import { MainView } from "./components/main-view/main-view";
 
-// Import statement to indicate that you need to bundle `./index.scss`
+//Redux
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit'
+import store from './redux/store'
+
 import './index.css';
 
 // Main component (will eventually use all the others)
 export default function MyFlixApplication() {
-  
+
      return (
         <>
+        <Provider store={store}>
           <Container id="container">
             <MainView />
           </Container>
+        </Provider>
         </>
     )
 }

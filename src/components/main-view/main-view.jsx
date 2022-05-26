@@ -4,7 +4,6 @@ import { BrowserRouter as Router} from "react-router-dom";
 import { MainView } from '../main-view/main-view';
 import { MovieView } from '../movie-view/movie-view';
 import { MovieCard } from '../movie-card/movie-card';
-// import { FavouritesView } from '../favourite-view/favourite-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
@@ -18,9 +17,16 @@ import {
 } from "react-router-dom";
 import { Row, Col, Spinner } from 'react-bootstrap/';
 
+//Redux
+import { useDispatch, useSelector } from 'react-redux'
+import { setMovies } from '../../redux/movieSlice';
+
 export function MainView(props) {
 
-    const [movies, setMovies] = useState([]);
+    const dispatch = useDispatch();
+    
+    const movies = useSelector(state => state.movies);
+    //const [movies, setMovies] = useState([]);
     const [user, setUser] = useState(props.user);
     const [loading, setLoading] = useState(true);
 		const [error, setError] = useState();
@@ -31,7 +37,7 @@ export function MainView(props) {
           setUser(localStorage.getItem('user'));
         }
       getMovies(accessToken);
-      },[user])
+      },[user, movies])
 
        /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
        function onLoggedIn(authData) {
@@ -48,7 +54,8 @@ export function MainView(props) {
          const response =  await axios.get('https://my-flix-cf.herokuapp.com/movies', {
          headers: { Authorization: `Bearer ${token}`}
         })
-        setMovies(response.data)
+        dispatch(setMovies(response.data));
+        console.log(movies);
         setLoading(false);
       }
 
@@ -77,7 +84,7 @@ export function MainView(props) {
                     path="/"
                     element={<>
                       {(!user) ? <><Col><LoginView onLoggedIn={(user) => onLoggedIn(user)} /></Col></> :
-                      <><Row className="main-view justify-content-md-evenly m-0 p-5 align-items-start">{movies.map((m) => (<Col md={3} key={m._id}><MovieCard md={8} key={m._id} movieData={m} /></Col>))}</Row></>}
+                      <><Row className="main-view justify-content-md-evenly m-0 p-5 align-items-start">{movies.value.map((m) => (<Col md={3} key={m._id}><MovieCard md={8} key={m._id} movieData={m} /></Col>))}</Row></>}
                     </>}/>
                         <Route path="/movies/:movie_id" element={<MovieView />} /> 
 
