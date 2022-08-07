@@ -1,6 +1,7 @@
 This project was built as part of CareerFoundry's Full-Stack-Web-Development course.
 It features a MERN stack and has been updated to React 18+ version.
 
+
 The REST API for the app (JavaScript, Node.js, Express, MongoDB) has previously been developed and is currently hosted on Heroku. Details can be found [here](https://github.com/toNy5oo/movie_api). 
 
 ---
@@ -100,3 +101,4 @@ Profile view
 Update profile
 
     allows users to update their user info
+		
